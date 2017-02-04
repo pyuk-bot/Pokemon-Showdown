@@ -294,7 +294,7 @@ exports.BattleAliases = {
 	"hoopac": "Hoopa",
 	"hoopaconfined": "Hoopa",
 	"ufof": "UFO",
-	"ufoflying" "UFO",
+	"ufoflying": "UFO",
 
 	// cosmetic formes
 	"burmyplant": "Burmy",
