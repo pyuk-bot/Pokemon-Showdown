@@ -13442,7 +13442,7 @@ exports.BattlePokedex = {
 		color: "White",
 		eggGroups: ["Undiscovered"],
 	},
-	prop21: {
+	propw1: {
 		num: -5012,
 		species: "Prop W1",
 		types: ["Grass"],
