@@ -3758,7 +3758,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Field"],
 		otherFormes: ["smearglebowtie"],
 	},
-	smeargle: {
+	smearglebowtie: {
 		num: 235,
 		species: "Smeargle-Bowtie",
 		baseSpecies: "Smeargle",
