@@ -2190,7 +2190,7 @@ exports.BattleFormatsData = {
 			{"generation": 5, "level": 30, "gender": "M", "abilities":["owntempo"], "moves":["outrage", "magiccoat"]},
 			{"generation": 5, "level": 99, "gender": "M", "abilities":["owntempo"], "moves":["nastyplot", "sheercold", "attract", "shadowball"]},
 		],
-		gen: 5
+		gen: 5,
 		tier: "Illegal",
 	},
 	miltank: {
