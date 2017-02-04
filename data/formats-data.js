@@ -6521,7 +6521,17 @@ exports.BattleFormatsData = {
 		gen: 5,
 		tier: "Illegal",
 	},
-	propo2: {
+	blackbelt: {
+		randomBattleMoves: ["machpunch", "hammerarm", "jumpkick"],
+		isNonstandard: true,
+		eventPokemon: [
+			{"generation": 5, "level": 30, "moves": ["focuspunch", "machpunch", "taunt"]},
+			{"generation": 5, "level": 40, "moves": ["machpunch", "hammerarm", "jumpkick"]},
+		],
+		gen: 5,
+		tier: "Illegal",
+	},
+	giantpropo2: {
 		randomBattleMoves: ["crushgrip", "doubleslap", "teeterdance", "stomp"],
 		isNonstandard: true,
 		eventPokemon: [
@@ -6530,12 +6540,11 @@ exports.BattleFormatsData = {
 		gen: 5,
 		tier: "Illegal",
 	},
-	blackbelt: {
-		randomBattleMoves: ["machpunch", "hammerarm", "jumpkick"],
+	ufopropu2: {
+		randomBattleMoves: ["darkpulse", "flamethrower", "hyperbeam", "icebeam"],
 		isNonstandard: true,
 		eventPokemon: [
-			{"generation": 5, "level": 30, "moves": ["focuspunch", "machpunch", "taunt"]},
-			{"generation": 5, "level": 40, "moves": ["machpunch", "hammerarm", "jumpkick"]},
+			{"generation": 5, "level": 47, "moves": ["darkpulse", "flamethrower", "hyperbeam", "icebeam"]},
 		],
 		gen: 5,
 		tier: "Illegal",
