@@ -248,6 +248,8 @@ exports.BattleAliases = {
 	"lycanrocday": "Lycanroc",
 	"lycanrocn": "Lycanroc-Midnight",
 	"lycanrocnight": "Lycanroc-Midnight",
+	"ufop": "UFO-2",
+	"ufopsychic": "UFO-2",
 
 	// base formes
 	"nidoranfemale": "Nidoran-F",
@@ -291,6 +293,8 @@ exports.BattleAliases = {
 	"gourgeistaverage": "Gourgeist",
 	"hoopac": "Hoopa",
 	"hoopaconfined": "Hoopa",
+	"ufof": "UFO",
+	"ufoflying" "UFO",
 
 	// cosmetic formes
 	"burmyplant": "Burmy",
@@ -349,6 +353,8 @@ exports.BattleAliases = {
 	"miniorindigo": "Minior",
 	"miniorviolet": "Minior",
 	"magearnaoriginal": "Magearna",
+	"giant2": "Giant",
+	"monica2": "Giant",
 
 	// abilities
 	"ph": "Poison Heal",
@@ -479,6 +485,11 @@ exports.BattleAliases = {
 	"zard": "Charizard",
 	"ohmagod": "Plasmanta",
 	"zong": "Bronzong",
+	"brycen": "Brycen-Man",
+	"mechatyranitar": "MT",
+	"mechatyranitar2": "MT2",
+	"monica": "Giant",
+	"majin": "Spirit",
 
 	// ultra beasts
 	"ub01": "Nihilego",
