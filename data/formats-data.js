@@ -2184,8 +2184,7 @@ exports.BattleFormatsData = {
 		tier: "New",
 	},
 	smearglebowtie: {
-		randomBattleMoves: ["spore", "spikes", "stealthrock", "destinybond", "whirlwind", "stickyweb"],
-		randomDoubleBattleMoves: ["spore", "fakeout", "wideguard", "helpinghand", "followme", "tailwind", "kingsshield", "transform"],
+		randomBattleMoves: ["nastyplot", "attract", "shadowball"],
 		eventPokemon: [
 			{"generation": 5, "level": 60, "gender": "M", "abilities":["owntempo"], "moves":["mindreader", "guillotine", "tailwhip", "gastroacid"]},
 			{"generation": 5, "level": 30, "gender": "M", "abilities":["owntempo"], "moves":["outrage", "magiccoat"]},
