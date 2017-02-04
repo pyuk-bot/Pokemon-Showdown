@@ -3771,6 +3771,7 @@ exports.BattlePokedex = {
 		weightkg: 61,
 		color: "White",
 		eggGroups: ["Field"],
+	},
 	tyrogue: {
 		num: 236,
 		species: "Tyrogue",
