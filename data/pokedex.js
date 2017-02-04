@@ -13291,8 +13291,20 @@ exports.BattlePokedex = {
 		color: "White",
 		eggGroups: ["Undiscovered"],
 	},
+	blackbelt: {
+		num: -5014,
+		species: "Black Belt",
+		types: ["Fighting"],
+		gender: "M",
+		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
+		abilities: {0: "Huge Power"},
+		heightm: 1.5,
+		weightkg: 61,
+		color: "White",
+		eggGroups: ["Undiscovered"],
+	},
 	propu1: {
-		num: -5001,
+		num: -5015,
 		species: "Prop U1",
 		types: ["Flying", "Electric"],
 		gender: "N",
@@ -13304,7 +13316,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propu2: {
-		num: -5001,
+		num: -5016,
 		species: "Prop U2",
 		types: ["Psychic", "Electric"],
 		gender: "N",
@@ -13316,7 +13328,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	proph1: {
-		num: -5002,
+		num: -5017,
 		species: "Prop H1",
 		types: ["Dark", "Psychic"],
 		gender: "M",
@@ -13328,7 +13340,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propm1: {
-		num: -5003,
+		num: -5018,
 		species: "Prop M1",
 		types: ["Steel"],
 		gender: "N",
@@ -13340,7 +13352,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propm2: {
-		num: -5004,
+		num: -5019,
 		species: "Prop M2",
 		types: ["Steel", "Electric"],
 		gender: "N",
@@ -13352,7 +13364,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propt1: {
-		num: -5005,
+		num: -5020,
 		species: "Prop T1",
 		types: ["Steel"],
 		gender: "N",
@@ -13364,7 +13376,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propo1: {
-		num: -5006,
+		num: -5021,
 		species: "Prop O1",
 		types: ["Normal"],
 		gender: "F",
@@ -13376,7 +13388,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propo2: {
-		num: -5006,
+		num: -5022,
 		species: "Prop O2",
 		types: ["Normal"],
 		gender: "F",
@@ -13388,7 +13400,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propc1: {
-		num: -5007,
+		num: -5023,
 		species: "Prop C1",
 		types: ["Normal"],
 		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
@@ -13399,7 +13411,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propc2: {
-		num: -5008,
+		num: -5024,
 		species: "Prop C2",
 		types: ["Dark"],
 		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
@@ -13410,7 +13422,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propr1: {
-		num: -5009,
+		num: -5025,
 		species: "Prop R1",
 		types: ["Steel", "Normal"],
 		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
@@ -13421,7 +13433,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propr2: {
-		num: -5010,
+		num: -5026,
 		species: "Prop R2",
 		types: ["Steel", "Normal"],
 		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
@@ -13432,7 +13444,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propg1: {
-		num: -5011,
+		num: -5027,
 		species: "Prop G1",
 		types: ["Dark", "Ghost"],
 		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
@@ -13443,7 +13455,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propw1: {
-		num: -5012,
+		num: -5028,
 		species: "Prop W1",
 		types: ["Grass"],
 		gender: "F",
@@ -13455,7 +13467,7 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propw2: {
-		num: -5013,
+		num: -5028,
 		species: "Prop W2",
 		types: ["Fire"],
 		gender: "M",
@@ -13467,20 +13479,8 @@ exports.BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	propk1: {
-		num: -5014,
+		num: -5029,
 		species: "Prok K1",
-		types: ["Fighting"],
-		gender: "M",
-		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
-		abilities: {0: "Huge Power"},
-		heightm: 1.5,
-		weightkg: 61,
-		color: "White",
-		eggGroups: ["Undiscovered"],
-	},
-	blackbelt: {
-		num: -5014,
-		species: "Black Belt",
 		types: ["Fighting"],
 		gender: "M",
 		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
