@@ -39,6 +39,14 @@ exports.Formats = [
 		banlist: ['Uber', 'Power Construct', 'Shadow Tag'],
 	},
 	{
+		name: "[Gen 7] OU (suspect test)",
+		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3595351/\">OU Suspect Process</a>"],
+
+		mod: 'gen7',
+		ruleset: ['[Gen 7] OU'],
+		banlist: ['Dugtrio'],
+	},
+	{
 		name: "[Gen 7] Ubers",
 		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3587184/\">Ubers Metagame Discussion</a>"],
 
@@ -51,7 +59,7 @@ exports.Formats = [
 
 		mod: 'gen7',
 		ruleset: ['[Gen 7] OU'],
-		banlist: ['OU', 'BL', 'Power Construct', 'Mewnium Z', 'Baton Pass'],
+		banlist: ['OU', 'BL', 'Drizzle', 'Power Construct', 'Mewnium Z', 'Baton Pass'],
 	},
 	{
 		name: "[Gen 7] RU (alpha)",
