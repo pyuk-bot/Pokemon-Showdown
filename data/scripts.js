@@ -2233,9 +2233,9 @@ exports.BattleScripts = {
 			NU: 81,
 			BL3: 80,
 			RU: 79,
+			New: 79,
 			BL2: 78,
 			UU: 77,
-			New: 77,
 			BL: 76,
 			OU: 75,
 			Uber: 73,
@@ -2688,6 +2688,9 @@ exports.BattleScripts = {
 					break;
 				case 'acrobatics': case 'pluck': case 'drillpeck':
 					if (hasMove['bravebird']) rejected = true;
+					break;
+				case 'lunge':
+					if (hasMove['leechlife']) rejected = true;
 					break;
 				case 'solarbeam':
 					if ((!hasMove['sunnyday'] && !hasAbility['Drought']) || hasMove['gigadrain'] || hasMove['leafstorm']) rejected = true;
@@ -3259,10 +3262,10 @@ exports.BattleScripts = {
 		if (templateAbility === 'Huge Power' || templateAbility === 'Pure Power') {
 			bst += template.baseStats.atk;
 		} else if (templateAbility === 'Parental Bond') {
-			bst += 0.5 * (evs.atk > evs.spa ? template.baseStats.atk : template.baseStats.spa);
+			bst += 0.5 * (counter.Physical > counter.Special ? template.baseStats.atk : template.baseStats.spa);
 		} else if (templateAbility === 'Protean') {
 			// Holistic judgment. Don't boost Protean as much as Parental Bond
-			bst += 0.3 * (evs.atk > evs.spa ? template.baseStats.atk : template.baseStats.spa);
+			bst += 0.3 * (counter.Physical > counter.Special ? template.baseStats.atk : template.baseStats.spa);
 		} else if (templateAbility === 'Fur Coat') {
 			bst += template.baseStats.def;
 		}
