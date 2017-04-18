@@ -4,7 +4,7 @@ const common = require('./../../common');
 
 let battle;
 
-const TOTAL_TEAMS = 100;
+const TOTAL_TEAMS = 10000;
 const ALL_GENS = [1, 2/*, 3, 4*/, 5, 6, 7];
 
 function isValidSet(gen, set) {
