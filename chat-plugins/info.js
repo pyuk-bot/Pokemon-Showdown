@@ -1438,7 +1438,7 @@ exports.commands = {
 		}
 
 		this.run('formathelp');
-	}
+	},
 
 	'!roomhelp': true,
 	roomhelp: function (target, room, user) {
