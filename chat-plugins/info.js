@@ -1381,6 +1381,7 @@ exports.commands = {
 		if (totalMatches === 1) {
 			let html = [];
 			if (isBanlistSearch) {
+				let format = Dex.getFormat(targetId);
 				if (format.effectType === 'ValidatorRule' || format.effectType === 'Rule' || format.effectType === 'Format') {
 					if (format.ruleset && format.ruleset.length) html.push("<b>Ruleset</b> - " + Chat.escapeHTML(format.ruleset.join(", ")));
 					//if (format.removedRules && format.removedRules.length) html.push("<b>Removed rules</b> - " + Chat.escapeHTML(format.removedRules.join(", "))); // No current formats use this, but just in case...
