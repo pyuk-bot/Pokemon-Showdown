@@ -1414,7 +1414,7 @@ exports.commands = {
 	viewbanlist: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!target) {
-				return this.sendReply("Usage: " + cmd + " <format>");
+			return this.sendReply("Usage: " + cmd + " <format>");
 		}
 
 		let targetId = toId(target);
@@ -1438,7 +1438,7 @@ exports.commands = {
 			} else {
 				return this.sendReply("No ruleset found for " + format.name);
 			}
-		} 
+		}
 	},
 
 	'!roomhelp': true,
