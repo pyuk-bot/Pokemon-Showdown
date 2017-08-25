@@ -1440,12 +1440,6 @@ exports.commands = {
 		this.run('formathelp');
 	}
 
-		let targetId = toId(target);
-
-		let format = Dex.getFormat(targetId);
-		
-	},
-
 	'!roomhelp': true,
 	roomhelp: function (target, room, user) {
 		if (!this.canBroadcast('!htmlbox')) return;
