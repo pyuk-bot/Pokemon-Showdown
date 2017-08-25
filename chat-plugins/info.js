@@ -1424,7 +1424,7 @@ exports.commands = {
 			let html = [];
 			if (format.effectType !== 'Format') {
 				if (format.desc) {
-					html.push("<b>" + format.name + "</b> - " format.desc);
+					html.push("<b>" + format.name + "</b> - " + format.desc.join("<br />"));
 				} else {
 					html.push("No description found for this rule.");
 				}
@@ -1433,7 +1433,7 @@ exports.commands = {
 			//if (format.removedRules && format.removedRules.length) html.push("<b>Removed rules</b> - " + Chat.escapeHTML(format.removedRules.join(", "))); // No current formats use this, but just in case...
 			if (format.banlist && format.banlist.length) html.push("<b>Bans</b> - " + Chat.escapeHTML(format.banlist.join(", ")));
 			if (format.unbanlist && format.unbanlist.length) html.push("<b>Unbans</b> - " + Chat.escapeHTML(format.unbanlist.join(", ")));
-			if (html.length > (format.effectType !== 'Format' ? 1 : 0) {
+			if (html.length > (format.effectType !== 'Format' ? 1 : 0)) {
 				return this.sendReply("<b>Ruleset for " + format.name + ":</b><br />" + html.join("<br />"));
 			} else {
 				return this.sendReply("No ruleset found for " + format.name);
