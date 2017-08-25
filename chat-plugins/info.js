@@ -1400,7 +1400,7 @@ exports.commands = {
 				if (format.effectType === 'Format') {
 					return this.sendReplyBox("No description found for this " + formatType + " " + format.section + " format." + "<br />" + html.join("<br />"));
 				} else {
-					return this.sendReplyBox("No description found for this rule." + "<br />" + html.join("<br />");
+					return this.sendReplyBox("No description found for this rule." + "<br />" + html.join("<br />"));
 				}
 			}
 			return this.sendReplyBox(format.desc.join("<br />") + "<br />" + html.join("<br />");
