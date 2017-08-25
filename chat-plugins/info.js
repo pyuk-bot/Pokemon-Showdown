@@ -1403,7 +1403,7 @@ exports.commands = {
 					return this.sendReplyBox("No description found for this rule." + "<br />" + html.join("<br />"));
 				}
 			}
-			return this.sendReplyBox(format.desc.join("<br />") + "<br />" + html.join("<br />");
+			return this.sendReplyBox(format.desc.join("<br />") + "<br />" + html.join("<br />"));
 		}
 
 		let tableStyle = `border:1px solid gray; border-collapse:collapse`;
