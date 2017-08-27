@@ -1397,7 +1397,7 @@ exports.commands = {
 					html.push("No ruleset found for " + format.name);
 				}
 			}
-			let format = Dex.getFormat(Object.values(sections)[0].formats[0]);
+			format = Dex.getFormat(Object.values(sections)[0].formats[0]);
 			let formatType = (format.gameType || "singles");
 			formatType = formatType.charAt(0).toUpperCase() + formatType.slice(1).toLowerCase();
 			if (!format.desc) {
