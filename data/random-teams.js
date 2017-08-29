@@ -1234,14 +1234,6 @@ class RandomTeams extends Dex.ModdedDex {
 			if (template.id === 'ambipom' && !counter['technician']) {
 				// If it doesn't qualify for Technician, Skill Link is useless on it
 				ability = 'Pickup';
-			} else if (template.id === 'aurorus' && ability === 'Snow Warning' && hasMove['hypervoice']) {
-				for (let i = 0; i < moves.length; i++) {
-					if (moves[i] === 'hypervoice') {
-						moves[i] = 'blizzard';
-						counter['Normal'] = 0;
-						break;
-					}
-				}
 			} else if (template.baseSpecies === 'Basculin') {
 				ability = 'Adaptability';
 			} else if (template.id === 'lilligant' && hasMove['petaldance']) {
@@ -1640,8 +1632,12 @@ class RandomTeams extends Dex.ModdedDex {
 				tyranitar: 'sand',
 				tapubulu: 'grassyTerrain',
 			};
-			let effect = fieldEffectSetters[toId(template.species)] ? : '';
-			if (!!effect) teamDetails[effect] = 1;
+			let effect = fieldEffectSetters[toId(template.species)];
+			if (!!effect) {
+				teamDetails[effect] = 1;
+			} else {
+				effect = '';
+			}
 
 			// Limit 1 of any type combination, 2 in monotype
 			let typeCombo = types.slice().sort().join();
@@ -2307,14 +2303,6 @@ class RandomTeams extends Dex.ModdedDex {
 				// If it doesn't qualify for Technician, Skill Link is useless on it
 				// Might as well give it Pickup just in case
 				ability = 'Pickup';
-			} else if (template.id === 'aurorus' && ability === 'Snow Warning' && hasMove['hypervoice']) {
-				for (let i = 0; i < moves.length; i++) {
-					if (moves[i] === 'hypervoice') {
-						moves[i] = 'blizzard';
-						counter['Normal'] = 0;
-						break;
-					}
-				}
 			} else if (template.baseSpecies === 'Basculin') {
 				ability = 'Adaptability';
 			} else if (template.id === 'gligar') {
