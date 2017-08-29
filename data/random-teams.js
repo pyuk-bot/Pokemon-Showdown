@@ -1632,12 +1632,9 @@ class RandomTeams extends Dex.ModdedDex {
 				tyranitar: 'sand',
 				tapubulu: 'grassyTerrain',
 			};
-			let effect = fieldEffectSetters[toId(template.species)];
-			if (!!effect) {
-				teamDetails[effect] = 1;
-			} else {
-				effect = '';
-			}
+			let effect = '';
+			if (toId(template.species) in fieldEffectSetters ) effect = fieldEffectSetters[toId(template.species)];
+			if (!!effect) teamDetails[effect] = 1;
 
 			// Limit 1 of any type combination, 2 in monotype
 			let typeCombo = types.slice().sort().join();
