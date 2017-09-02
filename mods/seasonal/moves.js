@@ -92,7 +92,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 0,
 		category: "Physical",
-		shortDesc: "Does damage equal to the amount of damage the pokemon has taken. User faints. Replacement is fully healed.",
+		shortDesc: "Damage = Users HP. User faints. Replacement is fully healed.",
 		id: "kamikazerebirth",
 		isNonstandard: true,
 		name: "Kamikaze Rebirth",
@@ -112,7 +112,7 @@ exports.BattleMovedex = {
 		},
 		onHit: function (target, source) {
 			target = target.side.foe.pokemon[0];
-			target.damage(source.maxhp - source.hp);
+			target.damage(source.hp);
 			source.faint();
 		},
 		sideCondition: 'kamikazerebirth',
