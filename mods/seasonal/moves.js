@@ -96,7 +96,7 @@ exports.BattleMovedex = {
 		id: "retirement",
 		isNonstandard: true,
 		name: "Retirement",
-		pp: 32,
+		pp: 20,
 		priority: 2,
 		flags: {protect: 1, mirror: 1},
 		selfSwitch: true,
@@ -105,7 +105,7 @@ exports.BattleMovedex = {
 			this.add('-anim', source, "Volt Switch", target);
 		},
 		onAfterMove: function (pokemon, target, move) {
-			target.side.foe.addSideConditon("retirement", pokemon, move);
+			pokemon.side.addSideConditon("retirement", pokemon, move);
 		},
 		effect: {
 			duration: 2,
