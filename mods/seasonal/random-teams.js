@@ -58,7 +58,7 @@ class RandomStaffBrosTeams extends RandomTeams {
 				evs: {atk: 4, spa: 252, spe: 252}, nature: 'Hasty',
 			},
 			'xfix': {
-				species: 'Xatu', ability: ['Magic Bounce', 'Prankster', 'Skill Link'][this.random(3)], item: 'Pomeg Berry', gender: 'M',
+				species: 'Xatu', ability: ['Magic Bounce', 'Prankster'][this.random(2)], item: 'Pomeg Berry', gender: 'M',
 				moves: ['Substitute', ['Roost', 'Strength Sap'][this.random(2)], 'Thunder Wave'],
 				signatureMove: 'glitzer popping',
 				evs: {hp: 4, def: 252, spd: 252}, nature: 'Calm',
