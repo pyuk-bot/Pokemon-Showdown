@@ -6,7 +6,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 100,
 		category: "Physical",
-		shortDesc: "20% chance to flinch the target."
+		shortDesc: "20% chance to flinch the target.",
 		id: "buzzingofthestorm",
 		isViable: true,
 		isNonstandard: true,
