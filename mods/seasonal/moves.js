@@ -105,7 +105,7 @@ exports.BattleMovedex = {
 			this.add('-anim', source, "Volt Switch", target);
 		},
 		onAfterMove: function (pokemon, target, move) {
-			target.foe.addSideConditon("retirement", pokemon, move);
+			target.side.foe.addSideConditon("retirement", pokemon, move);
 		},
 		effect: {
 			duration: 2,
