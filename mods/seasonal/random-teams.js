@@ -27,7 +27,7 @@ class RandomStaffBrosTeams extends RandomTeams {
 			},
 			'Level 51': {
 				species: 'Porygon2', ability: 'Parental Bond', item: 'Eviolite',
-				moves: ['Recover', ['Night Blade', 'Seismic Toss'][this.random(2)], ['Nature\'s Madness', 'Cosmic Power', 'Cotton Guard'][this.random(3)]],
+				moves: ['Recover', ['Night Shade', 'Seismic Toss'][this.random(2)], ['Nature\'s Madness', 'Cosmic Power', 'Cotton Guard'][this.random(3)]],
 				signatureMove: 'Next Level Strats',
 				evs: {hp: 236, def: 220, spd: 48, spe: 4}, nature: 'Calm',
 			},
