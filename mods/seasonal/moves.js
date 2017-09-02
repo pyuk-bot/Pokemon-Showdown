@@ -92,7 +92,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 0,
 		category: "Physical",
-		shortDesc: "Damage = Users HP. User faints. Replacement is fully healed.",
+		shortDesc: "Final Gambit + Healing Wish",
 		id: "kamikazerebirth",
 		isNonstandard: true,
 		name: "Kamikaze Rebirth",
