@@ -52,6 +52,41 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Dark",
 	},
+	// Level 51
+	nextlevelstrats: {
+		accuracy: true,
+		category: "Status",
+		id: "nextlevelstrats",
+		isNonstandard: true,
+		name: "Next Level Strats",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, snatch: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Follow Me", target);
+		},
+		onHit: function (pokemon) {
+			const template = pokemon.template;
+			pokemon.level += 10;
+			pokemon.set.level = pokemon.level;
+			// recalcs stats, the client is not informed about a change
+			pokemon.formeChange(template);
+
+			pokemon.details = template.species + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
+			this.add('detailschange', pokemon, pokemon.details);
+
+			const newHP = Math.floor(Math.floor(2 * template.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100) * pokemon.level / 100 + 10);
+			pokemon.hp = newHP - (pokemon.maxhp - pokemon.hp);
+			pokemon.maxhp = newHP;
+			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
+
+			this.add('-message', 'Level 51 advanced 10 levels! It is now level ' + pokemon.level + '!');
+		},
+		secondary: false,
+		target: "self",
+		type: "Normal",
+	},
 	// kamikaze
 	kamikazerebirth: {
 		accuracy: 100,
