@@ -155,7 +155,7 @@ exports.BattleMovedex = {
 		accuracy: 60,
 		basepower: 150,
 		category: "Physical",
-		shortDesc: "No additional effect."
+		shortDesc: "No additional effect.",
 		id: "lafireblaze",
 		isNonstandard: true,
 		name: "LaFireBlaze",
