@@ -87,6 +87,60 @@ exports.BattleMovedex = {
 		target: "self",
 		type: "Normal",
 	},
+	//joim
+	retirement: {
+		accuracy: 100,
+		basePower: 70,
+		category: "Special",
+		shortDesc: "-1 def, spd on foe, +1 atk, spa on replacement",
+		id: "retirement",
+		isNonstandard: true,
+		name: "Retirement",
+		pp: 32,
+		priority: 2,
+		flags: {protect: 1, mirror: 1},
+		selfSwitch: true,
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Volt Switch", target);
+		},
+		onAfterMove: function (pokemon, target, move) {
+			target.foe.addSideConditon("retirement", pokemon, move);
+		},
+		effect: {
+			duration: 2,
+			onStart: function (side, source) {
+				side = side.foe;
+				this.debug('Retirement started on ' + side.name);
+				this.effectData.positions = [];
+				for (let i = 0; i < side.active.length; i++) {
+					this.effectData.positions[i] = false;
+				}
+				this.effectData.positions[source.position] = true;
+			},
+			onRestart: function (side, source) {
+				this.effectData.positions[source.position] = true;
+			},
+			onSwitchInPriority: 1,
+			onSwitchIn: function (target) {
+				if (!this.effectData.positions[target.position]) {
+					return;
+				}
+				if (!target.fainted) {
+					this.boost({atk: 1, spa: 1}, target);
+					//this.add('-boost', target, target.getHealth, '[from] move: Kamikaze Rebirth');
+					this.effectData.positions[target.position] = false;
+				}
+				if (!this.effectData.positions.some(affected => affected === true)) {
+					target.side.removeSideCondition('retirement');
+				}
+			},
+		},
+		boosts: {def: -1, spd: -1},
+		secondary: false,
+		target: "normal",
+		type: "Electric",
+	},
 	// kamikaze
 	kamikazerebirth: {
 		accuracy: 100,
@@ -106,7 +160,6 @@ exports.BattleMovedex = {
 		},
 		onTryHit: function (pokemon, target, move) {
 			if (!this.canSwitch(pokemon.side)) {
-				delete move.selfdestruct;
 				return false;
 			}
 		},
@@ -119,7 +172,6 @@ exports.BattleMovedex = {
 		effect: {
 			duration: 2,
 			onStart: function (side, source) {
-				side = side.foe;
 				this.debug('Kamikaze Rebirth started on ' + side.name);
 				this.effectData.positions = [];
 				for (let i = 0; i < side.active.length; i++) {
