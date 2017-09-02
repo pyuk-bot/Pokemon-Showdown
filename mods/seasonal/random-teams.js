@@ -37,6 +37,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Next Level Strats',
 				evs: {hp: 236, def: 220, spd: 48, spe: 4}, nature: 'Calm',
 			},
+			'MochaMint': {
+				species: 'Deerling', ability: 'Sturdy', item: 'Eviolite', gender: 'M', //needs confirmation
+				moves: ['Protect', 'Nuzzle', 'U-Turn'],
+				signatureMove: 'Car Accident',
+				evs: {hp: 252, def: 4, spe: 252}, nature: 'Jolly',
+			},
 			'panpawn': {
 				species: 'Cyndaquil', ability: 'Flash Fire', item: 'Leftovers', gender: 'M',
 				moves: ['Eruption', 'Extrasensory', 'Facade'],
