@@ -36,6 +36,7 @@ class Validator {
 		let dex = this.dex;
 
 		let problems = [];
+ 		const ruleTable = this.ruleTable;
 		if (format.team) {
 			return false;
 		}
@@ -65,7 +66,7 @@ class Validator {
 			if (removeNicknames) team[i].name = team[i].baseSpecies;
 		}
 
-		for (const [rule, source, limit, bans] of this.ruleTable.complexTeamBans) {
+		for (const [rule, source, limit, bans] of ruleTable.complexTeamBans) {
 			let count = 0;
 			for (const ban of bans) {
 				if (teamHas[ban] > 0) {
@@ -81,9 +82,9 @@ class Validator {
 			}
 		}
 
-		for (const [rule] of this.ruleTable) {
+		for (const [rule] of ruleTable) {
 			let subformat = dex.getFormat(rule);
-			if (subformat.onValidateTeam && this.ruleTable.has(subformat.id)) {
+			if (subformat.onValidateTeam && ruleTable.has(subformat.id)) {
 				problems = problems.concat(subformat.onValidateTeam.call(dex, team, format, teamHas) || []);
 			}
 		}
