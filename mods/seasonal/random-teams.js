@@ -65,7 +65,7 @@ class RandomStaffBrosTeams extends RandomTeams {
 				species: 'Staraptor', ability: 'Flash Feather', item: 'Choice Band', gender: 'M',
 				moves: ['Brave Bird', 'Close Combat', ['Double Edge', 'U-Turn'][this.random(2)]],
 				signatureMove: 'Kamikaze Rebirth',
-				evs: {hp: 172, atk: 228, spe: 108}, nature: 'Adamant',
+				evs: {hp: 252, atk: 148, spe: 108}, nature: 'Adamant',
 			},
 			'Level 51': {
 				species: 'Porygon2', ability: 'Trace', item: 'Eviolite',
