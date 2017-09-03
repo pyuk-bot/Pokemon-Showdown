@@ -523,6 +523,38 @@ exports.BattleMovedex = {
 		target: "allAdjacent",
 		type: "Electric",
 	},
+	// Temporaryanonymous
+	spoopyedgecut: {
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		id: "spoopyedgecut",
+		isViable: true,
+		isNonstandard: true,
+		name: "SPOOPY EDGE CUT",
+		pp: 30,
+		priority: 1,
+		shortDesc: "Usually moves first. Lowers user's accuracy by 2.",
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onTryHit: function (target, source) {
+			this.add('-message', '*@Temporaryanonymous teleports behind you*');
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Night Shade", target);
+		},
+		onHit: function (pokemon) {
+			if (pokemon.hp <= 0 || pokemon.fainted) {
+				this.add('c|@Temporaryanonymous|YOU ARE ALREADY DEAD *unsheathes glorious cursed nippon steel katana and cuts you in half with it* heh......nothing personnel.........kid......................');
+			}
+		},
+		onMoveFail: function (target, source, move) {
+			this.add('-message', '*@Temporaryanonymous teleports behind you*');
+			this.add('c|@Temporaryanonymous|YOU ARE ALREADY DEAD *misses* Tch......not bad.........kid......................');
+		},
+		secondary: false,
+		self: {boosts: {accuracy: -2}},
+		target: "normal",
+		type: "Ghost",
+	},
 	// Teremiare
 	batonthief: {
 		accuracy: true,
@@ -647,5 +679,51 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "self",
 		type: "???",
+	},
+	// ZOD
+	"cheerleadingsquad": {
+		accuracy: 100,
+		category: "Status",
+		shortDesc: "Use random moves, one from each healthy Pokemon on your team.",
+		desc: "Works like Beat Up + Assist so for example if you had 4 mons left it would choose a random move from their move pools and use it against the opponent (including special moves) at the reduced attack rate of 50%",
+		id: "cheerleadingsquad",
+		name: "Cheerleading Squad",
+		pp: 10,
+		priority: 0,
+		onHit: function (pokemon, target) {
+			let moves = [];
+			//Get the list of useable moves from healthy pokemon
+			for (let j = 0; j < target.side.pokemon.length; j++) {
+				let pokemon = target.side.pokemon[j];
+				if (pokemon === target) continue;
+				if (!pokemon.side.pokemon[j] ||	pokemon.side.pokemon[j].fainted || pokemon.side.pokemon[j].status) {
+					continue;
+				}
+				let randomMoves = [];
+				for (let i = 0; i < pokemon.moveset.length; i++) {
+					let move = pokemon.moveset[i].id;
+					let noAssist = {
+						assist:1, belch:1, bestow:1, bounce:1, chatter:1, cheerleadingsquad:1, circlethrow:1, copycat:1, counter:1, covet:1, destinybond:1, detect:1, dig:1, dive:1, dragontail:1, endure:1, feint:1, fly:1, focuspunch:1, followme:1, helpinghand:1, kingsshield:1, matblock:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, phantomforce:1, protect:1, ragepowder:1, roar:1, shadowforce:1, sketch:1, skydrop:1, sleeptalk:1, snatch:1, spikyshield:1, struggle:1, switcheroo:1, thief:1, transform:1, trick:1, whirlwind:1,
+					};
+					if (!noAssist[move] && !this.getMove(move).isZ) {
+						randomMoves.push(move);
+					}
+				}
+				if (randomMoves.length) {
+					moves.push(randomMoves[this.random(randomMoves.length)]);
+				}
+			}
+			if (!moves.length) {
+				return false;
+			}
+			//Use these moves, with base power halved if it exists
+			for (let move of moves) {
+				move = this.getMove(move);
+				if (move.basePower) move.basePower = Math.floor(move.basePower / 2);
+				this.useMove(move, target);
+			}
+		},
+		target: "normal",
+		type: "Fairy",
 	},
 };
