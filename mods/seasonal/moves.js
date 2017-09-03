@@ -184,16 +184,17 @@ exports.BattleMovedex = {
  		accuracy: 100,
  		basePower: 90,
  		category: "Physical",
- 		shortDesc: "No additional effect.",
+ 		shortDesc: "Ignores the Abilities of other Pokemon.",
  		id: "accelesquawk",
  		isNonstandard: true,
  		name: "Accele Squawk",
  		pp: 10,
  		priority: 0,
+		flags: {protect: 1, mirror: 1},
 		ignoreAbility: true,
  		onPrepareHit: function (target, source) {
  			this.attrLastMove('[still]');
- 			this.add('-anim', source, "Brave Bird", target); //placeholder
+ 			this.add('-anim', source, "Brave Bird", target);
 			this.add('c|%imas|**AcceleSquawk**');
  		},
  		secondary: false,
@@ -213,15 +214,30 @@ exports.BattleMovedex = {
 		isZ: 'imasiumz',
  		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
- 			this.add('-anim', source, "Brave Bird", target);  //placeholder
- 		},
-		onHit: function(target, source, move) {
+ 			this.add('-anim', source, "Supersonic Skystrike", target);
 			this.boost({atk: 3, def: 1, spd: 1}, source);
-		},
+ 		},
  		secondary: false,
  		target: "normal",
  		type: "Flying",
  	},
+	// Innovamania
+	ragequit: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		id: "ragequit",
+		name: "Rage Quit",
+		pp: 40,
+		priority: 0,
+		flags: {gravity: 1},
+		onHit: function (pokemon) {
+			pokemon.faint();
+		},
+		secondary: false,
+		target: "self",
+		type: "Normal",
+	},
 	//joim
 	retirement: {
 		accuracy: 100,
@@ -475,6 +491,29 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "allAdjacent",
 		type: "Electric",
+	},
+	// Teremiare
+	batonthief: {
+		accuracy: true,
+		category: "Status",
+		shortDesc: "Steals target's boosts and then Baton Passes them out.",
+		id: "batonthief",
+		isNonstandard: true,
+		name: "Baton Thief",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		stealsBoosts: true,
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Spectral Thief", target);
+		},
+		onAfterMoveSecondarySelf: function (source) {
+			this.useMove('batonpass', source);
+		},
+		secondary: false,
+		target: "normal",
+		type: "Dark",
 	},
 	// Trickster, haven't completely tested this yet
 	"3freeze": {
