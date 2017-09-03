@@ -160,7 +160,7 @@ exports.BattleMovedex = {
 		},
 		onHit: function (pokemon) {
 			const template = pokemon.template;
-			pokemon.level += 10;
+			pokemon.level += 5;
 			pokemon.set.level = pokemon.level;
 			// recalcs stats, the client is not informed about a change
 			pokemon.formeChange(template);
@@ -173,7 +173,7 @@ exports.BattleMovedex = {
 			pokemon.maxhp = newHP;
 			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 
-			this.add('-message', 'Level 51 advanced 10 levels! It is now level ' + pokemon.level + '!');
+			this.add('-message', 'Level 51 advanced 5 levels! It is now level ' + pokemon.level + '!');
 		},
 		secondary: false,
 		target: "self",
