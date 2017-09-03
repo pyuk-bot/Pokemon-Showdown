@@ -8,6 +8,12 @@ exports.BattleAbilities = {
 			if (move && move.type === 'Flying') return priority + 1;
 		},
 	},
+	interdimensional:{
+		shortDesc: "On switch-in, summons Gravity.",
+		onHitField: function (target, source, effect) {
+			this.addPseudoWeather('gravity', source, effect, '[of] ' + source);
+		},
+	},
 	// Teremiare
 	superprankster: {
 		shortDesc: "This Pokemon's status moves have their priority increased by 3.",
