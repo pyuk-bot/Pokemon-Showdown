@@ -17,7 +17,7 @@ exports.BattleStatuses = {
 			this.add('c|%Ast☆arA|I\'d rather take a nap, I hope you won\'t be a petilil shit, Eat some rare candies and get on my level.');
 		},
 		onFaint: function () {
-			sentences = ['/me twerks into oblivion', 'good night ♥', 'Astara Vista Baby'];
+			let sentences = ['/me twerks into oblivion', 'good night ♥', 'Astara Vista Baby'];
 			this.add('c|%Ast☆arA|' + sentences[this.random(3)]);
 		},
 	},
