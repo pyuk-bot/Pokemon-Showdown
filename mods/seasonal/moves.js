@@ -606,7 +606,7 @@ exports.BattleMovedex = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Spectral Thief", target);
 		},
-		onAfterMoveSecondarySelf: function (source) {
+		onHit: function (target, source) {
 			this.useMove('batonpass', source);
 		},
 		secondary: false,
