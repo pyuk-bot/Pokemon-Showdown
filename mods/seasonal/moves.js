@@ -692,7 +692,7 @@ exports.BattleMovedex = {
 		name: "Cheerleading Squad",
 		pp: 10,
 		priority: 0,
-		flags: {protect: 1}
+		flags: {protect: 1},
 		onHit: function (pokemon, target) {
 			let moves = [];
 			//Get the list of useable moves from healthy pokemon
