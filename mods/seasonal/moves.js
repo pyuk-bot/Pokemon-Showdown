@@ -435,9 +435,9 @@ exports.BattleMovedex = {
 	// panpawn
 	lafireblaze420: {
 		accuracy: 75,
-		basepower: 150,
+		basePower: 150,
 		category: "Physical",
-		shortDesc: "No additional effect.",
+		shortDesc: "20% chance to burn the target.",
 		id: "lafireblaze420",
 		isNonstandard: true,
 		name: "LaFireBlaze420",
