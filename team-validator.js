@@ -16,7 +16,7 @@ class Validator {
 	constructor(format) {
 		this.format = Dex.getFormat(format);
 		this.dex = Dex.forFormat(this.format);
-		this.ruleTable = dex.getRuleTable(this.format);
+		this.ruleTable = this.dex.getRuleTable(this.format);
 	}
 
 	validateTeam(team, removeNicknames) {
@@ -36,7 +36,7 @@ class Validator {
 		let dex = this.dex;
 
 		let problems = [];
- 		const ruleTable = this.ruleTable;
+		const ruleTable = this.ruleTable;
 		if (format.team) {
 			return false;
 		}
