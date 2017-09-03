@@ -1,6 +1,98 @@
 'use strict';
 
 exports.BattleMovedex = {
+	// Aelita
+	energyfield: {
+		accuracy: 90,
+		basePower: 150,
+		category: "Special",
+		id: "energyfield",
+		isNonstandard: true,
+		isViable: true,
+		name: "Energy Field",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onModifyMove: function (move) {
+			if (this.isWeather(['raindance', 'primordialsea'])) {
+				move.accuracy = true;
+			} else if (this.isWeather(['sunnyday', 'desolateland'])) {
+				move.accuracy = 50;
+			}
+		},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Parabolic Charge", source);
+			this.add('-anim', source, "Parabolic Charge", source);
+			this.add('-anim', source, "Ion Deluge", target);
+		},
+		self: {boosts:{spa:-1, spd:-1, spe:-1}},
+		secondary: {
+			chance: 40,
+			status: 'par',
+		},
+		target: "normal",
+		type: "Electric",
+	},
+	// Astara
+	starboltdesperation: {
+		accuracy: 75,
+		basePower: 0,
+		category: "Physical",
+		id: "starboltdesperation",
+		isViable: true,
+		isNonstandard: true,
+		name: 'Star Bolt Desperation',
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1},
+		typechart: [
+			'Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting',
+			'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice',
+			'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water',
+		],
+		damageCallback: function (pokemon, target) {
+			return target.hp * 0.75;
+		},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grudge", target);
+			this.add('-anim', source, "Dragon Ascent", target);
+		},
+		onHit: function (target, source) {
+			const boosts = {};
+			const stats = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy'];
+			const increase = stats[this.random(6)];
+			const decrease = stats[this.random(6)];
+			boosts[increase] = 1;
+			boosts[decrease] = -1;
+			this.boost(boosts, source, source);
+		},
+		onModifyMove: function (move) {
+			move.type = move.typechart[this.random(18)];
+		},
+		secondary: {
+			chance: 100,
+			onHit: function (target) {
+				if (this.random(2) === 1) {
+					const status = ['par', 'brn', 'frz', 'psn', 'tox', 'slp'][this.random(6)];
+					if (status === 'frz') {
+						let freeze = true;
+						for (let i = 0; i < target.side.pokemon.length; i++) {
+							const pokemon = target.side.pokemon[i];
+							if (pokemon.status === 'frz') freeze = false;
+						}
+						if (freeze) target.trySetStatus('frz');
+					} else {
+						target.trySetStatus(status);
+					}
+				}
+				if (this.random(2) === 1) target.addVolatile('confusion');
+			},
+		},
+		target: "normal",
+		type: "Normal",
+	},
 	// Beowulf
 	buzzingofthestorm: {
 		accuracy: 100,
@@ -87,6 +179,49 @@ exports.BattleMovedex = {
 		target: "self",
 		type: "Normal",
 	},
+	//Imas
+ 	accelesquawk: {
+ 		accuracy: 100,
+ 		basePower: 90,
+ 		category: "Physical",
+ 		shortDesc: "No additional effect.",
+ 		id: "accelesquawk",
+ 		isNonstandard: true,
+ 		name: "Accele Squawk",
+ 		pp: 10,
+ 		priority: 0,
+		ignoreAbility: true,
+ 		onPrepareHit: function (target, source) {
+ 			this.attrLastMove('[still]');
+ 			this.add('-anim', source, "Brave Bird", target); //placeholder
+			this.add('c|%imas|**AcceleSquawk**');
+ 		},
+ 		secondary: false,
+ 		target: "normal",
+ 		type: "Flying",
+ 	},
+ 	boi: {
+ 		accuracy: true,
+ 		basePower: 180,
+ 		category: "Physical",
+ 		shortDesc: "No additional effect.",
+ 		id: "boi",
+ 		isNonstandard: true,
+ 		name: "B O I",
+ 		pp: 1,
+ 		priority: 0,
+		isZ: 'imasiumz',
+ 		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+ 			this.add('-anim', source, "Brave Bird", target);  //placeholder
+ 		},
+		onHit: function(target, source, move) {
+			this.boost({atk: 3, def: 1, spd: 1}, source);
+		},
+ 		secondary: false,
+ 		target: "normal",
+ 		type: "Flying",
+ 	},
 	//joim
 	retirement: {
 		accuracy: 100,
@@ -140,6 +275,52 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "normal",
 		type: "Electric",
+	},
+	// Kalalokki
+	maelstrm: {
+		accuracy: 85,
+		basePower: 100,
+		category: "Special",
+		id: "maelstrm",
+		name: "Maelström",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Surf", target);
+			this.add('-anim', source, "Dark Void", target);
+		},
+		onHit: function (target, source) {
+			target.addVolatile('maelstrm', source);
+		},
+		effect: {
+			duration: 5,
+			durationCallback: function (target, source) {
+				if (source.hasItem('gripclaw')) return 8;
+				return this.random(5, 7);
+			},
+			onStart: function () {
+				this.add('message', 'It became trapped in an enormous maelström!');
+			},
+			onResidualOrder: 11,
+			onResidual: function (pokemon) {
+				if (this.effectData.source.hasItem('bindingband')) {
+					this.damage(pokemon.maxhp / 6);
+				} else {
+					this.damage(pokemon.maxhp / 8);
+				}
+			},
+			onEnd: function () {
+				this.add('message', 'The maelström dissipated.');
+			},
+			onTrapPokemon: function (pokemon) {
+				pokemon.tryTrap();
+			},
+		},
+		secondary: false,
+		target: "normal",
+		type: "Water",
 	},
 	// kamikaze
 	kamikazerebirth: {

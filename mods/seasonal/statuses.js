@@ -1,6 +1,26 @@
 'use strict';
 
 exports.BattleStatuses = {
+	aelita: {
+		exists: true,
+		onStart: function (target, source) {
+			this.add('c|%Aelita|Transfer, Aelita. Scanner, Aelita. Virtualization!');
+			this.boost({spe: 1}, source);
+		},
+		onFaint: function () {
+			this.add('c|%Aelita|CODE: LYOKO. Tower deactivated...');
+		},
+	},
+	astara: {
+		exists: true,
+		onStart: function () {
+			this.add('c|%Ast☆arA|I\'d rather take a nap, I hope you won\'t be a petilil shit, Eat some rare candies and get on my level.');
+		},
+		onFaint: function () {
+			sentences = ['/me twerks into oblivion', 'good night ♥', 'Astara Vista Baby'];
+			this.add('c|%Ast☆arA|' + sentences[this.random(3)]);
+		},
+	},
 	beowulf: {
 		exists: true,
 		onSwitchIn: function () {
@@ -26,6 +46,31 @@ exports.BattleStatuses = {
 		},
 		onFaint: function () {
 			this.add('c|@Level 51|IndexError: list index out of range');
+		},
+	},
+	imas: {
+		exists: true,
+		onStart: function () {
+			this.add('c|%imas|hlo im flyboy220');
+		},
+		onFaint: function () {
+			this.add('c|%imas|bg no re');
+		},
+		onSwitchOut: function () {
+			this.add('c|%imas|ok');
+		},
+	},
+	kalalokki: {
+		exists: true,
+		onStart: function () {
+			this.add('c|%kalalokki|(•_•)');
+			this.add('c|%Kalalokki|( •_•)>⌐■-■');
+			this.add('c|%Kalalokki|(⌐■_■)');
+		},
+		onFaint: function () {
+			this.add('c|%kalalokki|(•_•)');
+			this.add('c|%Kalalokki|( •_•)>⌐■-■');
+			this.add('c|%Kalalokki|(x_x)');
 		},
 	},
 	kamikaze: {

@@ -7,6 +7,18 @@ class RandomStaffBrosTeams extends RandomTeams {
 		let team = [];
 		let variant = (this.random(2) === 1);
 		let sets = {
+			'Aelita': {
+				species: 'Porygon-Z', ability: 'Protean', item: 'Life Orb', gender: 'N',
+				moves: [['boomburst', 'moonblast'][this.random(2)], 'quiverdance', 'chatter'],
+				signatureMove: "Energy Field",
+				evs: {hp:4, spa:252, spe:252}, nature: 'Modest',
+			},
+			'Astara': {
+				species: 'Jirachi', ability: 'Cursed Body', item: ['Leftovers', 'Sitrus Berry'][this.random(2)], gender: 'F', shiny: true,
+				moves: ['psystrike', 'moonblast', 'nastyplot', 'scald', 'recover'],
+				signatureMove: 'Star Bolt Desperation',
+				evs: {hp:4, spa:252, spe:252}, nature: 'Modest',
+			},
 			'Beowulf': {
 				species: 'Beedrill', ability: 'Download', item: 'Beedrillite', gender: 'M',
 				moves: ['spikyshield', 'gunkshot', ['sacredfire', 'boltstrike', 'diamondstorm'][this.random(3)]],
@@ -19,11 +31,23 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Dark Aggro',
 				evs: {hp: 252, spa: 252, spd: 4}, nature: 'Adamant',
 			},
+			'imas': {
+				species: 'Skarmory', ability: 'Flash Feather', item: 'imasium Z', gender: 'M',
+				moves: ['Swords Dance', 'Taunt', 'Roost'],
+				signatureMove: 'Accele Squawk',
+				evs: {hp: 252, atk: 252, spe: 4}, nature: 'Adamant',
+			},
 			'Joim': {
 				species: 'Zapdos', ability:'Tinted Lens', item: 'Life Orb', gender: 'N',
 				moves: ['Roost', 'Hurricane', ['Thunderbolt', 'Quiver Dance'][this.random(2)]],
 				signatureMove: 'Retirement',
 				evs: {hp: 4, spa: 252, spe: 252}, nature: 'Modest', //ask nature
+			},
+			'Kalalokki': {
+				species: 'Wingull', ability: 'Swift Swim', item: ['Waterium Z', 'Electrium Z', 'Flyinium Z'][this.random(3)], gender: 'M',
+				moves: ['hurricane', 'thunder', 'waterspout'],
+				signatureMove: "Maelström",
+				evs: {spa:252, spd:4, spe:252}, nature: 'Modest',
 			},
 			'kamikaze': {
 				species: 'Staraptor', ability: 'Flash Feather', item: 'Choice Band', gender: 'M',
