@@ -245,7 +245,7 @@ exports.BattleMovedex = {
 		effect: {
 			duration: 2,
 			onStart: function (side, source) {
-				side = side.foe;
+				//side = side.foe;
 				this.debug('Retirement started on ' + side.name);
 				this.effectData.positions = [];
 				for (let i = 0; i < side.active.length; i++) {
@@ -347,6 +347,7 @@ exports.BattleMovedex = {
 		onHit: function (target, source) {
 			target = target.side.foe.pokemon[0];
 			target.damage(source.hp);
+			this.add('-damage', target, target.getHealth);
 			source.faint();
 		},
 		sideCondition: 'kamikazerebirth',
