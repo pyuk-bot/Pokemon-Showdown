@@ -231,6 +231,7 @@ exports.BattleMovedex = {
  		target: "normal",
  		type: "Flying",
  	},
+ 	// Imas's Z move
  	boi: {
  		accuracy: true,
  		basePower: 180,
@@ -272,7 +273,7 @@ exports.BattleMovedex = {
 	//joim
 	retirement: {
 		accuracy: 100,
-		basePower: 70,
+		basePower: 50,
 		category: "Special",
 		shortDesc: "-1 def, spd on foe, +1 atk, spa on replacement",
 		id: "retirement",
