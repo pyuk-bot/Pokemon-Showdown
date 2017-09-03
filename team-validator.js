@@ -16,6 +16,7 @@ class Validator {
 	constructor(format) {
 		this.format = Dex.getFormat(format);
 		this.dex = Dex.forFormat(this.format);
+		this.ruleTable = dex.getRuleTable(this.format);
 	}
 
 	validateTeam(team, removeNicknames) {
@@ -35,7 +36,6 @@ class Validator {
 		let dex = this.dex;
 
 		let problems = [];
-		const ruleTable = dex.getRuleTable(format);
 		if (format.team) {
 			return false;
 		}
@@ -65,7 +65,7 @@ class Validator {
 			if (removeNicknames) team[i].name = team[i].baseSpecies;
 		}
 
-		for (const [rule, source, limit, bans] of ruleTable.complexTeamBans) {
+		for (const [rule, source, limit, bans] of this.ruleTable.complexTeamBans) {
 			let count = 0;
 			for (const ban of bans) {
 				if (teamHas[ban] > 0) {
@@ -81,9 +81,9 @@ class Validator {
 			}
 		}
 
-		for (const [rule] of ruleTable) {
+		for (const [rule] of this.ruleTable) {
 			let subformat = dex.getFormat(rule);
-			if (subformat.onValidateTeam && ruleTable.has(subformat.id)) {
+			if (subformat.onValidateTeam && this.ruleTable.has(subformat.id)) {
 				problems = problems.concat(subformat.onValidateTeam.call(dex, team, format, teamHas) || []);
 			}
 		}
@@ -138,7 +138,7 @@ class Validator {
 		let lsetData = {set:set, format:format};
 
 		let setHas = {};
-		const ruleTable = dex.getRuleTable(format);
+		const ruleTable = this.ruleTable;
 
 		for (const [rule] of ruleTable) {
 			let subformat = dex.getFormat(rule);
@@ -732,7 +732,7 @@ class Validator {
 			}
 		}
 		// Event-related ability restrictions only matter if we care about illegal abilities
-		const ruleTable = dex.getRuleTable(this.format);
+		const ruleTable = this.ruleTable;
 		if (!ruleTable.has('ignoreillegalabilities')) {
 			if (dex.gen <= 5 && eventData.abilities && eventData.abilities.length === 1 && !eventData.isHidden) {
 				if (template.species === eventTemplate.species) {
