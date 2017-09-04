@@ -1253,9 +1253,6 @@ class RandomTeams extends Dex.ModdedDex {
 				ability = 'Super Luck';
 			} else if (template.id === 'venusaurmega') {
 				ability = 'Chlorophyll';
-			} else if (template.baseSpecies === 'Zygarde' && !this.random(3)) {
-				ability = 'Aura Break';
-			}
 		}
 
 		if (hasMove['rockclimb'] && ability !== 'Sheer Force') {
@@ -1303,7 +1300,7 @@ class RandomTeams extends Dex.ModdedDex {
 			item = hasMove['destinybond'] ? 'Custap Berry' : ['Leftovers', 'Sitrus Berry'][this.random(2)];
 		} else if (template.species === 'Raichu-Alola' && hasMove['thunderbolt'] && !teamDetails.zMove && this.random(4) < 1) {
 			item = 'Aloraichium Z';
-		} else if (template.species === 'Zygarde-10%' && ability === 'Power Construct') {
+		} else if (template.species === 'Zygarde-10%' && ability === 'Power Construct' && hasMove['Substitute']) {
 			item = 'Sitrus Berry';
 		} else if (ability === 'Imposter') {
 			item = 'Choice Scarf';
