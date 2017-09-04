@@ -1253,6 +1253,7 @@ class RandomTeams extends Dex.ModdedDex {
 				ability = 'Super Luck';
 			} else if (template.id === 'venusaurmega') {
 				ability = 'Chlorophyll';
+			}
 		}
 
 		if (hasMove['rockclimb'] && ability !== 'Sheer Force') {
