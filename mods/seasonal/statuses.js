@@ -43,6 +43,15 @@ exports.BattleStatuses = {
 			this.add('c|%Ast☆arA|' + sentences[this.random(3)]);
 		},
 	},
+	auzbat: {
+		exists: true,
+		onStart: function () {
+			this.add('c|%AuzBat|Smith is better than Kohli');
+		},
+		onFaint: function () {
+			this.add('c|%AuzBat|... at least Smith doesn\'t average less than 14 in England');
+		},
+	},
 	beowulf: {
 		exists: true,
 		onSwitchIn: function () {
@@ -68,6 +77,18 @@ exports.BattleStatuses = {
 		},
 		onFaint: function () {
 			this.add('c|@Level 51|IndexError: list index out of range');
+		},
+	},
+	megazard: {
+		exists: true,
+		onStart: function () {
+			this.add('c|%Megazard|Thank you for choosing Drampa™');
+		},
+		onFaint: function () {
+			this.add('c|%Megazard|Please send any feedback to your local Drampa™ distributor.');
+		},
+		onSwitchOut: function () {
+			this.add('c|%Megazard|The Drampa™ product is not under warranty.');
 		},
 	},
 	hoeenhero: {

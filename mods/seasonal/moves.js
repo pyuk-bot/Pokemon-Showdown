@@ -126,6 +126,26 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Normal",
 	},
+	// Auzbat
+	fatbat: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "Raises the user's Defense and Special Defense by 1 stage.",
+		shortDesc: "Raises the user's Defense and Sp. Def by 1.",
+		id: "fatbat",
+		name: "Fat Bat",
+		pp: 20,
+		priority: 0,
+		flags: {snatch: 1},
+		boosts: {
+			def: 1,
+			spd: 1,
+		},
+		secondary: false,
+		target: "self",
+		type: "Poison",
+	},
 	// Beowulf
 	buzzingofthestorm: {
 		accuracy: 100,
@@ -466,6 +486,24 @@ exports.BattleMovedex = {
 		target: "self",
 		type: "Flying",
 	},
+	// Megazard
+	dragonswrath: {
+		accuracy: 100,
+		basePower: 107,
+		category: "Special",
+		shortDesc: "Super effective on Fairy.",
+		id: "dragonswrath",
+		isViable: true,
+		name: "dragonswrath",
+		pp: 17,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onEffectiveness: function (typeMod, type) {
+			if (type === 'Fairy') return 1;
+		},
+		target: "normal",
+		type: "Dragon",
+	},
 	// MochaMint
 	caraccident: {
 		accuracy: true,
@@ -518,9 +556,10 @@ exports.BattleMovedex = {
 	// panpawn
 	lafireblaze420: {
 		accuracy: 75,
-		basePower: 150,
+		basePower: 0,
+		damage: 150,
 		category: "Physical",
-		shortDesc: "20% chance to burn the target.",
+		shortDesc: "Does 150 damage. 20% chance to burn the target.",
 		id: "lafireblaze420",
 		isNonstandard: true,
 		name: "LaFireBlaze420",
@@ -654,7 +693,7 @@ exports.BattleMovedex = {
 			this.attrLastMove(['still']);
 			this.add('-anim', source, "Spacial Rend", target); // confirmed with Trickster
 		},
-		onHitField: function (target, source, effect) {
+		onHit: function (target, source, effect) {
 			this.addPseudoWeather('trickroom', source, effect, '[of] ' + source);
 		},
 		effect: {
