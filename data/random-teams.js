@@ -1311,11 +1311,7 @@ class RandomTeams extends Dex.ModdedDex {
 		} else if (template.species === 'Wobbuffet') {
 			item = hasMove['destinybond'] ? 'Custap Berry' : ['Leftovers', 'Sitrus Berry'][this.random(2)];
 		} else if (template.species === 'Zygarde-10%' && hasMove['substitute']) {
-			if (!teamDetails.zMove) {
-				item = hasMove['outrage'] ? 'Dragonium Z' : 'Groundium Z';
-			} else {
-				item = hasMove['outrage'] ? 'Lum Berry' : 'Life Orb';
-			}
+			item = hasMove['outrage'] ? 'Dragonium Z' : 'Groundium Z';
 		} else if (ability === 'Imposter') {
 			item = 'Choice Scarf';
 		} else if (ability === 'Klutz' && hasMove['switcheroo']) {
