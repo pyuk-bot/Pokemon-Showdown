@@ -1399,7 +1399,7 @@ class RandomTeams extends Dex.ModdedDex {
 		} else if (ability === 'Slow Start' || hasMove['clearsmog'] || hasMove['curse'] || hasMove['detect'] || hasMove['protect'] || hasMove['sleeptalk']) {
 			item = 'Leftovers';
 		} else if (hasMove['substitute']) {
-			item = !counter['drain'] || counter.damagingMoves.length < 2 ? 'Leftovers' : 'Life Orb';
+			item = (!counter['drain'] || counter.damagingMoves.length < 2) && template.species !== 'Zygarde-10%' ? 'Leftovers' : 'Life Orb';
 		} else if ((ability === 'Iron Barbs' || ability === 'Rough Skin') && this.random(2)) {
 			item = 'Rocky Helmet';
 		} else if (counter.Physical + counter.Special >= 4 && template.baseStats.spd >= 65 && template.baseStats.hp + template.baseStats.def + template.baseStats.spd >= 235) {
@@ -2362,8 +2362,12 @@ class RandomTeams extends Dex.ModdedDex {
 			item = 'Light Clay';
 		} else if (hasMove['shellsmash']) {
 			item = (ability === 'Solid Rock' && counter['priority']) ? 'Weakness Policy' : 'White Herb';
-		} else if (hasMove['facade'] || ability === 'Poison Heal' || ability === 'Toxic Boost') {
+		} else if (ability === 'Poison Heal' || ability === 'Toxic Boost') {
 			item = 'Toxic Orb';
+		} else if (ability === 'Guts') {
+			item = hasType['Fire'] ? 'Toxic Orb' : 'Flame Orb';
+		} else if (ability === 'Quick Feet') {
+			item = counter.Physical ? 'Toxic Orb' : 'Flame Orb';
 		} else if (hasMove['raindance']) {
 			item = 'Damp Rock';
 		} else if (hasMove['sunnyday']) {
@@ -2386,8 +2390,6 @@ class RandomTeams extends Dex.ModdedDex {
 			item = '';
 
 		// medium priority
-		} else if (ability === 'Guts') {
-			item = hasType['Fire'] ? 'Toxic Orb' : 'Flame Orb';
 		} else if (ability === 'Marvel Scale') {
 			item = 'Flame Orb';
 		} else if (counter.Physical >= 4 && template.baseStats.spe > 55 && !hasMove['fakeout'] && !hasMove['flamecharge'] && !hasMove['rapidspin'] && !hasMove['suckerpunch'] && ability !== 'Sturdy' && ability !== 'Multiscale') {
