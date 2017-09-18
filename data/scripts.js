@@ -110,6 +110,7 @@ exports.BattleScripts = {
 				this.faintMessages();
 				this.add('-activate', dancers[i], 'ability: Dancer');
 				this.runMove(baseMove.id, dancers[i], 0, this.getAbility('dancer'), undefined, true);
+				this.runMove(toID('defog'), dancers[3], 0, this.getAbility('dancer'), undefined, true);
 			}
 			if (trickRoom) this.pseudoWeather['trickroom'] = trickRoom;
 		}
