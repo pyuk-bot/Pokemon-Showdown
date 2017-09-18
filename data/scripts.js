@@ -87,14 +87,10 @@ exports.BattleScripts = {
 		}
 		this.useMove(baseMove, pokemon, target, sourceEffect, zMove);
 		this.singleEvent('AfterMove', move, null, pokemon, target, move);
-
 		this.runEvent('AfterMove', pokemon, target, move);
 
 		// Dancer's activation order is completely different from any other event, so it's handled separately
 		if (move.flags['dance']) {
-			// Dancer activates in reverse speed order with or without trick room, so we simulate this by "pretending" that trick room is active if it wasn't already
-			let trickRoom = this.pseudoWeather['trickroom'];
-			if (trickRoom) delete this.pseudoWeather['trickroom'];
 			let dancers = [];
 			for (let i = 0; i < this.sides.length; i++) {
 				for (let j = 0; j < this.sides[i].active.length; j++) {
@@ -105,6 +101,9 @@ exports.BattleScripts = {
 					}
 				}
 			}
+			// Dancer activates in reverse speed order with or without trick room, so we simulate this by storing the current Trick Room status and restoring it after sorting by speed 
+			let trickRoom = this.pseudoWeather['trickroom'];
+			if (trickRoom) delete this.pseudoWeather['trickroom'];
 			dancers.sort(Battle.comparePriority);
 			// From slowest to fastest
 			for (let i = dancers.length - 1; i >= 0; i++) {
