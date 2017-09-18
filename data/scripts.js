@@ -111,7 +111,7 @@ exports.BattleScripts = {
 				this.add('-activate', dancers[i], 'ability: Dancer');
 				this.runMove(move.id, dancers[i], 0, this.getAbility('dancer'), undefined, true);
 			}
-			if (trickRoom) this.pseudoWeather('trickroom') = trickRoom;
+			if (trickRoom) this.pseudoWeather['trickroom'] = trickRoom;
 		}
 		if (noLock && pokemon.volatiles.lockedmove) delete pokemon.volatiles.lockedmove;
 	},
