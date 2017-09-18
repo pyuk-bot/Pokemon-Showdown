@@ -47,6 +47,7 @@ describe('Dancer', function () {
 		]);
 		p2.active[1].boostBy({spe: 6});
 		battle.choose('p2', 'move 2');
+		battle.commitDecisions();
 		p1.chooseMove(1).chooseMove(1).foe.chooseMove(1, 1).chooseMove(1);
 		assert.fainted(battle.p1.active[0]);
 		assert.fainted(battle.p1.active[1]);
