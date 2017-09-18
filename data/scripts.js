@@ -90,7 +90,7 @@ exports.BattleScripts = {
 		this.runEvent('AfterMove', pokemon, target, move);
 
 		// Dancer's activation order is completely different from any other event, so it's handled separately
-		if (baseMove.flags['dance']) {
+		if (move.flags['dance']) {
 			let dancers = [];
 			for (let i = 0; i < this.sides.length; i++) {
 				for (let j = 0; j < this.sides[i].active.length; j++) {
@@ -109,7 +109,7 @@ exports.BattleScripts = {
 			for (let i = dancers.length - 1; i >= 0; i++) {
 				this.faintMessages();
 				this.add('-activate', dancers[i], 'ability: Dancer');
-				this.runMove(move, dancers[i], 0, this.getAbility('dancer'), undefined, true);
+				this.runMove(baseMove.id, dancers[i], 0, this.getAbility('dancer'), undefined, true);
 			}
 			if (trickRoom) this.pseudoWeather['trickroom'] = trickRoom;
 		}
