@@ -106,11 +106,11 @@ exports.BattleScripts = {
 			if (trickRoom) delete this.pseudoWeather['trickroom'];
 			dancers.sort(this.comparePriority);
 			// From slowest to fastest
+			this.runMove(toId('defog'), dancers[3], 0, this.getAbility('dancer'), undefined, true);
 			for (let i = dancers.length - 1; i >= 0; i++) {
 				this.faintMessages();
 				this.add('-activate', dancers[i], 'ability: Dancer');
 				this.runMove(baseMove.id, dancers[i], 0, this.getAbility('dancer'), undefined, true);
-				this.runMove(toId('defog'), dancers[3], 0, this.getAbility('dancer'), undefined, true);
 			}
 			if (trickRoom) this.pseudoWeather['trickroom'] = trickRoom;
 		}
