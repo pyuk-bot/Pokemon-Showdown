@@ -104,7 +104,7 @@ exports.BattleScripts = {
 			// Dancer activates in reverse speed order with or without trick room, so we simulate this by storing the current Trick Room status and restoring it after sorting by speed 
 			let trickRoom = this.pseudoWeather['trickroom'];
 			if (trickRoom) delete this.pseudoWeather['trickroom'];
-			dancers.sort(Battle.comparePriority);
+			dancers.sort(this.comparePriority);
 			// From slowest to fastest
 			for (let i = dancers.length - 1; i >= 0; i++) {
 				this.faintMessages();
