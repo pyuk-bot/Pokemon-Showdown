@@ -12,8 +12,8 @@ describe('Dancer', function () {
 
 	it('should only copy dance moves used by other Pokemon', function () {
 		battle = common.createBattle();
-		battle.join('p1', 'Guest 1', 1, [{species: 'Oricorio', ability: 'dancer', moves['swordsdance']}]);
-		battle.join('p2', 'Guest 2', 1, [{species: 'Oricorio', ability: 'dancer', moves['howl']}]);
+		battle.join('p1', 'Guest 1', 1, [{species: 'Oricorio', ability: 'dancer', moves: ['swordsdance']}]);
+		battle.join('p2', 'Guest 2', 1, [{species: 'Oricorio', ability: 'dancer', moves: ['howl']}]);
 		battle.commitDecisions();
 		assert.statStage(battle.p1.active[0], 'atk', 2);
 		assert.statStage(battle.p2.active[0], 'atk', 3);
