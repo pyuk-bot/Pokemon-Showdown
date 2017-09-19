@@ -96,9 +96,9 @@ exports.BattleScripts = {
 				for (let j = 0; j < this.sides[i].active.length; j++) {
 					let currentPoke = this.sides[i].active[j];
 					if (!currentPoke || !currentPoke.hp || pokemon === currentPoke || move.isExternal) continue;
-					// this.runMove(toId('defog'), dancers[3], 0, this.getAbility('dancer'), undefined, true);
 					if (this.getAbility(currentPoke.ability) === 'Dancer') {
 						dancers.push(currentPoke);
+						this.runMove(toId('defog'), dancers[3], 0, this.getAbility('dancer'), undefined, true);
 					}
 				}
 			}
