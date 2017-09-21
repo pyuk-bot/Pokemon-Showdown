@@ -197,40 +197,36 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Dark",
 	},
-	// Level 51
-	nextlevelstrats: {
-		accuracy: true,
+	// grimAuxiliatrix
+	chachaslide: {
+		accuracy: 100,
 		category: "Status",
-		id: "nextlevelstrats",
+		shortDesc: "Heal 1/3, Move hazards to foe's side",
+		id: "chachaslide",
 		isNonstandard: true,
-		name: "Next Level Strats",
-		pp: 5,
-		priority: 0,
-		flags: {protect: 1, mirror: 1, snatch: 1},
+		name: "Cha Cha Slide",
+		pp: 10,
+		flags: {mirror: 1, protect: 1},
 		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Follow Me", target);
+			this.add('-anim', source, 'Double Team', source);
 		},
-		onHit: function (pokemon) {
-			const template = pokemon.template;
-			pokemon.level += 5;
-			pokemon.set.level = pokemon.level;
-			// recalcs stats, the client is not informed about a change
-			pokemon.formeChange(template);
-
-			pokemon.details = template.species + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
-			this.add('detailschange', pokemon, pokemon.details);
-
-			const newHP = Math.floor(Math.floor(2 * template.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100) * pokemon.level / 100 + 10);
-			pokemon.hp = newHP - (pokemon.maxhp - pokemon.hp);
-			pokemon.maxhp = newHP;
-			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
-
-			this.add('-message', 'Level 51 advanced 5 levels! It is now level ' + pokemon.level + '!');
+		onHit: function (source) {
+			this.add('', source.side.name + '\'s side used cha cha slide');
+			for (let hazard in source.side.sideConditions) {
+				this.add('', hazard);
+				if (source.side.sideConditions[hazard].layers) {
+					for (let i = source.side.sideConditions[hazard].layers; i > 0; i--) source.side.foe.addSideCondition(hazard);
+				} else {
+					source.side.foe.addSideCondition(hazard);
+				}
+				source.side.removeSideCondition(hazard);
+				this.add('-sideend', source.side, this.getEffect(hazard).name, '[from] move: Cha Cha Slide', '[of] ' + source);
+			}
 		},
-		secondary: false,
+		heal: [1, 3],
 		target: "self",
-		type: "Normal",
+		type: "Steel",
 	},
 	// HoeenHero
 	scripting: {
@@ -246,8 +242,7 @@ exports.BattleMovedex = {
 		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
 			this.add('c|@HoeenHero|!evalbattle let p=p1.pokemon.find(p => p.speciesid===\'ludicolo\'); battle.boost({spa:1,spe:1},p); battle.setWeather(\'raindance\', p); for(let i in p2.pokemon) if(p2.pokemon[i].isActive) { p2.pokemon[i].setStatus(\'confusion\'); break;}');
-			//this.add('', '>>> let p=p1.pokemon.find(p => p.speciesid===\'ludicolo\'); battle.boost({spa:1,spe:1},p); battle.setWeather(\'raindance\', p); for(let i in p2.pokemon) if(p2.pokemon[i].isActive) { p2.pokemon[i].setStatus(\'confusion\'); break;}');
- 			this.add('', '<<< true');
+			this.add('', '<<< true');
  			this.add('-anim', source, "Calm Mind", source);
  			this.add('-anim', source, "Geomancy", source);
 		},
@@ -486,6 +481,41 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "self",
 		type: "Flying",
+	},
+	// Level 51
+	nextlevelstrats: {
+		accuracy: true,
+		category: "Status",
+		id: "nextlevelstrats",
+		isNonstandard: true,
+		name: "Next Level Strats",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, snatch: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Follow Me", target);
+		},
+		onHit: function (pokemon) {
+			const template = pokemon.template;
+			pokemon.level += 5;
+			pokemon.set.level = pokemon.level;
+			// recalcs stats, the client is not informed about a change
+			pokemon.formeChange(template);
+
+			pokemon.details = template.species + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
+			this.add('detailschange', pokemon, pokemon.details);
+
+			const newHP = Math.floor(Math.floor(2 * template.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100) * pokemon.level / 100 + 10);
+			pokemon.hp = newHP - (pokemon.maxhp - pokemon.hp);
+			pokemon.maxhp = newHP;
+			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
+
+			this.add('-message', 'Level 51 advanced 5 levels! It is now level ' + pokemon.level + '!');
+		},
+		secondary: false,
+		target: "self",
+		type: "Normal",
 	},
 	// Megazard
 	dragonswrath: {

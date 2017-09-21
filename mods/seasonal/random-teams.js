@@ -43,6 +43,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Dark Aggro',
 				evs: {hp: 252, spa: 252, spd: 4}, nature: 'Adamant',
 			},
+			'grimAuxiliatrix': {
+				species: 'Aggron', ability: 'Chrome Finish', item: 'Aggronite', gender: 'M', // ask gender
+				moves: ['Thunder Wave', 'Heavy Slam', ['Stealth Rock', 'Dragon Tail', 'Stone Edge'][this.random(3)]],
+				signatureMove: 'Cha Cha Slide',
+				evs: {hp: 252, def: 16, spd: 240}, nature: 'Impish',
+			},
 			'HoeenHero': {
 				species: 'Ludicolo', ability: 'Swift Swim', item: 'Damp Rock', gender: 'M',
 				moves: [['Hydro Pump', 'Scald'][this.random(2)], 'Giga Drain', 'Ice Beam'],

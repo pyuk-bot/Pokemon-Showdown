@@ -70,25 +70,18 @@ exports.BattleStatuses = {
 			this.add('c|~EV|muk off');
 		},
 	},
-	level51: {
+	grimauxiliatrix: {
 		exists: true,
-		onStart: function () {
-			this.add('c|@Level 51|Calculating chance of victory!');
+		onUpdate: function (pokemon) {
+			if (pokemon.template.isMega) {
+				if (pokemon.getAbility().id === 'filter') {
+					pokemon.setAbility('chromefinish');
+					//this.add('-ability', pokemon, 'Chrome Finish');
+				}
+			}
 		},
 		onFaint: function () {
-			this.add('c|@Level 51|IndexError: list index out of range');
-		},
-	},
-	megazard: {
-		exists: true,
-		onStart: function () {
-			this.add('c|%Megazard|Thank you for choosing Drampa™');
-		},
-		onFaint: function () {
-			this.add('c|%Megazard|Please send any feedback to your local Drampa™ distributor.');
-		},
-		onSwitchOut: function () {
-			this.add('c|%Megazard|The Drampa™ product is not under warranty.');
+			this.add('c|@grimAuxiliatrix|∠( ᐛ 」∠)＿');
 		},
 	},
 	hoeenhero: {
@@ -145,6 +138,27 @@ exports.BattleStatuses = {
 		},
 		onFaint: function () {
 			this.add('c|&kamikaze|NANI!');
+		},
+	},
+	level51: {
+		exists: true,
+		onStart: function () {
+			this.add('c|@Level 51|Calculating chance of victory!');
+		},
+		onFaint: function () {
+			this.add('c|@Level 51|IndexError: list index out of range');
+		},
+	},
+	megazard: {
+		exists: true,
+		onStart: function () {
+			this.add('c|%Megazard|Thank you for choosing Drampa™');
+		},
+		onFaint: function () {
+			this.add('c|%Megazard|Please send any feedback to your local Drampa™ distributor.');
+		},
+		onSwitchOut: function () {
+			this.add('c|%Megazard|The Drampa™ product is not under warranty.');
 		},
 	},
 	panpawn: {

@@ -47,4 +47,14 @@ exports.BattleAbilities = {
 			if (move && move.category === 'Status') return priority + 3;
 		},
 	},
+	// grimAuxiliatrix
+	chromefinish: {
+		shortDesc: "Halves damage from special moves",
+		onFoeBasePower: function (basePower, attacker, defender, move) {
+			if (this.effectData.target !== defender) return;
+			if (move.category === 'Special') {
+				return this.chainModify(0.5);
+			}
+		},
+	},
 };
