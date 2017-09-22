@@ -88,7 +88,7 @@ exports.BattleScripts = {
 		this.useMove(baseMove, pokemon, target, sourceEffect, zMove);
 		this.singleEvent('AfterMove', move, null, pokemon, target, move);
 		this.runEvent('AfterMove', pokemon, target, move);
-/*
+		/*
 		// Dancer's activation order is completely different from any other event, so it's handled separately
 		if (move.flags['dance']) {
 			let dancers = [];
