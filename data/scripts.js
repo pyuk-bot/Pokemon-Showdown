@@ -92,9 +92,9 @@ exports.BattleScripts = {
 		// Dancer's activation order is completely different from any other event, so it's handled separately
 		if (move.flags['dance']) {
 			let dancers = [];
-			for (let i = 0; i < this.sides.length; i++) {
-				for (let j = 0; j < this.sides[i].active.length; j++) {
-					let currentPoke = this.sides[i].active[j];
+			for (const side of this.sides) {
+				for (const slot of side.active) {
+					let currentPoke = slot;
 					if (!currentPoke || !currentPoke.hp || pokemon === currentPoke || move.isExternal) continue;
 					if (currentPoke.ability === 'dancer') {
 						dancers.push(currentPoke);
@@ -106,10 +106,10 @@ exports.BattleScripts = {
 			if (trickRoom) delete this.pseudoWeather['trickroom'];
 			dancers.sort(this.comparePriority);
 			// From slowest to fastest (really)
-			for (let i = 0; i < dancers.length; i++) {
+			for (const dancer of dancers) {
 				this.faintMessages();
-				this.add('-activate', dancers[i], 'ability: Dancer');
-				this.runMove(baseMove.id, dancers[i], 0, this.getAbility('dancer'), undefined, true);
+				this.add('-activate', dancer, 'ability: Dancer');
+				this.runMove(baseMove.id, dancer, 0, this.getAbility('dancer'), undefined, true);
 			}
 			if (trickRoom) this.pseudoWeather['trickroom'] = trickRoom;
 		}
