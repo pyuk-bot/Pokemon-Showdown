@@ -96,7 +96,7 @@ exports.BattleScripts = {
 				for (let j = 0; j < this.sides[i].active.length; j++) {
 					let currentPoke = this.sides[i].active[j];
 					if (!currentPoke || !currentPoke.hp || pokemon === currentPoke || move.isExternal) continue;
-					if (this.getAbility(currentPoke.ability) === 'dancer') {
+					if (currentPoke.ability.id === 'dancer') {
 						dancers.push(currentPoke);
 						this.runMove(toId('defog'), dancers[3], 0, this.getAbility('dancer'), undefined, true);
 					}
