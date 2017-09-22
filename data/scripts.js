@@ -88,7 +88,7 @@ exports.BattleScripts = {
 		this.useMove(baseMove, pokemon, target, sourceEffect, zMove);
 		this.singleEvent('AfterMove', move, null, pokemon, target, move);
 		this.runEvent('AfterMove', pokemon, target, move);
-
+/*
 		// Dancer's activation order is completely different from any other event, so it's handled separately
 		if (move.flags['dance']) {
 			let dancers = [];
@@ -113,7 +113,7 @@ exports.BattleScripts = {
 				this.runMove(baseMove.id, dancers[i], 0, this.getAbility('dancer'), undefined, true);
 			}
 			if (trickRoom) this.pseudoWeather['trickroom'] = trickRoom;
-		}
+		}*/
 		if (noLock && pokemon.volatiles.lockedmove) delete pokemon.volatiles.lockedmove;
 	},
 	/**
