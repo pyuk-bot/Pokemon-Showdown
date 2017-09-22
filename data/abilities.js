@@ -561,7 +561,7 @@ exports.BattleAbilities = {
 		desc: "After another Pokemon uses a dance move, this Pokemon uses the same move. Moves used by this Ability cannot be copied again.",
 		shortDesc: "After another Pokemon uses a dance move, this Pokemon uses the same move.",
 		id: "dancer",
- 		onAnyAfterMove: function (source, target, move) {
+		onAnyAfterMove: function (source, target, move) {
 			if (!this.effectData.target.hp || source === this.effectData.target || move.isExternal) return;
 			if (move.flags['dance']) {
 				this.faintMessages();
