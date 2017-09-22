@@ -92,19 +92,23 @@ exports.BattleScripts = {
 		// Dancer's activation order is completely different from any other event, so it's handled separately
 		if (move.flags['dance']) {
 			let dancers = [];
+			let test = 0;
 			for (let i = 0; i < this.sides.length; i++) {
 				for (let j = 0; j < this.sides[i].active.length; j++) {
 					let currentPoke = this.sides[i].active[j];
 					if (!currentPoke || !currentPoke.hp || pokemon === currentPoke || move.isExternal) continue;
-					if (currentPoke.ability === 'dancer') { // please
+					if (currentPoke.ability === 'dancer') {
 						dancers.push(currentPoke);
+						test++;
 					}
 				}
 			}
 			// Dancer activates in reverse speed order with or without trick room, so we simulate this by storing the current Trick Room status and restoring it after sorting by speed 
 			let trickRoom = this.pseudoWeather['trickroom'];
 			if (trickRoom) delete this.pseudoWeather['trickroom'];
+			if (dancers.length !== test) this.runMove(baseMove.id, 'debug', 0, this.getAbility('dancer'), undefined, true);
 			dancers.sort(this.comparePriority);
+			if (dancers.length !== test) this.runMove(baseMove.id, 'debug', 0, this.getAbility('dancer'), undefined, true);
 			// From slowest to fastest
 			for (let i of dancers) {
 				if (!dancers[i])  this.runMove(baseMove.id, 'debug', 0, this.getAbility('dancer'), undefined, true);
