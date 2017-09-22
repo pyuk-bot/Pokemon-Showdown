@@ -279,7 +279,7 @@ class Pokemon {
 	getDecisionSpeed() {
 		let speed = this.getStat('spe', false, false);
 		if (speed > 10000) speed = 10000;
-		if (this.battle.getPseudoWeather('trickroom')) {
+		if (this.battle.getPseudoWeather('trickroom') && !this.battle.getPseudoWeather('dancer')) {
 			speed = 0x2710 - speed;
 		}
 		return speed & 0x1FFF;

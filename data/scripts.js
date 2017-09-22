@@ -101,17 +101,16 @@ exports.BattleScripts = {
 					}
 				}
 			}
-			// Dancer activates in reverse speed order with or without trick room, so we simulate this by storing the current Trick Room status and restoring it after sorting by speed 
-			let trickRoom = this.pseudoWeather['trickroom'];
-			if (trickRoom) delete this.pseudoWeather['trickroom'];
+			// Dancer activates in reverse speed order with or without trick room, so we temporarily add a special pseudoweather 
+			this.pseudoWeather['dancer'] = {id: 'dancer'};
 			dancers.sort(this.comparePriority);
+			delete this.pseudoWeather['dancer'];
 			// From slowest to fastest (really)
 			for (const dancer of dancers) {
 				this.faintMessages();
 				this.add('-activate', dancer, 'ability: Dancer');
 				this.runMove(baseMove.id, dancer, 0, this.getAbility('dancer'), undefined, true);
 			}
-			if (trickRoom) this.pseudoWeather['trickroom'] = trickRoom;
 		}
 		if (noLock && pokemon.volatiles.lockedmove) delete pokemon.volatiles.lockedmove;
 	},
