@@ -25,7 +25,7 @@ describe('Dancer', function () {
 			{species: 'Shedinja', level: 98, ability: 'dancer', item: 'focussash', moves: ['sleeptalk']},
 			{species: 'Shedinja', level: 99, ability: 'dancer', moves: ['sleeptalk']},
 		]);
-		const p2 = battle.join('p2', 'Guest 2', 1, [
+		battle.join('p2', 'Guest 2', 1, [
 			{species: 'Shedinja', ability: 'wonderguard', moves: ['fierydance']},
 			{species: 'Shedinja', ability: 'dancer', moves: ['sleeptalk']},
 		]);
@@ -41,7 +41,7 @@ describe('Dancer', function () {
 			{species: 'Shedinja', level: 98, ability: 'dancer', item: 'focussash', moves: ['sleeptalk']},
 			{species: 'Shedinja', level: 99, ability: 'dancer', moves: ['sleeptalk']},
 		]);
-		const p2 = battle.join('p2', 'Guest 2', 1, [
+		battle.join('p2', 'Guest 2', 1, [
 			{species: 'Shedinja', ability: 'wonderguard', moves: ['fierydance', 'trickroom']},
 			{species: 'Shedinja', ability: 'dancer', moves: ['sleeptalk']},
 		]);
