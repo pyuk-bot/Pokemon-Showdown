@@ -101,11 +101,9 @@ exports.BattleScripts = {
 					}
 				}
 			}
-			// Dancer activates in reverse speed order with or without trick room, so we simulate this by storing the current Trick Room status and restoring it after sorting by speed 
-			let trickRoom = this.pseudoWeather['trickroom'];
-			if (trickRoom) delete this.pseudoWeather['trickroom'];
-			dancers.sort(this.comparePriority);
-			// From slowest to fastest (really)
+			// Dancer activates in order of lowest speed stat to highest
+			// Ties go to whichever Pokemon has had the ability for the least amount of time
+			dancers.sort(function (a, b) { return -(b.getStat('spe', false, false) - a.getStat('spe', false, false)) || b.abilityOrder - a.abilityOrder; });
 			for (const dancer of dancers) {
 				this.faintMessages();
 				this.add('-activate', dancer, 'ability: Dancer');
