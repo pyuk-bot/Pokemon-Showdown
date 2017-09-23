@@ -89,6 +89,7 @@ exports.BattleScripts = {
 		this.singleEvent('AfterMove', move, null, pokemon, target, move);
 		this.runEvent('AfterMove', pokemon, target, move);
 		if (noLock && pokemon.volatiles.lockedmove) delete pokemon.volatiles.lockedmove;
+		pokemon.lastMoveFailed = (!moveDidSomething && !move.protectBlocked);
 	},
 	/**
 	 * useMove is the "inside" move caller. It handles effects of the
