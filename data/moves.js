@@ -1026,6 +1026,7 @@ exports.BattleMovedex = {
 					return;
 				}
 				this.add('-activate', target, 'move: Protect');
+				move.protectBlocked = true;
 				let lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
 					// Outrage counter is reset
@@ -8808,6 +8809,7 @@ exports.BattleMovedex = {
 					if (move.isZ) move.zBrokeProtect = true;
 					return;
 				}
+				move.protectBlocked = true;
 				this.add('-activate', target, 'move: Protect');
 				let lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
@@ -9814,6 +9816,7 @@ exports.BattleMovedex = {
 					return;
 				}
 				if (move && (move.target === 'self' || move.category === 'Status')) return;
+				move.protectBlocked = true;
 				this.add('-activate', target, 'move: Mat Block', move.name);
 				let lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
@@ -12172,6 +12175,7 @@ exports.BattleMovedex = {
 					if (move.isZ) move.zBrokeProtect = true;
 					return;
 				}
+				move.protectBlocked = true;
 				this.add('-activate', target, 'move: Protect');
 				let lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
@@ -12689,6 +12693,7 @@ exports.BattleMovedex = {
 					if (move.isZ) move.zBrokeProtect = true;
 					return;
 				}
+				move.protectBlocked = true;
 				this.add('-activate', target, 'move: Quick Guard');
 				let lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
@@ -15327,6 +15332,7 @@ exports.BattleMovedex = {
 					if (move.isZ) move.zBrokeProtect = true;
 					return;
 				}
+				move.protectBlocked = true;
 				this.add('-activate', target, 'move: Protect');
 				let lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
@@ -15996,6 +16002,9 @@ exports.BattleMovedex = {
 		num: 707,
 		accuracy: 100,
 		basePower: 75,
+		basePowerCallback: function (pokemon, target, move) {
+			return (pokemon && pokemon.lastMoveFailed) ? move.basePower * 2 : move.basePower;
+		},
 		category: "Physical",
 		desc: "Power doubles if the user's last move failed.",
 		shortDesc: "Power doubles if the user's last move failed.",
@@ -16004,7 +16013,6 @@ exports.BattleMovedex = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		// TODO: find out what "failed" means and implement accordingly
 		secondary: false,
 		target: "normal",
 		type: "Ground",
@@ -18483,6 +18491,7 @@ exports.BattleMovedex = {
 				if (effect && effect.target !== 'allAdjacent' && effect.target !== 'allAdjacentFoes') {
 					return;
 				}
+				effect.protectBlocked = true;
 				this.add('-activate', target, 'move: Wide Guard');
 				let lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
