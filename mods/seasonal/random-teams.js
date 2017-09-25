@@ -115,6 +115,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Geomagnetic Storm',
 				evs: {def: 252, spa: 4, spe: 252}, nature: 'Bold',
 			},
+			'Scyther NO Swiping': {
+				species: 'scyther', ability: 'Technician', item: 'Razor Claw', gender: 'M',
+				moves: ['Leaf Blade', 'Sacred Sword', 'Lunge'],
+				signatureMove: '3 Strike Swipe',
+				evs: {atk: 252, def: 4, spe: 252}, nature: 'Jolly',
+			},
 			'Temporaryanonymous': {
 				species: 'Doublade', ability: 'Tough Claws', item: 'Eviolite',
 				gender: 'M',
@@ -153,6 +159,7 @@ class RandomStaffBrosTeams extends RandomTeams {
 		let pool = Object.keys(sets);
 		while (team.length < 6 && pool.length) {
 			let name = this.sampleNoReplace(pool);
+			}
 			let set = sets[name];
 			set.level = 100;
 			set.name = name;

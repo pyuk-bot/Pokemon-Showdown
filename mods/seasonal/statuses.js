@@ -163,8 +163,14 @@ exports.BattleStatuses = {
 	},
 	panpawn: {
 		exists: true,
+		effectType: 'Ability',
 		onStart: function () {
 			this.add('c|%panpawn|hello darkness my old friend,,,');
+			for (let i = 0; i < this.queue.length; i++) {
+				if (this.queue[i].choice === 'runPrimal' && this.queue[i].pokemon === source && source.template.speciesid === 'groudon') return;
+				if (this.queue[i].choice !== 'runSwitch' && this.queue[i].choice !== 'runPrimal') break;
+			}
+			this.setWeather('sunnyday');
 		},
 		onFaint: function () {
 			this.add('c|%panpawn|how RUDE ;_;7');
@@ -184,6 +190,27 @@ exports.BattleStatuses = {
 			this.add('-message', '▄███████▄.▲.▲.▲.▲.▲.▲');
 			this.add('-message', '█████████████████████▀▀');
 		},
+	},
+	scythernoswiping: {
+		exists: true,
+		effectType: 'Ability',
+		onDamage: function (damage, target, source, effect) {
+			if (effect && effect.id === 'stealthrock') {
+				return false;
+			}
+		},
+		onTryHit: function (target, source, move) {
+			if (move.type === 'Rock' && !target.activeTurns) {
+				this.add('-immune', target, '[msg]', '[from] ability: Mountaineer');
+				return null;
+			}
+		},
+		onStart: function () {
+			this.add('c|@Scyther NO Swiping|/me prepares to swipe victory');
+		},
+		onFaint: function () {
+			this.add('c|@Scyther NO Swiping|Aww man');
+		}
 	},
 	teremiare: {
 		exists: true,

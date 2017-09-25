@@ -173,18 +173,18 @@ exports.BattleMovedex = {
 	// EV
 	darkaggro: {
 		accuracy: 100,
-		basePower: 40,
+		basePower: 20,
 		basePowerCallback: function (pokemon, target, move) {
 			return move.basePower + 20 * pokemon.positiveBoosts();
 		},
 		category: "Physical",
-		shortDesc: "Steals target's boosts before dealing damage. + 20 power for each of the user's stat boosts.",
+		shortDesc: "Steals boosts, does damage. +20 power per boost.",
 		id: "darkaggro",
 		isNonstandard: true,
 		name: "Dark Aggro",
 		pp: 10,
-		priority: 0,
-		flags: {contact:1, protect: 1, mirror: 1},
+		priority: -1,
+		flags: {contact: 1, protect: 1, mirror: 1},
 		stealsBoosts: true,
 		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
@@ -285,7 +285,7 @@ exports.BattleMovedex = {
  		accuracy: true,
  		basePower: 180,
  		category: "Physical",
- 		shortDesc: "Raises Atk by, Def and SpD by 1.",
+ 		shortDesc: "Raises Atk by 1.",
  		id: "boi",
  		isNonstandard: true,
  		name: "B O I",
@@ -297,7 +297,7 @@ exports.BattleMovedex = {
  		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
  			this.add('-anim', source, "Supersonic Skystrike", target);
-			this.boost({atk: 3, def: 1, spd: 1}, source);
+			this.boost({atk: 1}, source);
  		},
  		secondary: false,
  		target: "normal",
@@ -587,7 +587,7 @@ exports.BattleMovedex = {
 	},	
 	// panpawn
 	lafireblaze420: {
-		accuracy: 75,
+		accuracy: 80,
 		basePower: 0,
 		damage: 150,
 		category: "Physical",
@@ -628,6 +628,40 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "allAdjacent",
 		type: "Electric",
+	},
+	// Scyther NO Swiping
+	"3strikeswipe": {
+		accuracy: true,
+		basePower: 35,
+		category: "Physical",
+		shortDesc: "Hits 1-3 times with inverse type chart. High crit.",
+		id: "3strikeswipe",
+		isNonstandard: true,
+		name: "3 Strike Swipe",
+		pp: 10,
+		priority: 0,
+		critRatio: 2,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onBeforeMove: function (source, target, move) {
+			move.hits = 0;
+		},
+		onTryHit: function (target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "X-Scissor", target);
+			move.hits++;
+		},
+		onAfterMoveSecondarySelf: function (source, target, move) {
+			if (move.hits && move.hits === 3 && toId(source.name) === 'scythernoswiping') {
+				this.add('c|@Scyther NO Swiping|Oh baby a triple!!!');
+			}
+		},
+		onEffectiveness: function (typeMod) {
+			return -typeMod;
+		},
+		multihit: [1, 3],
+		hits: 0,
+		target: "normal",
+		type: "Bug",
 	},
 	// Temporaryanonymous
 	spoopyedgecut: {
