@@ -353,9 +353,12 @@ exports.Formats = [
 	},
 	{
 		name: "[Gen 7] Super Staff Bros Brawl",
-		desc: "WIP",
-		debug: true,
+		desc: [
+			"Staff Bros returns for another round! Battle with a random team of pokemon created by the sim staff.",
+			"&bullet; (link to README.md)Roster",
+		],
 		
+		debug: true, // Remove me before PRing
 		mod: 'seasonal',
 		team: 'randomStaffBros',
 		ruleset: ['HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],

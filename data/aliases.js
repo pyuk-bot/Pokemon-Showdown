@@ -39,6 +39,8 @@ exports.BattleAliases = {
 	"bf": "[Gen 6] Battle Factory",
 	"gen6inverse": "[Gen 6] Inverse Battle",
 	"uber": "[Gen 7] Ubers",
+	"seasonal": "[Gen 7] Super Staff Bros Brawl",
+	"ssb": "[Gen 7] Super Staff Bros Brawl",
 
 	// mega evos
 	"fabio": "Ampharos-Mega",

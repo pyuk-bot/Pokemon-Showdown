@@ -159,7 +159,6 @@ class RandomStaffBrosTeams extends RandomTeams {
 		let pool = Object.keys(sets);
 		while (team.length < 6 && pool.length) {
 			let name = this.sampleNoReplace(pool);
-			}
 			let set = sets[name];
 			set.level = 100;
 			set.name = name;
