@@ -52,7 +52,7 @@ describe('Dancer', function () {
 		assert.fainted(battle.p2.active[0]);
 		assert.fainted(battle.p2.active[1]);
 	});
-	
+
 	it('should not copy a move that did nothing'), function () {
 		battle = common.createBattle({gameType: 'doubles'});
 		const p1 = battle.join('p1', 'Guest 1', 1, [
