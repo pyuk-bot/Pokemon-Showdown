@@ -63,15 +63,11 @@ describe('Dancer', function () {
 			{species: 'Oricorio', ability: 'dancer', moves: ['fierydance', 'protect', 'teeterdance']},
 			{species: 'Shedinja', ability: 'wonderguard', moves: ['finalgambit']},
 		]);
-		// Remove the Shedinja
-		battle.choose('p1', 'move 4');
-		battle.choose('p2', 'move 2');
-		battle.commitDecisions();
-		// Next Turn
 		p1.active[0].boostBy({atk: 5, spe: 6});
 		p2.active[0].boostBy({atk: -6});
-		p1.chooseMove(1).chooseMove(2, 1).foe.chooseMove(2, 2);
-		battle.commitDecisions();
+		p2.active[1].boostBy({spe: 6});
+		p1.chooseMove(1).chooseMove(1, 1);
+		p2.chooseMove(1, -2).chooseMove(1, 1);
 		assert.fullHP(p2.active[0]);
 		assert.statStage(p1.active[0], 'atk', 6);
 		assert.statStage(p1.active[0], 'spe', 6);
