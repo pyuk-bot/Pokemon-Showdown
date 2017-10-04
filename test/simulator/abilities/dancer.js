@@ -67,11 +67,11 @@ describe('Dancer', function () {
 		battle.choose('p1', 'move 4');
 		battle.choose('p2', 'move 2');
 		battle.commitDecisions();
+		assert.fullHP(p2.active[0]);
 		// Next Turn
 		p1.active[0].boostBy({atk: 5, spe: 6});
 		p2.active[0].boostBy({atk: -6});
 		p1.chooseMove(1).chooseMove(2, 1).foe.chooseMove(2, 2);
-		battle.commitDecisions();
 		assert.fullHP(p2.active[0]);
 		assert.statStage(p1.active[0], 'atk', 6);
 		assert.statStage(p1.active[0], 'spe', 6);
