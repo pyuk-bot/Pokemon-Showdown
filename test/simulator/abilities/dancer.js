@@ -56,12 +56,18 @@ describe('Dancer', function () {
 	it('should not copy a move that did nothing', function () {
 		battle = common.createBattle({gameType: 'doubles'});
 		const p1 = battle.join('p1', 'Guest 1', 1, [
-			{species: 'Oricorio', level: 98, ability: 'dancer', moves: ['dragondance', 'protect', 'teeterdance']},
+			{species: 'Oricorio', level: 98, ability: 'dancer', moves: ['dragondance', 'protect', 'teeterdance', 'celebrate']},
 			{species: 'Oricorio', level: 99, ability: 'dancer', moves: ['featherdance']},
 		]);
 		const p2 = battle.join('p2', 'Guest 2', 1, [
 			{species: 'Oricorio', ability: 'dancer', moves: ['fierydance', 'protect', 'teeterdance']},
+			{species: 'Shedinja', ability: 'wonderguard', moves: ['finalgambit']},
 		]);
+		// Remove the Shedinja
+		battle.choose('p1', 'move 4');
+		battle.choose('p2', 'move 2');
+		battle.commitDecisions();
+		// Next Turn
 		p1.active[0].boostBy({atk: 5, spe: 6});
 		p2.active[0].boostBy({atk: -6});
 		p1.chooseMove(1).chooseMove(2, 1).foe.chooseMove(2, 2);
