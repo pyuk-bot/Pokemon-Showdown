@@ -14,7 +14,7 @@ describe('Reflect Type', function () {
 		battle = common.createBattle();
 		battle.join('p1', 'Guest 1', 1, [{species: 'Arcanine', ability: 'intimidate', moves: ['burnup']}]);
 		battle.join('p2', 'Guest 2', 1, [{species: 'Latias', ability: 'levitate', item: 'laggingtail', moves: ['reflecttype']}]);
-		assert.strictEqual(battle.p2.active[0].getTypes(), ['???']);
+		assert.strictEqual(battle.p1.active[0].getTypes(), ['???']);
 		assert.constant(() => battle.p2.active[0].getTypes(), () => battle.commitDecisions());
 	});
 
