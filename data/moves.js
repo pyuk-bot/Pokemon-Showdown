@@ -13038,7 +13038,7 @@ exports.BattleMovedex = {
 		flags: {protect: 1, authentic: 1, mystery: 1},
 		onHit: function (target, source) {
 			if (source.template && (source.template.num === 493 || source.template.num === 773)) return false;
-			if (target.getTypes() === ['???']) return false;
+			if (target.getTypes().length === 1 && target.getTypes()[0] === '???') return false;
 			this.add('-start', source, 'typechange', '[from] move: Reflect Type', '[of] ' + target);
 			if (target.addedType) {
 				source.types = target.getTypes(true).map(type => type === '???' ? 'Normal' : type);
