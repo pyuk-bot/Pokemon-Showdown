@@ -38,7 +38,7 @@ describe('Reflect Type', function () {
 		assert.strictEqual(battle.p2.active[0].getTypes()[0], '???');
 		assert.strictEqual(battle.p2.active[0].addedType, 'Ghost');
 		battle.commitDecisions();
-		assert.strictEqual(battle.p2.active[0].getTypes.length, 2);
+		assert.strictEqual(battle.p2.active[0].getTypes().length, 2);
 		assert.strictEqual(battle.p1.active[0].getTypes()[0], 'Normal');
 	});
 });
