@@ -13040,7 +13040,7 @@ exports.BattleMovedex = {
 			if (source.template && (source.template.num === 493 || source.template.num === 773)) return false;
 			if (target.getTypes().length === 1 && target.getTypes()[0] === '???') return false;
 			this.add('-start', source, 'typechange', '[from] move: Reflect Type', '[of] ' + target);
-			if (target.addedType) {
+			if (target.addedType && target.getTypes(true).length === 1) {
 				source.types = target.getTypes(true).map(type => type === '???' ? 'Normal' : type);
 			} else {
 				source.types = target.getTypes(true).filter(type => type !== '???');
