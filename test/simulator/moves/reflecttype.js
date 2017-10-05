@@ -22,7 +22,7 @@ describe('Reflect Type', function () {
 		battle.join('p1', 'Guest 1', 1, [{species: 'Moltres', ability: 'pressure', moves: ['burnup']}]);
 		battle.join('p2', 'Guest 2', 1, [{species: 'Latias', ability: 'levitate', item: 'laggingtail', moves: ['reflecttype']}]);
 		battle.commitDecisions();
-		assert.strictEqual(battle.p2.active[0].getTypes(), ['Fire']);
+		assert.strictEqual(battle.p2.active[0].getTypes(), ['Flying']);
 	});
 
 	it('should turn the "???" type into "Normal" when used against a Pokemon whose type contains "???" and an added type', function () {
