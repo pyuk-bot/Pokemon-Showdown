@@ -33,3 +33,4 @@ describe('Reflect Type', function () {
 		battle.commitDecisions();
 		assert.strictEqual(battle.p2.active[0].getTypes(), ['Normal', 'Ghost']);
 	});
+});
