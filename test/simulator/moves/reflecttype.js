@@ -35,10 +35,10 @@ describe('Reflect Type', function () {
 		const p1 = battle.join('p1', 'Guest 1', 1, [{species: 'Latias', ability: 'levitate', moves: ['reflecttype', 'trickortreat']}]);
 		battle.join('p2', 'Guest 2', 1, [{species: 'Arcanine', ability: 'intimidate', moves: ['burnup']}]);
 		p1.chooseMove(2, 1).foe.chooseDefault();
+		assert.strictEqual(battle.p2.active[0].getTypes()[0], '???');
 		assert.strictEqual(battle.p2.active[0].addedType, 'Ghost');
 		battle.commitDecisions();
 		assert.strictEqual(battle.p2.active[0].getTypes.length, 2);
-		assert.strictEqual(battle.p2.active[0].getTypes()[0], '???');
 		assert.strictEqual(battle.p1.active[0].getTypes()[0], 'Normal');
 	});
 });
