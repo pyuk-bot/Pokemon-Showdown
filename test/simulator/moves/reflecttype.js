@@ -14,7 +14,8 @@ describe('Reflect Type', function () {
 		battle = common.createBattle();
 		battle.join('p1', 'Guest 1', 1, [{species: 'Arcanine', ability: 'intimidate', moves: ['burnup']}]);
 		battle.join('p2', 'Guest 2', 1, [{species: 'Latias', ability: 'levitate', item: 'laggingtail', moves: ['reflecttype']}]);
-		assert.strictEqual(battle.p1.active[0].getTypes(), ['???']);
+		assert.strictEqual(battle.p1.active[0].getTypes().length, 1);
+		assert.strictEqual(battle.p1.active[0].getTypes()[0], '???');
 		assert.constant(() => battle.p2.active[0].getTypes(), () => battle.commitDecisions());
 	});
 
@@ -23,8 +24,10 @@ describe('Reflect Type', function () {
 		battle.join('p1', 'Guest 1', 1, [{species: 'Moltres', ability: 'pressure', moves: ['burnup']}]);
 		battle.join('p2', 'Guest 2', 1, [{species: 'Latias', ability: 'levitate', item: 'laggingtail', moves: ['reflecttype']}]);
 		battle.commitDecisions();
-		assert.strictEqual(battle.p1.active[0].getTypes(), ['???', 'Flying']);
-		assert.strictEqual(battle.p2.active[0].getTypes(), ['Flying']);
+		assert.strictEqual(battle.p1.active[0].getTypes()[0], '???');
+		assert.strictEqual(battle.p1.active[0].getTypes()[1], 'Flying');
+		assert.strictEqual(battle.p2.active[0].getTypes().length, 1);
+		assert.strictEqual(battle.p2.active[0].getTypes()[0], 'Flying');
 	});
 
 	it('should turn the "???" type into "Normal" when used against a Pokemon whose type contains "???" and an added type', function () {
