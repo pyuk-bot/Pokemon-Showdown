@@ -1576,7 +1576,7 @@ class RandomTeams extends Dex.ModdedDex {
 			case 'Castform': case 'Gourgeist': case 'Oricorio':
 				if (this.random(4) >= 1) continue;
 				break;
-			case 'Basculin': case 'Cherrim': case 'Greninja': case 'Groudon': case 'Hoopa': case: 'Kyogre' case 'Meloetta': case 'Meowstic':
+			case 'Basculin': case 'Cherrim': case 'Greninja': case 'Groudon': case 'Hoopa': case 'Kyogre': case 'Meloetta': case 'Meowstic':
 				if (this.random(2) >= 1) continue;
 				break;
 			}
