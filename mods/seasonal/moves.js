@@ -170,6 +170,29 @@ exports.BattleMovedex = {
 		target: "any",
 		type: "Bug",
 	},
+	// cant say
+	bladeofaesthetics: {
+		accuracy: 100,
+		basePower: 120,
+		category: "Physical",
+		shortDesc: "",
+		id: "bladeofaesthetics",
+		name: "blade of ~aesthetics~",
+		isNonstandard: true,
+		pp: 10,
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sacred Sword", target);
+			this.add('-anim', source, "Bloom Doom", target);
+		},
+		onHit: function (target, source) {
+			this.setTerrain('grassyterrain', source);
+		},
+		flags: {protect: 1, mirror: 1, contact: 1},
+		secondary: false,
+		target: "normal",
+		type: "Steel",
+	},
 	// EV
 	darkaggro: {
 		accuracy: 100,
@@ -243,8 +266,8 @@ exports.BattleMovedex = {
 			this.attrLastMove('[still]');
 			this.add('c|@HoeenHero|!evalbattle let p=p1.pokemon.find(p => p.speciesid===\'ludicolo\'); battle.boost({spa:1,spe:1},p); battle.setWeather(\'raindance\', p); for(let i in p2.pokemon) if(p2.pokemon[i].isActive) { p2.pokemon[i].setStatus(\'confusion\'); break;}');
 			this.add('', '<<< true');
- 			this.add('-anim', source, "Calm Mind", source);
- 			this.add('-anim', source, "Geomancy", source);
+			this.add('-anim', source, "Calm Mind", source);
+			this.add('-anim', source, "Geomancy", source);
 		},
 		self: {
 			boosts: {spa: 1},
@@ -258,51 +281,50 @@ exports.BattleMovedex = {
 		type: "Psychic",
 	},
 	//Imas
- 	accelesquawk: {
- 		accuracy: 100,
- 		basePower: 90,
- 		category: "Physical",
- 		shortDesc: "Ignores the Abilities of other Pokemon.",
- 		id: "accelesquawk",
- 		isNonstandard: true,
- 		name: "Accele Squawk",
- 		pp: 10,
- 		priority: 0,
+	accelesquawk: {
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		shortDesc: "Ignores the Abilities of other Pokemon.",
+		id: "accelesquawk",
+		isNonstandard: true,
+		name: "Accele Squawk",
+		pp: 10,
+		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		ignoreAbility: true,
-		flags: {protect: 1, mirror: 1},
- 		onPrepareHit: function (target, source) {
- 			this.attrLastMove('[still]');
- 			this.add('-anim', source, "Brave Bird", target);
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Brave Bird", target);
 			this.add('c|%imas|**AcceleSquawk**');
- 		},
- 		secondary: false,
- 		target: "normal",
- 		type: "Flying",
- 	},
- 	// Imas's Z move
- 	boi: {
- 		accuracy: true,
- 		basePower: 180,
- 		category: "Physical",
- 		shortDesc: "Raises Atk by 1.",
- 		id: "boi",
- 		isNonstandard: true,
- 		name: "B O I",
- 		pp: 1,
+		},
+		secondary: false,
+		target: "normal",
+		type: "Flying",
+	},
+	// Imas's Z move
+	boi: {
+		accuracy: true,
+		basePower: 180,
+		category: "Physical",
+		shortDesc: "Raises Atk by 1.",
+		id: "boi",
+		isNonstandard: true,
+		name: "B O I",
+		pp: 1,
 		noPPBoosts: true,
- 		priority: 0,
+		priority: 0,
 		isZ: 'imasiumz',
 		flags: {protect: 1, mirror: 1},
- 		onPrepareHit: function (target, source) {
+		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
- 			this.add('-anim', source, "Supersonic Skystrike", target);
+			this.add('-anim', source, "Supersonic Skystrike", target);
 			this.boost({atk: 1}, source);
- 		},
- 		secondary: false,
- 		target: "normal",
- 		type: "Flying",
- 	},
+		},
+		secondary: false,
+		target: "normal",
+		type: "Flying",
+	},
 	// Innovamania
 	ragequit: {
 		accuracy: true,
@@ -584,7 +606,7 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "normal",
 		type: "Normal",
-	},	
+	},
 	// panpawn
 	lafireblaze420: {
 		accuracy: 80,
@@ -663,6 +685,64 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Bug",
 	},
+	// sirDonovan
+	ladiesfirst: {
+		accuracy: 100,
+		basePower: 120,
+		category: 'Special',
+		id: 'ladiesfirst',
+		isNonstandard: true,
+		isViable: true,
+		name: 'Ladies First',
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sing", target);
+		},
+		beforeTurnCallback: function (pokemon, target) {
+			let decision = this.willMove(pokemon);
+			if (target.gender === 'F' && decision) {
+				this.cancelMove(pokemon);
+				for (let i = this.queue.length - 1; i >= 0; i--) {
+					if (this.queue[i].choice === 'residual') {
+						this.queue.splice(i, 0, decision);
+						break;
+					}
+				}
+				this.add('-activate', pokemon, 'move: Ladies First');
+			}
+		},
+		self: {boosts: {spe: 1}},
+		secondary: false,
+		target: 'normal',
+		type: 'Fairy',
+	},
+	// SpaceBass
+	armyofmushrooms: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		shortDesc: "Boosts def, spd before attack",
+		id: "armyofmushrooms",
+		isNonstandard: true,
+		name: "Army of Mushrooms",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, protect: 1},
+		beforeTurnCallback: function (pokemon) {
+			this.boost({def: 1, spd: 1}, pokemon, pokemon, 'mushroom army');
+		},
+		onHit: function (pokemon) {
+			this.useMove("sleeppowder", pokemon);
+			this.useMove("leechseed", pokemon);
+			this.useMove("powder", pokemon);
+		},
+		secondary: false,
+		target: "self",
+		type: "Grass",
+	},
 	// Temporaryanonymous
 	spoopyedgecut: {
 		accuracy: 100,
@@ -717,6 +797,75 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "normal",
 		type: "Dark",
+	},
+	// Tiksi
+	devolutionwave: {
+		accuracy: 100,
+		basePower: 25,
+		category: "Physical",
+		shortDesc: "",
+		id: "devolutionwave",
+		name: "Devolution Wave",
+		isNonstandard: true,
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sludge Wave", target);
+			this.add('-anim', source, "Rock Slide", target);
+		},
+		multihit: 5,
+		onAfterHit: function (target, source, move) {
+			if (!move.curHits) move.curHits = 1;
+			let option = this.random(2);
+			switch (move.curHits) {
+			case 1:
+				if (option) {
+					this.boost({spe: -1}, target, source);
+				} else {
+					this.boost({def: -1}, target, source);
+				}
+				break;
+			case 2:
+				if (option) {
+					target.trySetStatus('tox', source);
+				} else {
+					if (target.hasType('Grass')) {
+						this.add('', target.name + ' would be seeded but is immune.');
+					} else {
+						target.addVolatile('leechseed', source);
+					}
+				}
+				break;
+			case 3:
+				if (option) {
+					this.setTerrain('electricterrain', source);
+				} else {
+					this.setTerrain('psychicterrain', source);
+				}
+				break;
+			case 4:
+				if (option) {
+					this.boost({spd: 1}, source, source);
+				} else {
+					this.useMove('skillswap', source, target);
+				}
+				break;
+			case 5:
+				if (option) {
+					target.side.addSideCondition('stealthrock');
+				} else {
+					target.side.addSideCondition('stickyweb');
+				}
+				break;
+			}
+			move.curHits++;
+		},
+		secondary: false,
+		target: "normal",
+		type: "Rock",
 	},
 	// Trickster, haven't completely tested this yet
 	eventhorizon: {

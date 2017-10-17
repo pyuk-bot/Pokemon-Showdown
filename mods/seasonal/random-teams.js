@@ -37,6 +37,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: "Buzzing of the Storm",
 				evs: {def:4, atk:252, spe:252}, nature: 'Jolly',
 			},
+			'cant say': {
+				species: 'Aegislash', ability: 'Stance Change', item: 'Weakness Policy', gender: 'M',
+				moves: ['Shift Gear', 'Spectral Thief', 'Sacred Sword'],
+				signatureMove: 'blade of ~aesthetics~',
+				evs: {atk: 252, spd: 4, spe: 252}, nature: 'Adamant',
+			},
 			'EV': {
 				species: 'Muk-Alola', ability: 'Unaware', item: 'Black Sludge', gender: 'M', // ask gender
 				moves: [['Gunk Shot', 'Poison Jab'][this.random(2)], 'Recover', 'Coil'],
@@ -121,6 +127,18 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: '3 Strike Swipe',
 				evs: {atk: 252, def: 4, spe: 252}, nature: 'Jolly',
 			},
+			'sirDonovan': {
+				species: 'Togetic', ability: 'Gale Wings', item: 'Eviolite', gender: 'M',
+				moves: ['Roost', 'Hurricane', 'Charm'],
+				signatureMove: 'Ladies First',
+				evs: {hp: 252, spa: 252, spe: 4}, nature: 'Modest',
+			},
+			'SpaceBass': {
+				species: 'foongus', ability: 'Prankster', item: 'Eviolite', gender: 'M', // ask gender
+				moves: ['Baton Pass', 'Ingrain', 'Substitute'],
+				signatureMove: 'Army of Mushrooms',
+				evs: {hp: 252, def: 128, spd: 128}, nature: 'Sassy',
+			},
 			'Temporaryanonymous': {
 				species: 'Doublade', ability: 'Tough Claws', item: 'Eviolite',
 				gender: 'M',
@@ -134,12 +152,18 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Baton Thief',
 				evs: {hp: 252, def: 4, spe: 252}, nature: 'Timid',
 			},
+			'Tiksi': {
+				species: 'Cradily', ability: 'Sand Stream', item: 'Leftovers', gender: 'M',
+				moves: ['Shore Up', 'Rock Slide', ['Swords Dance', 'Curse'][this.random(2)]],
+				signatureMove: 'Devolution Wave',
+				evs: {hp: 248, atk: 252, spd: 8}, nature: 'Adamant',
+			},
 			'Trickster': {
 				species: 'Hoopa', ability: 'Shadow Shield', item: 'Figy Berry',
 				gender: 'M',
 				moves: ['Inferno', 'Zap Cannon', ['Dynamic Punch', 'Grass Whistle'][this.random(2)]],
 				signatureMove: 'Event Horizon',
-				evs: {hp: 252, atk: 4, spa: 252}, ivs: {spe: 0}, nature: 'Quiet', 
+				evs: {hp: 252, atk: 4, spa: 252}, ivs: {spe: 0}, nature: 'Quiet',
 			},
 			'xfix': {
 				species: 'Xatu', ability: ['Magic Bounce', 'Prankster'][this.random(2)], item: 'Pomeg Berry', gender: 'M',

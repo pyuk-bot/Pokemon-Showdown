@@ -3,6 +3,7 @@
 exports.BattleStatuses = {
 	aelita: {
 		exists: true,
+		noCopy: true,
 		onStart: function (target, source) {
 			this.add('c|%Aelita|Transfer, Aelita. Scanner, Aelita. Virtualization!');
 			this.boost({spe: 1}, source);
@@ -13,6 +14,7 @@ exports.BattleStatuses = {
 	},
 	andy: {
 		exists: true,
+		noCopy: true,
 		onUpdate: function (pokemon) {
 			let name = toId(pokemon.name);
 			if (pokemon.template.isMega) {
@@ -31,10 +33,10 @@ exports.BattleStatuses = {
 		onSwitchOut: function () {
 			this.add('c|@AndrewGoncel >_>|:<');
 		},
-		
 	},
 	astara: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|%Ast☆arA|I\'d rather take a nap, I hope you won\'t be a petilil shit, Eat some rare candies and get on my level.');
 		},
@@ -45,6 +47,7 @@ exports.BattleStatuses = {
 	},
 	auzbat: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|%AuzBat|Smith is better than Kohli');
 		},
@@ -54,15 +57,36 @@ exports.BattleStatuses = {
 	},
 	beowulf: {
 		exists: true,
-		onSwitchIn: function () {
+		noCopy: true,
+		onStart: function () {
 			this.add('c|@Beowulf|Grovel peasant, you are in the presence of the RNGesus');
 		},
 		onFaint: function () {
 			this.add('c|@Beowulf|There is no need to be mad');
 		},
 	},
+	cantsay: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|&cant say|(´・ω・`)');
+		},
+		onSwitchOut: function () {
+			this.add('c|&cant say|wow CTed lol');
+		},
+		onFaint: function () {
+			this.add('c|&cant say|bg haxor :(');
+		},
+		onAfterMove: function (pokemon) {
+			if (pokemon.template.forme !== 'Blade') return;
+			if (pokemon.formeChange('Aegislash')) {
+				this.add('-formechange', pokemon, 'Aegislash', '[from] ability: Stance Change');
+			}
+		},
+	},
 	ev: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|~EV|nice boosts');
 		},
@@ -72,12 +96,10 @@ exports.BattleStatuses = {
 	},
 	grimauxiliatrix: {
 		exists: true,
+		noCopy: true,
 		onUpdate: function (pokemon) {
-			if (pokemon.template.isMega) {
-				if (pokemon.getAbility().id === 'filter') {
-					pokemon.setAbility('chromefinish');
-					//this.add('-ability', pokemon, 'Chrome Finish');
-				}
+			if (pokemon.template.isMega && pokemon.getAbility().id === 'filter') {
+				pokemon.setAbility('chromefinish');
 			}
 		},
 		onFaint: function () {
@@ -86,6 +108,7 @@ exports.BattleStatuses = {
 	},
 	hoeenhero: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|@HoeenHero|I have cheat codes!');
 		},
@@ -95,6 +118,7 @@ exports.BattleStatuses = {
 	},
 	imas: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|%imas|hlo im flyboy220');
 		},
@@ -107,6 +131,7 @@ exports.BattleStatuses = {
 	},
 	innovamania: {
 		exists: true,
+		noCopy: true,
 		onStart: function (pokemon) {
 			let sentences = ['Don\'t take this seriously', 'These Black Glasses sure look cool', 'Ready for some fun?( ͡° ͜ʖ ͡°)', '( ͡° ͜ʖ ͡°'];
 			this.add('c|@innovamania|' + sentences[this.random(4)]);
@@ -119,6 +144,7 @@ exports.BattleStatuses = {
 	},
 	kalalokki: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|%kalalokki|(•_•)');
 			this.add('c|%Kalalokki|( •_•)>⌐■-■');
@@ -133,6 +159,7 @@ exports.BattleStatuses = {
 	},
 	kamikaze: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|&kamikaze|Omae Wa Mou Shindeiru');
 		},
@@ -142,6 +169,7 @@ exports.BattleStatuses = {
 	},
 	level51: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|@Level 51|Calculating chance of victory!');
 		},
@@ -151,6 +179,7 @@ exports.BattleStatuses = {
 	},
 	megazard: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|%Megazard|Thank you for choosing Drampa™');
 		},
@@ -163,8 +192,9 @@ exports.BattleStatuses = {
 	},
 	panpawn: {
 		exists: true,
+		noCopy: true,
 		effectType: 'Ability',
-		onStart: function () {
+		onStart: function (source) {
 			this.add('c|%panpawn|hello darkness my old friend,,,');
 			for (let i = 0; i < this.queue.length; i++) {
 				if (this.queue[i].choice === 'runPrimal' && this.queue[i].pokemon === source && source.template.speciesid === 'groudon') return;
@@ -181,6 +211,7 @@ exports.BattleStatuses = {
 	},
 	scotteh: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|&Scotteh|─────▄▄████▀█▄');
 			this.add('c|&Scotteh|───▄██████████████████▄');
@@ -193,6 +224,7 @@ exports.BattleStatuses = {
 	},
 	scythernoswiping: {
 		exists: true,
+		noCopy: true,
 		effectType: 'Ability',
 		onDamage: function (damage, target, source, effect) {
 			if (effect && effect.id === 'stealthrock') {
@@ -210,10 +242,35 @@ exports.BattleStatuses = {
 		},
 		onFaint: function () {
 			this.add('c|@Scyther NO Swiping|Aww man');
-		}
+		},
+	},
+	sirdonovan: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|~sirDonovan|Oh, a battle? Let me finish my tea and crumpets');
+		},
+		onFaint: function () {
+			this.add('-message', 'RIP sirDonovan');
+		},
+	},
+	spacebass: {
+		exists: true,
+		noCopy: true,
+		effectType: 'Ability',
+		/*onStart: function () {
+			this.add('c|@SpaceBass|');
+		},*/
+		onSwitchOut: function (pokemon) {
+			pokemon.heal(this.modify(pokemon.maxhp, 0.4));
+		},
+		/*onFaint: function () {
+			this.add('c|@SpaceBass|');
+		},*/
 	},
 	teremiare: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|@Teremiare|(>\'o\')>');
 		},
@@ -221,8 +278,22 @@ exports.BattleStatuses = {
 			this.add('c|@Teremiare|<(\'o\'<)');
 		},
 	},
+	tiksi: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|@Tiksi|Hakkaa päälle!');
+		},
+		onSwitchOut: function () {
+			this.add('c|@Tiksi|TI rigged this ok');
+		},
+		onFaint: function (pokemon) {
+			this.add('c|@Tiksi|You rotten ' + pokemon.side.foe.name + '! I\'ll send you to the Tiksi branch!');
+		},
+	},
 	trickster: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|@Trickster|(◕‿◕✿)');
 		},
@@ -235,6 +306,7 @@ exports.BattleStatuses = {
 	},
 	xfix: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|@xfix|apparently pomeg berry can be used as sturdy if you hold down+B');
 		},
@@ -263,6 +335,7 @@ exports.BattleStatuses = {
 	},
 	zod: {
 		exists: true,
+		noCopy: true,
 		onStart: function () {
 			this.add('c|%Zod|Get ready to go full out!');
 		},
