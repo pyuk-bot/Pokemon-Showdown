@@ -3,6 +3,8 @@
 exports.BattleAbilities = {
 	// kamikaze and imas
 	flashfeather: {
+		id: "flashfeather",
+		name: "Flash Feather",
 		shortDesc: "This Pokemon's Flying-type moves have their priority increased by 1.",
 		onModifyPriority: function (priority, pokemon, target, move) {
 			if (move && move.type === 'Flying') return priority + 1;
@@ -10,9 +12,9 @@ exports.BattleAbilities = {
 	},
 	// Megazard
 	insensible: {
-		shortDesc: "This Pokemon ignores other Pokemon's stat stages when taking or doing damage, and receives 3/4th damage from super effective attacks.",
 		id: "insensible",
 		name: "Insensible",
+		shortDesc: "This Pokemon ignores other Pokemon's stat stages when taking or doing damage, and receives 3/4th damage from super effective attacks.",
 		onAnyModifyBoost: function (boosts, target) {
 			let source = this.effectData.target;
 			if (source === target) return;
@@ -35,6 +37,8 @@ exports.BattleAbilities = {
 		},
 	},
 	interdimensional:{
+		id: "interdimensional",
+		name: "Inter Dimensional",
 		shortDesc: "On switch-in, summons Gravity.",
 		onStart: function () {
 			this.addPseudoWeather('gravity');
@@ -42,6 +46,8 @@ exports.BattleAbilities = {
 	},
 	// Teremiare
 	superprankster: {
+		id: "superprankster",
+		name: "Super Prankster",
 		shortDesc: "This Pokemon's status moves have their priority increased by 3.",
 		onModifyPriority: function (priority, pokemon, target, move) {
 			if (move && move.category === 'Status') return priority + 3;
@@ -49,11 +55,39 @@ exports.BattleAbilities = {
 	},
 	// grimAuxiliatrix
 	chromefinish: {
+		id: "chromefinish",
+		name: "Chrome Finish",
 		shortDesc: "Halves damage from special moves",
 		onFoeBasePower: function (basePower, attacker, defender, move) {
 			if (this.effectData.target !== defender) return;
 			if (move.category === 'Special') {
 				return this.chainModify(0.5);
+			}
+		},
+	},
+	// ascriptmaster
+	appliancechange: {
+		id: "appliancechange",
+		name: "Appliance Change",
+		shortDesc: "+1 speed on switch in, changes forme based on type of move used.",
+		onSwitchIn: function () {
+			this.boost({spe: 1});
+		},
+		onBeforeMovePriority: 0.5,
+		onBeforeMove: function (attacker, defender, move) {
+			if (attacker.template.baseSpecies !== 'Rotom' || attacker.transformed) return;
+			let formes = {'Grass': 'Rotom-Mow', 'Fire': 'Rotom-Heat', 'Water': 'Rotom-Wash', 'Ice': 'Rotom-Frost', 'Flying': 'Rotom-Fan'};
+			let targetSpecies = formes[move.type];
+			if (!targetSpecies) targetSpecies = formes[Object.keys(formes)[this.random(5)]];
+			if (!targetSpecies) return; // Should never happen
+			if (attacker.template.species !== targetSpecies && attacker.formeChange(targetSpecies)) {
+				this.add('-formechange', attacker, targetSpecies, '[from] ability: Appliance Change');
+			}
+		},
+		onAfterMove: function (pokemon) {
+			if (pokemon.template.baseSpecies !== 'Rotom' || !pokemon.template.forme) return;
+			if (pokemon.formeChange('Rotom')) {
+				this.add('-formechange', pokemon, 'Rotom', '[from] ability: Appliance Change');
 			}
 		},
 	},

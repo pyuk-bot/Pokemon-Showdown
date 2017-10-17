@@ -66,6 +66,27 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Dark",
 	},
+	// ascriptmaster
+	voltechburst: {
+		accuracy: true,
+		basePower: 100,
+		category: "Special",
+		shortDesc: "Always hits, ignores foes ability.",
+		id: "voltechburst",
+		isNonstandard: true,
+		name: "Voltech Burst",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', target, 'Shock Wave', source);
+		},
+		ignoreAbility: true,
+		secondary: false,
+		target: "normal",
+		type: "Electric",
+	},
 	// Astara
 	starboltdesperation: {
 		accuracy: 75,
@@ -73,7 +94,6 @@ exports.BattleMovedex = {
 		category: "Physical",
 		shortDesc: "Steals foe's status move. Deals Damage",
 		id: "starboltdesperation",
-		isViable: true,
 		isNonstandard: true,
 		name: 'Star Bolt Desperation',
 		pp: 5,

@@ -34,6 +34,16 @@ exports.BattleStatuses = {
 			this.add('c|@AndrewGoncel >_>|:<');
 		},
 	},
+	ascriptmaster: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|%Ascriptmaster|Here we go! Time to show you something shocking!');
+		},
+		onFaint: function () {
+			this.add('c|%Ascriptmaster|In the end, the shocked one was me...');
+		},
+	},
 	astara: {
 		exists: true,
 		noCopy: true,

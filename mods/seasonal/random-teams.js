@@ -19,6 +19,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: "Pilfer",
 				evs: {hp:252, atk: 252, spe:4}, nature: 'Adamant',
 			},
+			'Ascriptmaster': {
+				species: 'Rotom', ability: 'Appliance Change', item: '', gender: 'M', // ask gender
+				moves: ['Searing Shot', 'Ice Beam', 'Aeroblast', 'Origin Pulse', 'Seed Flare'],
+				signatureMove: 'Voltech Burst',
+				evs: {hp: 4, spa: 252, spd: 252}, nature: 'Timid',
+			},
 			'Astara': {
 				species: 'Jirachi', ability: 'Cursed Body', item: ['Leftovers', 'Sitrus Berry'][this.random(2)], gender: 'F', shiny: true,
 				moves: ['psystrike', 'moonblast', 'nastyplot', 'scald', 'recover'],
@@ -196,6 +202,11 @@ class RandomStaffBrosTeams extends RandomTeams {
 			// Assuming the hardcoded set evs are all legal.
 			if (!set.evs) set.evs = {hp:84, atk:84, def:84, spa:84, spd:84, spe:84};
 			set.moves = [this.sampleNoReplace(set.moves), this.sampleNoReplace(set.moves), this.sampleNoReplace(set.moves)].concat(set.signatureMove);
+			if (name === 'Ascriptmaster') {
+				// item hack
+				let type = [this.getMove(set.moves[0]).type, this.getMove(set.moves[1]).type, this.getMove(set.moves[2]).type][this.random(3)];
+				set.item = {'Grass': 'Grassium Z', 'Fire': 'Firium Z', 'Water': 'Waterium Z', 'Ice': 'Icium Z', 'Flying': 'Flyinium Z'}[type];
+			}
 			team.push(set);
 		}
 
