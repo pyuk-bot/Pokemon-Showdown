@@ -52,15 +52,6 @@ class RandomTeams extends Dex.ModdedDex {
 		let index = this.random(length);
 		return this.fastPop(list, index);
 	}
-	checkBattleForme(template) {
-		// If the Pokémon has a Mega or Primal alt forme, that's its preferred battle forme.
-		// No randomization, no choice. We are just checking its existence.
-		// Returns a Pokémon template for further details.
-		if (!template.otherFormes) return null;
-		let firstForme = this.getTemplate(template.otherFormes[0]);
-		if (firstForme.isMega || firstForme.isPrimal) return firstForme;
-		return null;
-	}
 	// checkAbilities(selectedAbilities, defaultAbilities) {
 	// 	if (!selectedAbilities.length) return true;
 	// 	let selectedAbility = selectedAbilities.pop();
@@ -514,8 +505,8 @@ class RandomTeams extends Dex.ModdedDex {
 			// Only change the species. The template has custom moves, and may have different typing and requirements.
 			species = template.baseSpecies;
 		}
-		let battleForme = this.checkBattleForme(template);
-		if (battleForme && battleForme.randomBattleMoves && (battleForme.isMega ? !teamDetails.megaStone : this.random(2))) {
+		let battleForme = this.getTemplate(template.otherFormes[0]);
+		if (battleForme && battleForme.randomBattleMoves && battleForme.isMega && !teamDetails.megaStone) {
 			template = this.getTemplate(template.otherFormes.length >= 2 ? template.otherFormes[this.random(template.otherFormes.length)] : template.otherFormes[0]);
 		}
 
@@ -1527,7 +1518,7 @@ class RandomTeams extends Dex.ModdedDex {
 				if (template.battleOnly) types = this.getTemplate(template.baseSpecies).types;
 				if (types.indexOf(type) < 0) continue;
 			}
-			if (template.gen <= this.gen && !excludedTiers[template.tier] && !template.isMega && !template.isPrimal && !template.isNonstandard && template.randomBattleMoves) {
+			if (template.gen <= this.gen && !excludedTiers[template.tier] && !template.isMega && !template.isNonstandard && template.randomBattleMoves) {
 				pokemonPool.push(id);
 			}
 		}
@@ -1585,7 +1576,7 @@ class RandomTeams extends Dex.ModdedDex {
 			case 'Castform': case 'Gourgeist': case 'Oricorio':
 				if (this.random(4) >= 1) continue;
 				break;
-			case 'Basculin': case 'Cherrim': case 'Greninja': case 'Hoopa': case 'Meloetta': case 'Meowstic':
+			case 'Basculin': case 'Cherrim': case 'Greninja': case 'Groudon': case 'Hoopa': case 'Kyogre': case 'Meloetta': case 'Meowstic':
 				if (this.random(2) >= 1) continue;
 				break;
 			}
@@ -1714,8 +1705,8 @@ class RandomTeams extends Dex.ModdedDex {
 			// Only change the species. The template has custom moves, and may have different typing and requirements.
 			species = template.baseSpecies;
 		}
-		let battleForme = this.checkBattleForme(template);
-		if (battleForme && (battleForme.isMega ? !teamDetails.megaStone : this.random(2))) {
+		let battleForme = this.getTemplate(template.otherFormes[0]);
+		if (battleForme && battleForme.isMega && !teamDetails.megaStone) {
 			template = this.getTemplate(template.otherFormes.length >= 2 ? template.otherFormes[this.random(template.otherFormes.length)] : template.otherFormes[0]);
 		}
 
