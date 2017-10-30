@@ -2,7 +2,6 @@
 
 const assert = require('./../../assert');
 const common = require('./../../common');
-const PRNG = require('./../sim/prng');
 
 let battle;
 
