@@ -54,7 +54,7 @@ describe('Dancer', function () {
 	});
 
 	it('should not copy a move that did nothing', function () {
-		battle = common.createBattle({gameType: 'doubles'});
+		battle = common.createBattle({gameType: 'doubles'}, null, 1);
 		const p1 = battle.join('p1', 'Guest 1', 1, [
 			{species: 'Oricorio', level: 98, ability: 'dancer', item: 'laggingtail', moves: ['dragondance', 'protect', 'teeterdance']},
 			{species: 'Oricorio', level: 99, ability: 'dancer', moves: ['featherdance']},
@@ -77,12 +77,11 @@ describe('Dancer', function () {
 		battle.choose('p1', 'move 2');
 		battle.choose('p2', 'move 2');
 		battle.commitDecisions();
-		assert.statStage(p2.active[0], 'atk', -6);
+		assert.statStage(p1.active[0], 'atk', 0);
 		// Next turn: Teeter Dance should be copied as long as it hits one thing
 		battle.choose('p1', 'move 2');
 		battle.choose('p2', 'move 3');
 		battle.commitDecisions();
-		battle.resetRNG();
 		assert.fullHP(p1.active[1]);
 		// Next turn: Teeter Dance should NOT be copied if everything it hits is already confused
 		battle.choose('p1', 'move 3');
