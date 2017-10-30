@@ -82,9 +82,10 @@ describe('Dancer', function () {
 		battle.choose('p1', 'move 2');
 		battle.choose('p2', 'move 3');
 		battle.commitDecisions();
+		battle.resetRNG();
 		assert.fullHP(p1.active[1]);
 		// Next turn: Teeter Dance should NOT be copied if everything it hits is already confused
 		battle.choose('p1', 'move 3');
-		assert.constant(() => p2.active[0].volatiles['confusion'], () => battle.commitDecisions());
+		assert.constant(() => p1.active[0].volatiles['confusion'], () => battle.commitDecisions());
 	});
 });
