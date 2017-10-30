@@ -69,7 +69,7 @@ describe('Dancer', function () {
 		p1.chooseMove(1).chooseMove(1, 1);
 		p2.chooseMove(1, -2).chooseMove(1, 1);
 		assert.fullHP(p2.active[0]);
-		assert.statStage(p1.active[0], 'atk', 0);
+		assert.statStage(p1.active[0], 'atk', 6);
 		assert.statStage(p1.active[1], 'atk', 0);
 		assert.statStage(p2.active[0], 'atk', -6);
 		assert.statStage(p2.active[0], 'spe', 0);
