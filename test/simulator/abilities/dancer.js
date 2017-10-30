@@ -74,9 +74,10 @@ describe('Dancer', function () {
 		assert.statStage(p2.active[0], 'atk', -6);
 		assert.statStage(p2.active[0], 'spe', 0);
 		// Next turn
-		battle.choose('p1', 'move 2');
+		battle.choose('p1', 'move 1');
 		battle.choose('p2', 'move 2');
 		battle.commitDecisions();
+		assert.statStage(p1.active[0], 'atk', 6);
 		assert.statStage(p1.active[1], 'atk', 0);
 		// Next turn: Teeter Dance should be copied as long as it hits one thing
 		battle.choose('p1', 'move 2');
