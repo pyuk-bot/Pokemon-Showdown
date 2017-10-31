@@ -690,7 +690,7 @@ class BattleDex {
 			let stat = stats['hp'];
 			modStats['hp'] = Math.floor(Math.floor(2 * stat + set.ivs['hp'] + Math.floor(set.evs['hp'] / 4) + 100) * set.level / 100 + 10);
 		}
-		return this.natureModify(modStats, set.nature);
+		modStats = this.natureModify(modStats, set.nature);
 		if (this.gen === 7) {
 			for (let statName in modStats) {
 				if (statName === 'hp') continue;
