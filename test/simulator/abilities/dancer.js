@@ -107,6 +107,6 @@ describe('Dancer', function () {
 		battle = common.createBattle();
 		const p1 = battle.join('p1', 'Guest 1', 1, [{species: 'Oricorio', ability: 'dancer', moves: ['fierydance']}]);
 		battle.join('p2', 'Guest 2', 1, [{species: 'Shedinja', ability: 'dancer', item: 'focussash', moves: ['meanlook']}]);
-		assert.hurts(p1.active[0], () => battle.commitdecisions());
+		assert.hurts(p1.active[0], () => battle.commitDecisions());
 	});
 });
