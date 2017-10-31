@@ -90,7 +90,7 @@ describe('Dancer', function () {
 		assert.constant(() => p1.active[0].volatiles['confusion'], () => battle.commitDecisions());
 	});
 	
-	it('should not copy a move that missed'), function () {
+	it('should not copy a move that missed', function () {
 		battle = common.createBattle();
 		const p1 = battle.join('p1', 'Guest 1', 1, [{species: 'Oricorio', ability: 'dancer', item: 'choicescarf', moves: ['revelationdance']}]);
 		const p2 = battle.join('p2', 'Guest 2', 1, [{species: 'Oricorio', ability: 'dancer', item: 'brightpowder', moves: ['dig']}]);
@@ -103,7 +103,7 @@ describe('Dancer', function () {
 		assert.fullHP(p1.active[0]);
 	});
 	
-	it('should copy a move that hit, but did 0 damage'), function () {
+	it('should copy a move that hit, but did 0 damage', function () {
 		battle = common.createBattle();
 		const p1 = battle.join('p1', 'Guest 1', 1, [{species: 'Oricorio', ability: 'dancer', moves: ['fierydance']}]);
 		battle.join('p2', 'Guest 2', 1, [{species: 'Shedinja', ability: 'dancer', item: 'focussash', moves: ['meanlook']}]);
