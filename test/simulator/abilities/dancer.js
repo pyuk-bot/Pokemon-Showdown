@@ -97,7 +97,6 @@ describe('Dancer', function () {
 		p2.active[0].boostBy({evasion: 6});
 		battle.commitDecisions();
 		assert.fullHP(p1.active[0]);
-		assert.fullHP(p2.active[0]);
 		battle.commitDecisions();
 		assert.fullHP(p1.active[0]);
 	});
