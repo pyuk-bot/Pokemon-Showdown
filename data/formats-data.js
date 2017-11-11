@@ -6471,6 +6471,7 @@ exports.BattleFormatsData = {
 		tier: "Uber",
 	},
 	necrozmaultra: {
+		requiredItem: "Ultranecrozium Z",
 		battleOnly: true,
 		tier: "Uber",
 	},
