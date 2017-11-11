@@ -458,7 +458,7 @@ exports.BattlePokedex = {
 		evos: ["raichu", "raichualola"],
 		evoLevel: 1,
 		eggGroups: ["Field", "Fairy"],
-		otherFormes: ["pikachucosplay", "pikachurockstar", "pikachubelle", "pikachupopstar", "pikachuphd", "pikachulibre", "pikachuoriginal", "pikachuhoenn", "pikachusinnoh", "pikachuunova", "pikachukalos", "pikachualola", 'pikachupartner'],
+		otherFormes: ["pikachucosplay", "pikachurockstar", "pikachubelle", "pikachupopstar", "pikachuphd", "pikachulibre", "pikachuoriginal", "pikachuhoenn", "pikachusinnoh", "pikachuunova", "pikachukalos", "pikachualola", "pikachupartner"],
 	},
 	pikachucosplay: {
 		num: 25,
