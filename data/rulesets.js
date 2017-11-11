@@ -67,6 +67,7 @@ exports.BattleFormats = {
 			if (!format || !this.getRuleTable(format).has('-illegal')) return problems;
 			// everything after this line only happens if we're doing legality enforcement
 			let kyurems = 0;
+			let necrozmas = 0;
 			for (let i = 0; i < team.length; i++) {
 				if (team[i].species === 'Kyurem-White' || team[i].species === 'Kyurem-Black') {
 					if (kyurems > 0) {
@@ -74,6 +75,13 @@ exports.BattleFormats = {
 						break;
 					}
 					kyurems++;
+				}
+				if (team[i].species === 'Necrozma-Dusk-Mane' || team[i].species === 'Necrozma-Dawn-Wings') {
+					if (necrozmas > 0) {
+						problems.push('You cannot have more than one Necrozma-Dusk-Mane/Necrozma-Dawn-Wings');
+						break;
+					}
+					necrozmas++;
 				}
 			}
 			return problems;
@@ -200,7 +208,7 @@ exports.BattleFormats = {
 					problems.push("" + template.species + " transforms in-battle with " + template.requiredAbility + "."); // Darmanitan-Zen, Zygarde-Complete
 				}
 				if (template.requiredItems && !template.requiredItems.includes(item.name)) {
-					problems.push("" + template.species + " transforms in-battle with " + Chat.plural(template.requiredItems.length, "either ") + template.requiredItems.join(" or ") + '.'); // Mega or Primal
+					problems.push("" + template.species + " transforms in-battle with " + Chat.plural(template.requiredItems.length, "either ") + template.requiredItems.join(" or ") + '.'); // Mega, Primal, or Ultra
 				}
 				if (template.requiredMove && set.moves.indexOf(toId(template.requiredMove)) < 0) {
 					problems.push("" + template.species + " transforms in-battle with " + template.requiredMove + "."); // Meloetta-Pirouette, Rayquaza-Mega
@@ -598,7 +606,13 @@ exports.BattleFormats = {
 		effectType: 'ValidatorRule',
 		name: 'CFZ Clause',
 		desc: ["Bans the use of crystal-free Z-Moves"],
-		banlist: ['10,000,000 Volt Thunderbolt', 'Acid Downpour', 'All-Out Pummeling', 'Black Hole Eclipse', 'Bloom Doom', 'Breakneck Blitz', 'Catastropika', 'Continental Crush', 'Corkscrew Crash', 'Devastating Drake', 'Extreme Evoboost', 'Genesis Supernova', 'Gigavolt Havoc', 'Guardian of Alola', 'Hydro Vortex', 'Inferno Overdrive', 'Malicious Moonsault', 'Never-Ending Nightmare', 'Oceanic Operetta', 'Pulverizing Pancake', 'Savage Spin-Out', 'Shattered Psyche', 'Sinister Arrow Raid', 'Soul-Stealing 7-Star Strike', 'Stoked Sparksurfer', 'Subzero Slammer', 'Supersonic Skystrike', 'Tectonic Rage', 'Twinkle Tackle'],
+		banlist: [
+			'10,000,000 Volt Thunderbolt', 'Acid Downpour', 'All-Out Pummeling', 'Black Hole Eclipse', 'Bloom Doom', 'Breakneck Blitz', 'Catastropika', 'Clangorous Soulblaze',
+			'Continental Crush', 'Corkscrew Crash', 'Devastating Drake', 'Extreme Evoboost', 'Genesis Supernova', 'Gigavolt Havoc', 'Guardian of Alola', 'Hydro Vortex',
+			'Inferno Overdrive', 'Let\'s Snuggle Forever', 'Light That Burns the Sky', 'Malicious Moonsault', 'Menacing Moonraze Maelstrom', 'Never-Ending Nightmare',
+			'Oceanic Operetta', 'Pulverizing Pancake', 'Savage Spin-Out', 'Searing Sunraze Smash', 'Shattered Psyche', 'Sinister Arrow Raid', 'Soul-Stealing 7-Star Strike',
+			'Splintered Stormshards', 'Stoked Sparksurfer', 'Subzero Slammer', 'Supersonic Skystrike', 'Tectonic Rage', 'Twinkle Tackle',
+		],
 		onStart: function () {
 			this.add('rule', 'CFZ Clause: Crystal-free Z-Moves are banned');
 		},

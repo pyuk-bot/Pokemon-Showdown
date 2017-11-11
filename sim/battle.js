@@ -2131,6 +2131,12 @@ class Battle extends Dex.ModdedDex {
 			defense = defender.calculateStat(defenseStat, defBoosts);
 		}
 
+		if (move.useBestOffensive) {
+			if (statTable['atk'] > statTable['spa']) {
+				attack = attacker.calculateStat('spa', 'spd');
+			}
+		}
+
 		// Apply Stat Modifiers
 		attack = this.runEvent('Modify' + statTable[attackStat], attacker, defender, move, attack);
 		defense = this.runEvent('Modify' + statTable[defenseStat], defender, attacker, move, defense);
