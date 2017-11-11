@@ -5232,6 +5232,8 @@ exports.BattleLearnsets = {
 		volttackle: ["7T"],
 		wildcharge: ["7M", "7L50"],
 	}},
+	pikachupartner: {learnset: {
+	}},
 	raichu: {learnset: {
 		attract: ["7M", "6M", "5M", "4M", "3M"],
 		bide: ["7V"],
@@ -57551,6 +57553,8 @@ exports.BattleLearnsets = {
 		thunderfang: ["7E"],
 		toxic: ["7M"],
 	}},
+	rockuffdusk: {learnset: {
+	}},
 	lycanroc: {learnset: {
 		accelerock: ["7L1"],
 		attract: ["7M"],
@@ -57633,6 +57637,8 @@ exports.BattleLearnsets = {
 		tackle: ["7L1"],
 		taunt: ["7M", "7L1"],
 		toxic: ["7M"],
+	}},
+	lycanrocdusk: {learnset: {
 	}},
 	wishiwashi: {learnset: {
 		aquaring: ["7L17"],
@@ -60307,6 +60313,10 @@ exports.BattleLearnsets = {
 		wringout: ["7L67", "7S0"],
 		xscissor: ["7M"],
 	}},
+	necrozmaduskmane: {learnset: {
+	}},
+	necrozmadawnwings: {learnset: {
+	}},
 	magearna: {learnset: {
 		aurasphere: ["7L81"],
 		aurorabeam: ["7L17"],
@@ -60472,5 +60482,15 @@ exports.BattleLearnsets = {
 		toxic: ["7M"],
 		willowisp: ["7M"],
 		workup: ["7M"],
+	}},
+	poipole: {learnset: {
+	}},
+	naganadel: {learnset: {
+	}},
+	stakataka: {learnset: {
+	}},
+	blacephalon: {learnset: {
+	}},
+	zeraora: {learnset: {
 	}},
 };

@@ -400,6 +400,14 @@ exports.BattleFormatsData = {
 		gen: 7,
 		tier: "PU",
 	},
+	pikachupartner: {
+		eventPokemon: [
+			{"generation": 7, "level": 20, "nature": "Hardy", "moves":["thunderbolt", "quickattack", "irontail", "electroball"]},
+		],
+		eventOnly: true,
+		gen: 7,
+		tier: "PU",
+	},
 	raichu: {
 		randomBattleMoves: ["nastyplot", "encore", "thunderbolt", "grassknot", "hiddenpowerice", "focusblast", "voltswitch"],
 		randomDoubleBattleMoves: ["fakeout", "encore", "thunderbolt", "grassknot", "hiddenpowerice", "focusblast", "voltswitch", "protect"],
@@ -5979,6 +5987,9 @@ exports.BattleFormatsData = {
 	rockruff: {
 		tier: "LC",
 	},
+	rockruff: {
+		tier: "LC",
+	},
 	lycanroc: {
 		randomBattleMoves: ["swordsdance", "accelerock", "stoneedge", "crunch", "firefang"],
 		randomDoubleBattleMoves: ["accelerock", "stoneedge", "crunch", "firefang", "protect", "taunt"],
@@ -5991,6 +6002,9 @@ exports.BattleFormatsData = {
 			{"generation": 7, "level": 50, "isHidden": true, "moves":["stoneedge", "firefang", "suckerpunch", "swordsdance"], "pokeball": "cherishball"},
 		],
 		tier: "PU",
+	},
+	lycanrocdusk: {
+		tier: "OU",
 	},
 	wishiwashi: {
 		randomBattleMoves: ["scald", "hydropump", "icebeam", "hiddenpowergrass", "earthquake"],
@@ -6450,6 +6464,16 @@ exports.BattleFormatsData = {
 		eventOnly: true,
 		tier: "BL3",
 	},
+	necrozmaduskmane: {
+		tier: "Uber",
+	},
+	necrozmadawnwings: {
+		tier: "Uber",
+	},
+	necrozmaultra: {
+		battleOnly: true,
+		tier: "Uber",
+	},
 	magearna: {
 		randomBattleMoves: ["shiftgear", "flashcannon", "aurasphere", "fleurcannon", "ironhead", "thunderbolt", "icebeam"],
 		randomDoubleBattleMoves: ["dazzlinggleam", "flashcannon", "substitute", "protect", "trickroom", "fleurcannon", "aurasphere", "voltswitch"],
@@ -6471,6 +6495,21 @@ exports.BattleFormatsData = {
 		],
 		eventOnly: true,
 		tier: "Uber",
+	},
+	poipole: {
+		tier: "LC", // tentative until we know what level we get it at
+	},
+	naganadel: {
+		tier: "OU",
+	},
+	stakataka: {
+		tier: "OU",
+	},
+	blacephalon: {
+		tier: "OU",
+	},
+	zeraora: {
+		tier: "OU",
 	},
 	missingno: {
 		randomBattleMoves: ["watergun", "skyattack", "doubleedge", "metronome"],

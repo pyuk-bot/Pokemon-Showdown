@@ -3027,7 +3027,7 @@ exports.BattleItems = {
 		zMoveUser: ["Lunala", "Necrozma-Dawn-Wings"],
 		num: 922,
 		gen: 7,
-		desc: "If held by a Necrozma-Dawn-Wings with Moongeist Beam, it can use Menacing Moonraze Maelstrom.",
+		desc: "Lunala/Necrozma-Dawn-Wings w/ Moongeist Beam: Menacing Moonraze Maelstrom.",
 	},
 	"lureball": {
 		id: "lureball",
@@ -3072,7 +3072,7 @@ exports.BattleItems = {
 		zMoveUser: ["Lycanroc", "Lycanroc-Midnight", "Lycanroc-Dusk"],
 		num: 925,
 		gen: 7,
-		desc: "If held by a Lycanroc, Lycanroc-Midnight, or Lycanroc-Dusk with Stone Edge, it can use Splintered Stormshards.",
+		desc: "Lycanroc/Lycanroc-Midnight/Lycanroc-Dusk w/ Stone Edge: Splintered Stormshards.",
 	},
 	"machobrace": {
 		id: "machobrace",
@@ -5084,7 +5084,7 @@ exports.BattleItems = {
 		zMoveUser: ["Solgaleo", "Necrozma-Dusk-Mane"],
 		num: 921,
 		gen: 7,
-		desc: "If held by a Solgaleo or Necrozma-Dusk-Mane with Sunsteel Strike, it can use Searing Sunraze Smash.",
+		desc: "Solgaleo/Necrozma-Dusk-Mane w/ Sunsteel Strike: Searing Sunraze Smash.",
 	},
 	"souldew": {
 		id: "souldew",
@@ -5529,7 +5529,7 @@ exports.BattleItems = {
 		zMoveUser: ["Necrozma-Dusk-Mane", "Necrozma-Dawn-Wings"],
 		num: 923,
 		gen: 7,
-		desc: "If held by a Necrozma-Dusk-Mane or Necrozma-Dawn-Wings, it can change form into Ultra Necrozma. If it has Photon Geyser, it can also use Light That Burns the Sky.",
+		desc: "Necrozma-Dusk-Mane/Dawn-Wings: Ultra Burst. W/ Photon Geyser: can use Z-Move.",
 	},
 	"venusaurite": {
 		id: "venusaurite",

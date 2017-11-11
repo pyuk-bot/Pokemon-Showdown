@@ -2132,7 +2132,7 @@ exports.BattleAbilities = {
 		},
 		id: "neuroforce",
 		name: "Neuroforce",
-		rating: 4,
+		rating: 3.5,
 		num: 233,
 	},
 	"noguard": {
