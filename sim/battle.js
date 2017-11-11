@@ -2133,6 +2133,8 @@ class Battle extends Dex.ModdedDex {
 
 		if (move.useBestOffensive) {
 			if (statTable['atk'] > statTable['spa']) {
+				attack = attacker.calculateStat('atk', 'spd');
+			} else {
 				attack = attacker.calculateStat('spa', 'spd');
 			}
 		}
