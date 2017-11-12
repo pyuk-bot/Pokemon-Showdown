@@ -10328,7 +10328,6 @@ exports.BattleMovedex = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		hasCustomRecoil: true,
 		onHit: function (target, source, move) {
 			this.damage(Math.round(source.maxhp / 2), source, source, 'mindblown');
 		},
@@ -11713,19 +11712,6 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
 		pseudoWeather: 'iondeluge',
-		effect: {
-			duration: 1,
-			onHit: function (target) {
-				this.add('-fieldactivate', 'move: Plasma Fists');
-			},
-			onModifyMovePriority: -2,
-			onModifyMove: function (move) {
-				if (move.type === 'Normal') {
-					move.type = 'Electric';
-					this.debug(move.name + "'s type changed to Electric");
-				}
-			},
-		},
 		secondary: false,
 		target: "normal",
 		type: "Electric",

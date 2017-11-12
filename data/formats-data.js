@@ -5987,7 +5987,7 @@ exports.BattleFormatsData = {
 	rockruff: {
 		tier: "LC",
 	},
-	rockruff: {
+	rockruffdusk: {
 		tier: "LC",
 	},
 	lycanroc: {
