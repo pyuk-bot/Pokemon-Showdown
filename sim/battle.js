@@ -2137,8 +2137,8 @@ class Battle extends Dex.ModdedDex {
 
 		if (move.useBestOffensive) {
 			let altAttackStat = category === 'Special' ? 'atk' : 'spa';
-			let atkBoosts = move.useTargetOffensive ? defender.boosts[altAttackStat] : attacker.boosts[altAttackStat];
-			let ignoreOffensive = !!(move.ignoreOffensive || (ignoreNegativeOffensive && atkBoosts < 0));
+			atkBoosts = move.useTargetOffensive ? defender.boosts[altAttackStat] : attacker.boosts[altAttackStat];
+			ignoreOffensive = !!(move.ignoreOffensive || (ignoreNegativeOffensive && atkBoosts < 0));
 			if (ignoreOffensive) {
 				this.debug('Negating (sp)atk boost/penalty.');
 				atkBoosts = 0;
