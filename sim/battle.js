@@ -2131,6 +2131,7 @@ class Battle extends Dex.ModdedDex {
 			defense = defender.calculateStat(defenseStat, defBoosts);
 		}
 
+		// Definitely not correct
 		if (move.useBestOffensive) {
 			if (statTable['atk'] > statTable['spa']) {
 				attack = attacker.calculateStat('atk', 'spd');

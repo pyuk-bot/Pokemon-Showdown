@@ -6498,7 +6498,7 @@ exports.BattleFormatsData = {
 		tier: "Uber",
 	},
 	poipole: {
-		tier: "LC", // tentative until we know what level we get it at
+		tier: "NFE",
 	},
 	naganadel: {
 		tier: "OU",
