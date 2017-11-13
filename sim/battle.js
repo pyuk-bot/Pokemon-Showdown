@@ -2131,18 +2131,30 @@ class Battle extends Dex.ModdedDex {
 			defense = defender.calculateStat(defenseStat, defBoosts);
 		}
 
-		// Definitely not correct
-		if (move.useBestOffensive) {
-			if (statTable['atk'] > statTable['spa']) {
-				attack = attacker.calculateStat('atk', 'spd');
-			} else {
-				attack = attacker.calculateStat('spa', 'spd');
-			}
-		}
-
 		// Apply Stat Modifiers
 		attack = this.runEvent('Modify' + statTable[attackStat], attacker, defender, move, attack);
 		defense = this.runEvent('Modify' + statTable[defenseStat], defender, attacker, move, defense);
+
+		if (move.useBestOffensive) {
+			let altAttackStat = category === 'Special' ? 'atk' : 'spa';
+			let atkBoosts = move.useTargetOffensive ? defender.boosts[altAttackStat] : attacker.boosts[altAttackStat];
+			let ignoreOffensive = !!(move.ignoreOffensive || (ignoreNegativeOffensive && atkBoosts < 0));
+			if (ignoreOffensive) {
+				this.debug('Negating (sp)atk boost/penalty.');
+				atkBoosts = 0;
+			}
+			let altAttack;
+			if (move.useTargetOffensive) {
+				altAttack = defender.calculateStat(altAttackStat, atkBoosts);
+			} else {
+				altAttack = attacker.calculateStat(altAttackStat, atkBoosts);
+			}
+			altAttack = this.runEvent('Modify' + statTable[altAttackStat], attacker, defender, move, altAttack);
+			if (altAttack > attack) {
+				attack = altAttack;
+				move.useBestOffensive = altAttackStat;
+			}
+		}
 
 		//int(int(int(2 * L / 5 + 2) * A * P / D) / 50);
 		let baseDamage = Math.floor(Math.floor(Math.floor(2 * level / 5 + 2) * basePower * attack / defense) / 50);
@@ -2211,7 +2223,7 @@ class Battle extends Dex.ModdedDex {
 
 		if (move.crit && !suppressMessages) this.add('-crit', target);
 
-		if (pokemon.status === 'brn' && move.category === 'Physical' && !pokemon.hasAbility('guts')) {
+		if (pokemon.status === 'brn' && (move.category === 'Physical' || move.useBestOffensive === 'atk') && !pokemon.hasAbility('guts')) {
 			if (this.gen < 6 || move.id !== 'facade') {
 				baseDamage = this.modify(baseDamage, 0.5);
 			}

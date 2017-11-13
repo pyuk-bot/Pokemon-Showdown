@@ -876,6 +876,12 @@ class Move extends Effect {
 		this.useSourceDefensive = this.useSourceDefensive;
 
 		/**
+		 * Whether or not this move uses the user's highest attacking stat
+		 * @type {String | boolean}
+		 */
+		this.useBestOffensive = this.useBestOffensive;
+
+		/**
 		 * Whether or not this move ignores negative attack boosts
 		 * @type {boolean}
 		 */
