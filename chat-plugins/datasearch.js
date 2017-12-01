@@ -359,7 +359,7 @@ function runDexsearch(target, cmd, canAll, message) {
 	for (let i in Dex.data.TypeChart) {
 		allTypes[toId(i)] = i;
 	}
-	let allColors = ['green', 'red', 'blue', 'white', 'brown', 'yellow', 'purple', 'pink', 'gray', 'black'];
+	let allColors = ['green', 'red', 'blue', 'white', 'brown', 'yellow', 'purple', 'pink', 'gray', 'black', 'grey'];
 	let allEggGroups = {'amorphous':'Amorphous', 'bug':'Bug', 'ditto':'Ditto', 'dragon':'Dragon', 'fairy':'Fairy', 'field':'Field', 'flying':'Flying', 'grass':'Grass', 'humanlike':'Human-Like', 'mineral':'Mineral', 'monster':'Monster', 'undiscovered':'Undiscovered', 'water1':'Water 1', 'water2':'Water 2', 'water3':'Water 3', __proto__:null};
 	let allStats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'bst', 'weight', 'height', 'gen'];
 	let showAll = false;
@@ -424,6 +424,7 @@ function runDexsearch(target, cmd, canAll, message) {
 
 			if (allColors.includes(target)) {
 				target = target.charAt(0).toUpperCase() + target.slice(1);
+				if (target === 'Grey') target = 'Gray';
 				let invalid = validParameter("colors", target, isNotSearch, target);
 				if (invalid) return {reply: invalid};
 				orGroup.colors[target] = !isNotSearch;
@@ -614,13 +615,12 @@ function runDexsearch(target, cmd, canAll, message) {
 				if (inequality.slice(-1) === '=') directions.push('equal');
 				switch (toId(stat)) {
 				case 'attack': stat = 'atk'; break;
-				case 'defense': stat = 'def'; break;
-				case 'specialattack': stat = 'spa'; break;
-				case 'spc': stat = 'spa'; break;
-				case 'special': stat = 'spa'; break;
-				case 'spatk': stat = 'spa'; break;
-				case 'specialdefense': stat = 'spd'; break;
-				case 'spdef': stat = 'spd'; break;
+				case 'defense': case 'defence':
+					stat = 'def'; break;
+				case 'specialattack': case 'spc': case 'special': case 'spatk':
+					stat = 'spa'; break;
+				case 'specialdefense': case 'spdef':
+					stat = 'spd'; break;
 				case 'speed': stat = 'spe'; break;
 				case 'wt': stat = 'weight'; break;
 				case 'ht': stat = 'height'; break;
@@ -989,11 +989,12 @@ function runMovesearch(target, cmd, canAll, message) {
 				}
 				switch (target.substr(7)) {
 				case 'attack': target = 'atk'; break;
-				case 'defense': target = 'def'; break;
-				case 'specialattack': target = 'spa'; break;
-				case 'spatk': target = 'spa'; break;
-				case 'specialdefense': target = 'spd'; break;
-				case 'spdef': target = 'spd'; break;
+				case 'defense': case 'defence':
+					target = 'def'; break;
+				case 'specialattack': case 'spc': case 'special': case 'spatk':
+					target = 'spa'; break;
+				case 'specialdefense': case 'spdef':
+					target = 'spd'; break;
 				case 'speed': target = 'spe'; break;
 				case 'acc': target = 'accuracy'; break;
 				case 'evasiveness': target = 'evasion'; break;
