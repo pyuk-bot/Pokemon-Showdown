@@ -1,14 +1,37 @@
 'use strict';
 
 exports.BattleMovedex = {
+	// Acast
+	arrowdance: {
+		accuracy: 100,
+		basePower: 100,
+		category: "Physical",
+		shortDesc: "Raises user's attack by 1.",
+		id: "arrowdance",
+		isNonstandard: true,
+		name: "Arrow Dance",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, dance: 1, mirror: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, 'Dragon Dance', source);
+			this.add('-anim', source, 'Thousand Arrows', target);
+		},
+		self: {
+			boosts: {atk: 1},
+		},
+		target: "normal",
+		type: "Grass",
+	},
 	// Aelita
 	energyfield: {
 		accuracy: 90,
 		basePower: 150,
 		category: "Special",
+		shortDesc: "Lowers user's Defense, Sp. Def, and Speed by 1. Cant miss in rain.",
 		id: "energyfield",
 		isNonstandard: true,
-		isViable: true,
 		name: "Energy Field",
 		pp: 10,
 		priority: 0,
@@ -39,12 +62,13 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 90,
 		category: "Physical",
+		shortDesc: "User uses foe's selected move first. Fails if the move is not a Status move.",
 		id: "pilfer",
 		isNonstandard: true,
 		name: "Pilfer",
 		pp: 5,
 		priority: 3, //nerf if it's to broken
-		flags: {protect: 1, authentic: 1},
+		flags: {protect: 1, authentic: 1, mirror: 1},
 		onTryHit: function (target, pokemon) {
 			let decision = this.willMove(target);
 			if (decision) {
@@ -77,10 +101,10 @@ exports.BattleMovedex = {
 		name: "Voltech Burst",
 		pp: 5,
 		priority: 0,
-		flags: {protect: 1},
+		flags: {protect: 1, mirror: 1},
 		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
-			this.add('-anim', target, 'Shock Wave', source);
+			this.add('-anim', source, 'Shock Wave', target);
 		},
 		ignoreAbility: true,
 		secondary: false,
@@ -98,7 +122,7 @@ exports.BattleMovedex = {
 		name: 'Star Bolt Desperation',
 		pp: 5,
 		priority: 0,
-		flags: {contact: 1, protect: 1},
+		flags: {contact: 1, protect: 1, mirror: 1},
 		typechart: [
 			'Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting',
 			'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice',
@@ -149,15 +173,14 @@ exports.BattleMovedex = {
 	// Auzbat
 	fatbat: {
 		accuracy: true,
-		basePower: 0,
 		category: "Status",
 		desc: "Raises the user's Defense and Special Defense by 1 stage.",
 		shortDesc: "Raises the user's Defense and Sp. Def by 1.",
 		id: "fatbat",
 		name: "Fat Bat",
 		pp: 20,
-		priority: 0,
-		flags: {snatch: 1},
+		priority: 1,
+		flags: {snatch: 1, mirror: 1},
 		boosts: {
 			def: 1,
 			spd: 1,
@@ -195,7 +218,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 120,
 		category: "Physical",
-		shortDesc: "",
+		shortDesc: "Sets Grassy Terrain",
 		id: "bladeofaesthetics",
 		name: "blade of ~aesthetics~",
 		isNonstandard: true,
@@ -212,6 +235,61 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "normal",
 		type: "Steel",
+	},
+	// Chloe
+	addedpreservatives: {
+		accuracy: 100,
+		category: "Status",
+		shortDesc: "Reflect + Light Screen + Safeguard + Memento; User faints.",
+		id: "addedpreservatives",
+		isNonstandard: true,
+		name: "Added Preservatives",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Calm Mind", source);
+			this.add('-anim', source, "Final Gambit", target);
+		},
+		onHit: function (target, source) {
+			this.boost({atk: -2, spa: -2}, source.side.foe.active[0]);
+			source.side.addSideCondition('Reflect', source);
+			source.side.addSideCondition('Light Screen', source);
+			source.side.addSideCondition('Safeguard', source);
+		},
+		selfdestruct: "ifHit",
+		secondary: false,
+		target: "self",
+		type: "Normal",
+	},
+	// Duck
+	holyduck: {
+		accuracy: 100,
+		basePower: 95,
+		category: "Special",
+		shortDesc: "Breaks screens.",
+		id: "holyduck",
+		isNonstandard: true,
+		name: "Holy Duck!",
+		pp: 20,
+		priority: 2,
+		flags: {protect: 1, mirror: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "False Swipe", target);
+		},
+		onTryHit: function (pokemon) {
+			// will shatter screens through sub, before you hit
+			if (pokemon.runImmunity('Normal')) {
+				pokemon.side.removeSideCondition('reflect');
+				pokemon.side.removeSideCondition('lightscreen');
+				pokemon.side.removeSideCondition('auroraveil');
+			}
+		},
+		secondary: false,
+		target: "normal",
+		type: "Normal",
 	},
 	// EV
 	darkaggro: {
@@ -255,9 +333,7 @@ exports.BattleMovedex = {
 			this.add('-anim', source, 'Double Team', source);
 		},
 		onHit: function (source) {
-			this.add('', source.side.name + '\'s side used cha cha slide');
 			for (let hazard in source.side.sideConditions) {
-				this.add('', hazard);
 				if (source.side.sideConditions[hazard].layers) {
 					for (let i = source.side.sideConditions[hazard].layers; i > 0; i--) source.side.foe.addSideCondition(hazard);
 				} else {
@@ -350,7 +426,9 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
+		shortDesc: "User faints. lol.",
 		id: "ragequit",
+		isNonstandard: true,
 		name: "Rage Quit",
 		pp: 40,
 		priority: 0,
@@ -362,7 +440,51 @@ exports.BattleMovedex = {
 		target: "self",
 		type: "Normal",
 	},
-	//joim
+	// Iyarito
+	iyasrage: {
+		accuracy: 100,
+		basePower: 110,
+		category: "Special",
+		shortDesc: "Ignores Spd boosts.",
+		id: "iyasrage",
+		isNonstandard: true,
+		name: "Iya's Rage",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Shadow Ball", target);
+		},
+		onFoeModifyBoost: function (boosts) {
+			boosts['spd'] = 0;
+		},
+		secondary: false,
+		target: "normal",
+		type: "Ghost",
+	},
+	// Jasmine
+	reversetransform: {
+		accuracy: true,
+		category: "Status",
+		shortDesc: "Foe transforms into user.",
+		id: "reversetransform",
+		isNonstandard: true,
+		name: "Reverse Transform",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, authentic: 1},
+		onHit: function (target, source) {
+			if (!target.transformInto(source, target)) {
+				return false;
+			}
+			target.canMegaEvo = false;
+		},
+		target: "normal",
+		type: "Normal",
+	},
+	// Joim
 	retirement: {
 		accuracy: 100,
 		basePower: 50,
@@ -421,6 +543,7 @@ exports.BattleMovedex = {
 		accuracy: 85,
 		basePower: 100,
 		category: "Special",
+		shortDesc: "Traps and damages the target for 5-7 turns.",
 		id: "maelstrm",
 		name: "Maelström",
 		pp: 5,
@@ -467,7 +590,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 0,
 		category: "Physical",
-		shortDesc: "Final Gambit + Healing Wish",
+		shortDesc: "Final Gambit + Healing Wish.",
 		id: "kamikazerebirth",
 		isNonstandard: true,
 		name: "Kamikaze Rebirth",
@@ -528,9 +651,11 @@ exports.BattleMovedex = {
 	nextlevelstrats: {
 		accuracy: true,
 		category: "Status",
+		shortDesc: "User gains 5 levels.",
 		id: "nextlevelstrats",
 		isNonstandard: true,
 		name: "Next Level Strats",
+		noPPBoosts: true,
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, snatch: 1},
@@ -583,7 +708,7 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basepower: 0,
 		category: "status",
-		shortDesc: "Drops all foe's stats. Traps foe. Torments foe",
+		shortDesc: "Drops all foe's stats, Traps foe, Torments foe.",
 		id: "caraccident",
 		isNonstandard: true,
 		name: "Car Accident",
@@ -592,7 +717,7 @@ exports.BattleMovedex = {
 		selfdestruct: "ifHit",
 		volatileStatus: 'torment',
 		flags: {protect: 1, mirror: 1},
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', target, "Double Edge", source);
 			this.add('-anim', source, "Memento", target);
@@ -627,6 +752,34 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Normal",
 	},
+	// NOVED
+	forthekids: {
+		accuracy: 100,
+		basePower: 0,
+		damage: 'level',
+		category: "Physical",
+		shortDesc: "Damage = user's level, Paralyzes the foe, 30% flinch, lowers own def, spd by 1.",
+		id: "forthekids",
+		isNonstandard: true,
+		name: "For The Kids",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, nonsky: 1},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Seismic Toss", target);
+			this.add('-anim', source, "Seismic Toss", target);
+		},
+		onHit: function (target, source) {
+			target.trySetStatus('par', source);
+		},
+		secondary: {
+			chance: 30,
+			volatileStatus: 'flinch',
+		},
+		target: "normal",
+		type: "Fighting",
+	},
 	// panpawn
 	lafireblaze420: {
 		accuracy: 80,
@@ -639,7 +792,7 @@ exports.BattleMovedex = {
 		name: "LaFireBlaze420",
 		pp: 15,
 		priority: 0,
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Fire Blast", target);
 		},
@@ -655,7 +808,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 140,
 		category: "Special",
-		shortDesc: "No additional effect. Hits adjacent Pokemon.",
+		shortDesc: "Hits adjacent Pokemon.",
 		id: "geomagneticstorm",
 		isViable: true,
 		isNonstandard: true,
@@ -663,7 +816,7 @@ exports.BattleMovedex = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Discharge", target);
 		},
@@ -710,6 +863,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 120,
 		category: 'Special',
+		shortDesc: 'Move second if foe is female, +1 speed.',
 		id: 'ladiesfirst',
 		isNonstandard: true,
 		isViable: true,
@@ -744,7 +898,7 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		shortDesc: "Boosts def, spd before attack",
+		shortDesc: "Boosts def, spd before attack.",
 		id: "armyofmushrooms",
 		isNonstandard: true,
 		name: "Army of Mushrooms",
@@ -823,7 +977,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 25,
 		category: "Physical",
-		shortDesc: "",
+		shortDesc: "Hits 5 times, random effect after each hit.",
 		id: "devolutionwave",
 		name: "Devolution Wave",
 		isNonstandard: true,
@@ -887,18 +1041,17 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Rock",
 	},
-	// Trickster, haven't completely tested this yet
+	// Trickster
 	eventhorizon: {
 		accuracy: 100,
 		basePower: 0,
-		pp: 10,
-		priority: 0,
 		category: "Special",
-		shortDesc: "For 5 turns, negates all Ground immunities. More power the heavier the target.",
+		shortDesc: "More power the heavier the target. Sets Trick Room.",
 		id: "eventhorizon",
-		isViable: true,
 		isNonstandard: true,
 		name: "Event Horizon",
+		pp: 10,
+		priority: 0,
 		basePowerCallback: function (pokemon, target) {
 			let targetWeight = target.getWeight();
 			if (targetWeight >= 200) {
@@ -926,27 +1079,10 @@ exports.BattleMovedex = {
 		},
 		onTryHit: function (target, source, move) {
 			this.attrLastMove(['still']);
-			this.add('-anim', source, "Spacial Rend", target); // confirmed with Trickster
+			this.add('-anim', source, "Spacial Rend", target);
 		},
 		onHit: function (target, source, effect) {
 			this.addPseudoWeather('trickroom', source, effect, '[of] ' + source);
-		},
-		effect: {
-			duration: 5,
-			durationCallback: function (source, effect) {
-				if (source && source.hasAbility('persistent')) {
-					return 7;
-				}
-				return 5;
-			},
-			onStart: function (target, source) {
-				this.add('-fieldstart', 'move: Trick Room', '[of] ' + source);
-			},
-			// Speed modification is changed in Pokemon.getDecisionSpeed() in sim/pokemon.js
-			onResidualOrder: 23,
-			onEnd: function () {
-				this.add('-fieldend', 'move: Trick Room');
-			},
 		},
 		target: "normal",
 		type: "Psychic",

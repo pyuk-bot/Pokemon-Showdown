@@ -7,6 +7,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 		let team = [];
 		let variant = (this.random(2) === 1);
 		let sets = {
+			'Acast': {
+				species: 'Decidueye', ability: 'Stealth', item: 'Decidium Z', gender: 'M', // ask gender
+				moves: ['Spirit Shackle', 'Thousand Arrows', ['High Jump Kick', 'Brave Bird', 'Shadow Sneak'][this.random(3)]],
+				signatureMove: 'Arrow Dance',
+				evs: {hp: 4, atk: 252, spe: 252}, nature: 'Jolly',
+			},
 			'Aelita': {
 				species: 'Porygon-Z', ability: 'Protean', item: 'Life Orb', gender: 'N',
 				moves: [['boomburst', 'moonblast'][this.random(2)], 'quiverdance', 'chatter'],
@@ -49,6 +55,18 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'blade of ~aesthetics~',
 				evs: {atk: 252, spd: 4, spe: 252}, nature: 'Adamant',
 			},
+			'Chloe': {
+				species: 'Vileplume', ability: 'Prankster', item: 'Light Clay', gender: 'F',
+				moves: ['Parting Shot', 'Topsy Turvy', 'Encore'],
+				signatureMove: 'Added Preservatives',
+				evs: {hp: 252, def: 252, spd: 4}, nature: 'Bold',
+			},
+			'Duck': {
+				species: 'Farfetch\'d', ability: 'Sniper', item: 'Stick', gender: 'M',
+				moves: ['Shift Gear', 'Superpower', 'Dragon Ascent'],
+				signatureMove: 'Holy Duck!',
+				evs: {atk: 252, spd: 4, spe: 252}, nature: 'Jolly',
+			},
 			'EV': {
 				species: 'Muk-Alola', ability: 'Unaware', item: 'Black Sludge', gender: 'M', // ask gender
 				moves: [['Gunk Shot', 'Poison Jab'][this.random(2)], 'Recover', 'Coil'],
@@ -78,6 +96,18 @@ class RandomStaffBrosTeams extends RandomTeams {
 				moves: [['holdhands', 'trickortreat'][this.random(2)], ['swordsdance', 'agility'][this.random(2)], 'celebrate'],
 				signatureMove: "Rage Quit",
 				evs: {hp:4, atk:252, spe:252}, nature: 'Jolly',
+			},
+			'Iyarito': {
+				species: 'Gengar', ability: 'Fur Coat', item: 'Psychium Z', gender: 'M', // Ask gender
+				moves: ['Hypnosis', 'Dream Eater', 'Secret Sword'],
+				signatureMove: 'Iya\'s Rage',
+				evs: {hp: 184, spa: 252, spe: 60}, nature: 'Timid',
+			},
+			'Jasmine': {
+				species: 'Mew', ability: 'Speed Boost', item: 'Focus Sash', gender: 'F',
+				moves: ['Taunt', 'Explosion', 'Protect'],
+				signatureMove: 'Reverse Transform',
+				evs: {hp: 84, atk: 84, def: 84, spa: 84, spd: 84, spe: 84}, nature: 'Quirky',
 			},
 			'Joim': {
 				species: 'Zapdos', ability: 'Tinted Lens', item: 'Life Orb', gender: 'N',
@@ -114,6 +144,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				moves: ['Protect', 'Nuzzle', 'U-Turn'],
 				signatureMove: 'Car Accident',
 				evs: {hp: 252, def: 4, spe: 252}, nature: 'Jolly',
+			},
+			'NOVED': {
+				species: 'Kangaskhan', ability: 'Scrappy', item: 'Kangaskhanite', gender: 'F',
+				moves: ['Extreme Speed', 'Knock Off', 'Snatch'],
+				signatureMove: 'For the Kids',
+				evs: {hp: 252, atk: 252, spe: 4}, nature: 'Adamant',
 			},
 			'panpawn': {
 				species: 'Cyndaquil', ability: 'Flash Fire', item: 'Leftovers', gender: 'M',
@@ -165,7 +201,7 @@ class RandomStaffBrosTeams extends RandomTeams {
 				evs: {hp: 248, atk: 252, spd: 8}, nature: 'Adamant',
 			},
 			'Trickster': {
-				species: 'Hoopa', ability: 'Shadow Shield', item: 'Figy Berry',
+				species: 'Hoopa', ability: 'Interdimensional', item: 'Figy Berry',
 				gender: 'M',
 				moves: ['Inferno', 'Zap Cannon', ['Dynamic Punch', 'Grass Whistle'][this.random(2)]],
 				signatureMove: 'Event Horizon',

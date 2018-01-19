@@ -1,6 +1,19 @@
 'use strict';
 
 exports.BattleStatuses = {
+	acast: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|%Acast|Are you watching, Gamefreak? THIS IS WHAT DECIDUEYE COULD HAVE BEEN');
+		},
+		onSwitchOut: function () {
+			this.add('c|%Acast|I\'ll be back when Monotype is official.');
+		},
+		onFaint: function () {
+			this.add('c|%Acast|Gamefreak didn\'t love me enough ;-;');
+		},
+	},
 	aelita: {
 		exists: true,
 		noCopy: true,
@@ -94,6 +107,35 @@ exports.BattleStatuses = {
 			}
 		},
 	},
+	chloe: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|%Chloe|hallo');
+		},
+		onSwitchOut: function () {
+			this.add('c|%Chloe|brb');
+		},
+		onFaint: function () {
+			this.add('c|%Chloe|/me (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧');
+		},
+	},
+	duck: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|@Duck|Yes, I\'m actually a duck. I know.');
+		},
+		onSwitchOut: function () {
+			this.add('c|@Duck|**waddles away**');
+		},
+		onFaint: function () {
+			this.add('c|@Duck|Duck you! That move was too op anyway....');
+		},
+		onModifyCritRatio: function (critRatio) {
+			return critRatio + 1;
+		},
+	},
 	ev: {
 		exists: true,
 		noCopy: true,
@@ -152,6 +194,19 @@ exports.BattleStatuses = {
 			this.add('c|@innovamania|' + sentences[this.random(2)]);
 		},
 	},
+	iyarito: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|%Iyarito|Iyarito is always right');
+		},
+		onSwitchOut: function () {
+			this.add('c|%Iyarito|It\'s all Iyarito\'s fault');
+		},
+		onFaint: function () {
+			this.add('c|~Zarel|Iyarito you did it wrong ;_;');
+		},
+	},
 	kalalokki: {
 		exists: true,
 		noCopy: true,
@@ -198,6 +253,16 @@ exports.BattleStatuses = {
 		},
 		onSwitchOut: function () {
 			this.add('c|%Megazard|The Drampa™ product is not under warranty.');
+		},
+	},
+	noved: {
+		exists: true,
+		noCopy: true,
+		onStart: function () {
+			this.add('c|%NOVED|follow me on twitch /novedpoke');
+		},
+		onFaint: function () {
+			this.add('c|%NOVED|follow me on twitter too @novedpoke');
 		},
 	},
 	panpawn: {
