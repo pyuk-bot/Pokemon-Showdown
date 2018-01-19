@@ -13,7 +13,6 @@ const RULE_FLAGS = {
 	preview: 4,
 	sleepClause: 8,
 	cancel: 16,
-	partialDecisions: 32,
 };
 
 function capitalize(word) {
@@ -86,7 +85,6 @@ class TestTools {
 		if (options.preview) format.ruleset.push('Team Preview');
 		if (options.sleepClause) format.ruleset.push('Sleep Clause Mod');
 		if (options.cancel) format.ruleset.push('Cancel Mod');
-		// if (options.partialDecisions) format.ruleset.push('Partial Decisions');
 
 		this.dex.installFormat(formatId, format);
 		return format;
@@ -97,17 +95,19 @@ class TestTools {
 	 *
 	 * @param {Object} [options]
 	 * @param {Team[]} [teams]
-	 * @param {PRNG} [prng] A pseudo-random number generator. If not provided, a pseudo-random number
-	 * generator will be generated for the user with a seed that is guaranteed to be the same across
-	 * test executions to help with determinism.
 	 * @returns {Sim.Battle} A battle.
 	 */
-	createBattle(options, teams, prng = new PRNG(DEFAULT_SEED)) {
+	createBattle(options, teams) {
 		if (Array.isArray(options)) {
 			teams = options;
 			options = {};
 		}
-		const format = this.getFormat(options || {});
+		if (!options) options = {};
+		// If a seed for the pseudo-random number generator is not provided,
+		// a default seed (guaranteed to be the same across test executions)
+		// will be used. The default seed is intentionally tuned
+		let prng = new PRNG(options.seed || DEFAULT_SEED);
+		const format = this.getFormat(options);
 		const battle = Sim.construct(
 			format.id,
 			undefined,
@@ -115,7 +115,6 @@ class TestTools {
 			prng
 		);
 		battle.LEGACY_API_DO_NOT_USE = true;
-		if (options && options.partialDecisions) battle.supportPartialDecisions = true;
 		if (teams) {
 			for (let i = 0; i < teams.length; i++) {
 				assert(Array.isArray(teams[i]), "Team provided is not an array");
