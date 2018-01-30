@@ -57,9 +57,11 @@ exports.commands = {
 		`/dexsearch [parameter], [parameter], [parameter], ... - Searches for Pok\u00e9mon that fulfill the selected criteria`,
 		`Search categories are: type, tier, color, moves, ability, gen, resists, recovery, priority, stat, weight, height, egg group.`,
 		`Valid colors are: green, red, blue, white, brown, yellow, purple, pink, gray and black.`,
-		`Valid tiers are: Uber/OU/BL/UU/BL2/RU/BL3/NU/BL4/PU/NFE/LC/CAP/CAP NFE/CAP LC.`,
+		`Valid tiers are: Uber/OU/BL/UU/BL2/RU/BL3/NU/BL4/PU/NFE/LC/LCUber/CAP/CAP NFE/CAP LC.`,
+		`Valid doubles tiers are: DUber/DOU/DBL/DUU.`,
 		`Types can be searched for by either having the type precede 'type' or just using the type itself as a parameter, e.g., both 'fire type' and 'fire' show all Fire types; however, using 'psychic' as a parameter will show all Pok\u00e9mon that learn the move Psychic and not Psychic types.`,
 		`'resists' followed by a type will show Pok\u00e9mon that resist that typing, e.g., 'resists normal'.`,
+		`'weak' followed by a type will show Pok\u00e9mon that are weak to that typing, e.g., 'weak fire'.`,
 		`Inequality ranges use the characters '>=' for '≥' and '<=' for '≤', e.g., 'hp <= 95' searches all Pok\u00e9mon with HP less than or equal to 95.`,
 		`Parameters can be excluded through the use of '!', e.g., '!water type' excludes all water types.`,
 		`The parameter 'mega' can be added to search for Mega Evolutions only, and the parameter 'NFE' can be added to search not-fully evolved Pok\u00e9mon only.`,
@@ -270,6 +272,7 @@ exports.commands = {
 function runDexsearch(target, cmd, canAll, message) {
 	let searches = [];
 	let allTiers = {'uber': 'Uber', 'ubers': 'Uber', 'ou': 'OU', 'bl': 'BL', 'uu': 'UU', 'bl2': 'BL2', 'ru': 'RU', 'bl3': 'BL3', 'nu': 'NU', 'bl4': 'BL4', 'pu': 'PU', 'nfe': 'NFE', 'lcuber': 'LC Uber', 'lcubers': 'LC Uber', 'lc': 'LC', 'cap': 'CAP', 'caplc': 'CAP LC', 'capnfe': 'CAP NFE', __proto__: null};
+	let allDoublesTiers = {'doublesubers': 'DUber', 'doublesuber': 'DUber', 'duber': 'DUber', 'dubers': 'DUber', 'doublesou': 'DOU', 'dou': 'DOU', 'doublesbl': 'DBL', 'dbl': 'DBL', 'doublesuu': 'DUU', 'duu': 'DUU', __proto__: null};
 	let allTypes = Object.create(null);
 	for (let i in Dex.data.TypeChart) {
 		allTypes[toId(i)] = i;
@@ -304,7 +307,7 @@ function runDexsearch(target, cmd, canAll, message) {
 	};
 
 	for (const andGroup of target.split(',')) {
-		let orGroup = {abilities: {}, tiers: {}, colors: {}, 'egg groups': {}, gens: {}, moves: {}, types: {}, resists: {}, stats: {}, skip: false};
+		let orGroup = {abilities: {}, tiers: {}, doublesTiers: {}, colors: {}, 'egg groups': {}, gens: {}, moves: {}, types: {}, resists: {}, weak: {}, stats: {}, skip: false};
 		let parameters = andGroup.split("|");
 		if (parameters.length > 3) return {reply: "No more than 3 alternatives for each parameter may be used."};
 		for (const parameter of parameters) {
@@ -332,6 +335,14 @@ function runDexsearch(target, cmd, canAll, message) {
 				let invalid = validParameter("tiers", target, isNotSearch, target);
 				if (invalid) return {reply: invalid};
 				orGroup.tiers[target] = !isNotSearch;
+				continue;
+			}
+
+			if (toId(target) in allDoublesTiers) {
+				target = allDoublesTiers[toId(target)];
+				let invalid = validParameter("doubles tiers", target, isNotSearch, target);
+				if (invalid) return {reply: invalid};
+				orGroup.doublesTiers[target] = !isNotSearch;
 				continue;
 			}
 
@@ -498,6 +509,18 @@ function runDexsearch(target, cmd, canAll, message) {
 				}
 			}
 
+			if (target.substr(0, 5) === 'weak ') {
+				let targetWeak = target.substr(5, 1).toUpperCase() + target.substr(6);
+				if (targetWeak in Dex.data.TypeChart) {
+					let invalid = validParameter("weak", targetWeak, isNotSearch, target);
+					if (invalid) return {reply: invalid};
+					orGroup.weak[targetWeak] = !isNotSearch;
+					continue;
+				} else {
+					return {reply: `'${targetWeak}' is not a recognized type.`};
+				}
+			}
+
 			let inequality = target.search(/>|<|=/);
 			if (inequality >= 0) {
 				if (isNotSearch) return {reply: "You cannot use the negation symbol '!' in stat ranges."};
@@ -600,6 +623,13 @@ function runDexsearch(target, cmd, canAll, message) {
 				if (alts.tiers.LC && !dex[mon].prevo && dex[mon].nfe && !Dex.formats.gen7lc.banlist.includes(dex[mon].species) && tier !== 'NFE') continue;
 			}
 
+			if (alts.doublesTiers && Object.keys(alts.doublesTiers).length) {
+				let tier = dex[mon].doublesTier;
+				if (tier && tier[0] === '(') tier = tier.slice(1, -1);
+				if (alts.doublesTiers[tier]) continue;
+				if (Object.values(alts.doublesTiers).includes(false) && alts.doublesTiers[tier] !== false) continue;
+			}
+
 			for (let type in alts.types) {
 				if (dex[mon].types.includes(type) === alts.types[type]) {
 					matched = true;
@@ -616,6 +646,18 @@ function runDexsearch(target, cmd, canAll, message) {
 					if (notImmune && effectiveness >= 0) matched = true;
 				} else {
 					if (!notImmune || effectiveness < 0) matched = true;
+				}
+			}
+			if (matched) continue;
+
+			for (let type in alts.weak) {
+				let effectiveness = 0;
+				let notImmune = Dex.getImmunity(type, dex[mon]);
+				if (notImmune) effectiveness = Dex.getEffectiveness(type, dex[mon]);
+				if (alts.weak[type]) {
+					if (notImmune && effectiveness >= 1) matched = true;
+				} else {
+					if (!notImmune || effectiveness < 1) matched = true;
 				}
 			}
 			if (matched) continue;
@@ -1414,7 +1456,6 @@ function runLearn(target, cmd) {
 
 	let template = Dex.getTemplate(targets.shift());
 	let move = {};
-	let problem;
 	let all = (cmd === 'learnall');
 	if (cmd === 'learn5') lsetData.set.level = 5;
 
@@ -1430,6 +1471,8 @@ function runLearn(target, cmd) {
 		return {error: "You must specify at least one move."};
 	}
 
+	const validator = TeamValidator(formatid);
+	let lsetProblem;
 	for (const arg of targets) {
 		move = Dex.getMove(arg);
 		if (!move.exists || move.id === 'magikarpsrevenge') {
@@ -1438,12 +1481,16 @@ function runLearn(target, cmd) {
 		if (move.gen > gen) {
 			return {error: `${move.name} didn't exist yet in generation ${gen}.`};
 		}
-		problem = TeamValidator(formatid).checkLearnset(move, template.species, lsetData);
-		if (problem) break;
+		lsetProblem = validator.checkLearnset(move, template, lsetData);
+		if (lsetProblem) {
+			lsetProblem.moveName = move.name;
+			break;
+		}
 	}
+	let problems = validator.reconcileLearnset(template, lsetData, lsetProblem);
 	let buffer = `In ${formatName}, `;
-	buffer += "" + template.name + (problem ? " <span class=\"message-learn-cannotlearn\">can't</span> learn " : " <span class=\"message-learn-canlearn\">can</span> learn ") + (targets.length > 1 ? "these moves" : move.name);
-	if (!problem) {
+	buffer += "" + template.name + (problems ? " <span class=\"message-learn-cannotlearn\">can't</span> learn " : " <span class=\"message-learn-canlearn\">can</span> learn ") + (targets.length > 1 ? "these moves" : move.name);
+	if (!problems) {
 		let sourceNames = {E: "egg", S: "event", D: "dream world", V: "virtual console transfer from gen 1-2", X: "egg, traded back", Y: "event, traded back"};
 		let sourcesBefore = lsetData.sourcesBefore;
 		if (lsetData.sources || sourcesBefore < gen) buffer += " only when obtained";
@@ -1484,7 +1531,14 @@ function runLearn(target, cmd) {
 		if (sourcesBefore) {
 			buffer += `<li>${(sourcesBefore < gen ? "Gen " + sourcesBefore + " or earlier" : "anywhere") + " (all moves are level-up/tutor/TM/HM in Gen " + Math.min(gen, sourcesBefore) + (sourcesBefore < gen ? " to " + gen : "")})`;
 		}
+		if (lsetData.babyOnly && sourcesBefore) {
+			buffer += `<li>must be obtained as ` + Dex.getTemplate(lsetData.babyOnly).species;
+		}
 		buffer += "</ul>";
+	} else if (targets.length > 1 || problems.length > 1) {
+		buffer += ` because:<ul class="message-learn-list">`;
+		buffer += `<li>` + problems.join(`</li><li>`) + `</li>`;
+		buffer += `</ul>`;
 	}
 	return {reply: buffer};
 }
