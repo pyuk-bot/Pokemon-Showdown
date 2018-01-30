@@ -199,6 +199,22 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Normal",
 	},
+	// atomicllamas
+	bitchycomment: {
+		basePower: 100,
+		accuracy: 100,
+		category: "Special",
+		desc: '',
+		shortDesc: '',
+		status: 'brn',
+		pp: 20,
+		name: 'Bitchy Comment',
+		id: 'bitchycomment',
+		flags: {protect: 1, mirror: 1, sound: 1},
+		secondary: false,
+		target: "normal",
+		type: "Psychic",
+	},
 	// Auzbat
 	fatbat: {
 		accuracy: true,
@@ -346,6 +362,34 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "normal",
 		type: "Dark",
+	},
+	// feliburn
+	"clangoroussoulblaze": {
+		num: 728,
+		accuracy: true,
+		basePower: 185,
+		category: "Physical",
+		desc: "Raises the user's Attack, Defense, Special Attack, Special Defense, and Speed by 1 stage.",
+		shortDesc: "Raises the user's Atk/Def/SpAtk/SpDef/Spe by 1.",
+		id: "clangoroussoulblaze",
+		name: "Clangorous Soulblaze",
+		noPPBoosts: true,
+		pp: 1,
+		priority: 0,
+		flags: {sound: 1, authentic: 1},
+		selfBoost: {
+			boosts: {
+				atk: 1,
+				def: 1,
+				spa: 1,
+				spd: 1,
+				spe: 1,
+			},
+		},
+		secondary: false,
+		target: "allAdjacentFoes",
+		type: "Dragon",
+		contestType: "Cool",
 	},
 	// grimAuxiliatrix
 	chachaslide: {
@@ -1000,6 +1044,50 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "normal",
 		type: "Dark",
+	},
+	// The Immortal
+	sleepwalk: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		id: "sleepwalk",
+		isNonstandard: true,
+		isViable: true,
+		name: "Sleep Walk",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		sleepUsable: true,
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Healing Wish", target);
+		},
+		onHit: function (pokemon, source) {
+			if (pokemon.status !== 'slp') {
+				if (pokemon.hp >= pokemon.maxhp) return false;
+				if (!pokemon.setStatus('slp')) return false;
+				pokemon.statusData.time = 3;
+				pokemon.statusData.startTime = 3;
+				this.heal(pokemon.maxhp);
+				this.add('-status', pokemon, 'slp', '[from] move: Rest');
+			}
+			let moves = [];
+			for (let i = 0; i < pokemon.moveSlots.length; i++) {
+				let move = pokemon.moveSlots[i].id;
+				if (move && move !== 'sleepwalk') moves.push(move);
+			}
+			let move = '';
+			if (moves.length) move = moves[this.random(moves.length)];
+			if (!move) return false;
+			this.useMove(move, pokemon);
+			if (!pokemon.informed && source.name === 'The Immortal') {
+				this.add('c|~The Immortal|I don\'t really sleep walk...');
+				pokemon.informed = true;
+			}
+		},
+		secondary: false,
+		target: "self",
+		type: "Normal",
 	},
 	// Tiksi
 	devolutionwave: {

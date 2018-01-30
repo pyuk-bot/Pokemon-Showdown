@@ -548,7 +548,7 @@ exports.Formats = [
 			// REMOVE BEFORE PRing
 			this.add("raw|<font color='red'><b>PLEASE REPORT BUGS, MISTAKES, CHANGES, AND ANYTHING ELSE ON THE THREAD.</b></font>");
 
-			let allPokemon = this.p1.pokemon.concat(this.p2.pokemon);
+			/*let allPokemon = this.p1.pokemon.concat(this.p2.pokemon);
 			for (let i = 0, len = allPokemon.length; i < len; i++) {
 				let pokemon = allPokemon[i];
 				let last = pokemon.moves.length - 1;
@@ -557,7 +557,7 @@ exports.Formats = [
 					pokemon.moveset[last].move = pokemon.set.signatureMove;
 					pokemon.baseMoveset[last].move = pokemon.set.signatureMove;
 				}
-			}
+			}*/
 		},
 		onSwitchIn: function (pokemon) {
 			let name = toId(pokemon.illusion ? pokemon.illusion.name : pokemon.name);
@@ -604,8 +604,8 @@ exports.Formats = [
 				let last = pokemon.moves.length - 1;
 				if (pokemon.moves[last]) {
 					pokemon.moves[last] = toId(pokemon.set.signatureMove);
-					pokemon.moveset[last].move = pokemon.set.signatureMove;
-					pokemon.baseMoveset[last].move = pokemon.set.signatureMove;
+					pokemon.moveSlots[last].move = pokemon.set.signatureMove;
+					pokemon.baseMoveSlots[last].move = pokemon.set.signatureMove;
 				}
 			}
 		},

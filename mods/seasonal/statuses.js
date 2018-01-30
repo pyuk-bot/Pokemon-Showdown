@@ -78,6 +78,33 @@ exports.BattleStatuses = {
 			this.add('c|%Ast☆arA|' + sentences[this.random(3)]);
 		},
 	},
+	atomicllamas: {
+		exists: true,
+		noCopy: true,
+		onStart: function (pokemon) {
+			/*pokemon.setAbility('Bad Dreams');
+			this.add('-ability', pokemon, 'Bad Dreams');*/
+			this.add('c| atomicllamas|:blobwave:');
+		},
+		onResidualOrder: 26,
+		onResidualSubOrder: 1,
+		onResidual: function (pokemon) {
+			if (!pokemon.hp) return;
+			for (let i = 0; i < pokemon.side.foe.active.length; i++) {
+				let target = pokemon.side.foe.active[i];
+				if (!target || !target.hp) continue;
+				if (target.status === 'slp' || target.hasAbility('comatose')) {
+					this.damage(target.maxhp / 8, target, pokemon);
+				}
+			}
+		},
+		onFaint: function () {
+			this.add('c| atomicllamas|Same.');
+		},
+		onSwitchOut: function () {
+			this.add('c| atomicllamas|:blobwavereverse:');
+		},
+	},
 	auzbat: {
 		exists: true,
 		noCopy: true,
@@ -362,6 +389,28 @@ exports.BattleStatuses = {
 		onFaint: function () {
 			this.add('c|@Teremiare|<(\'o\'<)');
 		},
+	},
+	theimmortal: {
+		exists: true,
+		noCopy: true,
+		onUpdate: function (pokemon) {
+			let name = toId(pokemon.name);
+			if (pokemon.template.isMega && pokemon.getAbility().id === 'megalauncher') {
+				if (name === 'theimmortal') {
+					pokemon.setAbility('Cloud Nine');
+					this.add('-ability', pokemon, 'Cloud Nine');
+				}
+			}
+		},
+		/*onStart: function () {
+			
+		},
+		onSwitchOut: function () {
+			
+		},
+		onFaint: function () {
+			
+		},*/
 	},
 	tiksi: {
 		exists: true,

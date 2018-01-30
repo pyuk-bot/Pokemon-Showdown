@@ -17,13 +17,13 @@ class RandomStaffBrosTeams extends RandomTeams {
 				species: 'Porygon-Z', ability: 'Protean', item: 'Life Orb', gender: 'N',
 				moves: [['boomburst', 'moonblast'][this.random(2)], 'quiverdance', 'chatter'],
 				signatureMove: "Energy Field",
-				evs: {hp:4, spa:252, spe:252}, nature: 'Modest',
+				evs: {hp: 4, spa: 252, spe: 252}, nature: 'Modest',
 			},
 			'Andy >_>': {
 				species: 'Absol', ability: 'Justified', item: 'Absolite', gender: 'M',
 				moves: ['Swords Dance', 'Sucker Punch', ['U-Turn', 'Knock Off'][this.random(2)]],
 				signatureMove: "Pilfer",
-				evs: {hp:252, atk: 252, spe:4}, nature: 'Adamant',
+				evs: {hp: 252, atk: 252, spe: 4}, nature: 'Adamant',
 			},
 			'antemortem': {
 				species: 'Clefable', ability: ['Multiscale', 'Sheer Force'], item: 'Leftovers', gender: 'M', //ask gender
@@ -41,19 +41,25 @@ class RandomStaffBrosTeams extends RandomTeams {
 				species: 'Jirachi', ability: 'Cursed Body', item: ['Leftovers', 'Sitrus Berry'][this.random(2)], gender: 'F', shiny: true,
 				moves: ['psystrike', 'moonblast', 'nastyplot', 'scald', 'recover'],
 				signatureMove: 'Star Bolt Desperation',
-				evs: {hp:4, spa:252, spe:252}, nature: 'Modest',
+				evs: {hp: 4, spa: 252, spe: 252}, nature: 'Modest',
+			},
+			'atomicllamas': {
+				species: 'Jynx', Ability: 'Snow Warning', item: 'Focus Sash', gender: 'N', // ask gender
+				moves: ['Lovely Kiss', 'Blizzard', 'Aura Sphere'],
+				signatureMove: 'Bitchy Comment',
+				evs: {spa: 252, spd: 4, spe: 252}, ivs: {atk: 0}, nature: 'Timid',
 			},
 			'AuzBat': {
 				species: 'Golbat', ability: 'Regenerator', item: 'Eviolite', gender: 'M',
 				moves: ['toxic', 'defog', ['superfang', 'bravebird'][this.random(2)]],
 				signatureMove: "Fat Bat",
-				evs: {hp:212, spd:240, spe:56}, nature: 'Careful',
+				evs: {hp: 212, spd: 240, spe: 56}, nature: 'Careful',
 			},
 			'Beowulf': {
 				species: 'Beedrill', ability: 'Download', item: 'Beedrillite', gender: 'M',
 				moves: ['spikyshield', 'gunkshot', ['sacredfire', 'boltstrike', 'diamondstorm'][this.random(3)]],
 				signatureMove: "Buzzing of the Storm",
-				evs: {def:4, atk:252, spe:252}, nature: 'Jolly',
+				evs: {def: 4, atk: 252, spe: 252}, nature: 'Jolly',
 			},
 			'cant say': {
 				species: 'Aegislash', ability: 'Stance Change', item: 'Weakness Policy', gender: 'M',
@@ -79,6 +85,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Dark Aggro',
 				evs: {hp: 252, spa: 252, spd: 4}, nature: 'Adamant',
 			},
+			'Feliburn': {
+				species: 'Kommo-o', Ability: 'Turboblaze', item: 'Dragonium Z', gender: 'N', // ask gender
+				moves: ['Close Combat', 'Dragon Hammer', ['Sunsteel Strike', 'Earthquake'][this.random(2)]],
+				signatureMove: 'Clangorous Soulblaze',
+				evs: {spa: 252, spd: 4, spe: 252}, ivs: {atk: 0}, nature: 'Jolly',
+			},
 			'grimAuxiliatrix': {
 				species: 'Aggron', ability: 'Chrome Finish', item: 'Aggronite', gender: 'M', // ask gender
 				moves: ['Thunder Wave', 'Heavy Slam', ['Stealth Rock', 'Dragon Tail', 'Stone Edge'][this.random(3)]],
@@ -101,7 +113,7 @@ class RandomStaffBrosTeams extends RandomTeams {
 				species: 'Arceus', ability: 'Pick Up', item: 'Black Glasses', gender: 'M',
 				moves: [['holdhands', 'trickortreat'][this.random(2)], ['swordsdance', 'agility'][this.random(2)], 'celebrate'],
 				signatureMove: "Rage Quit",
-				evs: {hp:4, atk:252, spe:252}, nature: 'Jolly',
+				evs: {hp: 4, atk: 252, spe: 252}, nature: 'Jolly',
 			},
 			'Iyarito': {
 				species: 'Gengar', ability: 'Fur Coat', item: 'Psychium Z', gender: 'M', // Ask gender
@@ -125,7 +137,7 @@ class RandomStaffBrosTeams extends RandomTeams {
 				species: 'Wingull', ability: 'Swift Swim', item: ['Waterium Z', 'Electrium Z', 'Flyinium Z'][this.random(3)], gender: 'M',
 				moves: ['hurricane', 'thunder', 'waterspout'],
 				signatureMove: "Maelström",
-				evs: {spa:252, spd:4, spe:252}, nature: 'Modest',
+				evs: {spa: 252, spd: 4, spe: 252}, nature: 'Modest',
 			},
 			'kamikaze': {
 				species: 'Staraptor', ability: 'Flash Feather', item: 'Choice Band', gender: 'M',
@@ -200,6 +212,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Baton Thief',
 				evs: {hp: 252, def: 4, spe: 252}, nature: 'Timid',
 			},
+			'The Immortal': {
+				species: 'Blastoise', Ability: 'Magic Bounce', item: 'Blastoisinite', gender: 'N', // ask gender
+				moves: ['Shell Smash', 'Dragon Tail', 'Steam Eruption'],
+				signatureMove: 'Sleep Walk',
+				evs: {hp: 252, def: 4, spd: 252}, nature: 'Sassy',
+			},
 			'Tiksi': {
 				species: 'Cradily', ability: 'Sand Stream', item: 'Leftovers', gender: 'M',
 				moves: ['Shore Up', 'Rock Slide', ['Swords Dance', 'Curse'][this.random(2)]],
@@ -235,14 +253,14 @@ class RandomStaffBrosTeams extends RandomTeams {
 			set.level = 100;
 			set.name = name;
 			if (!set.ivs) {
-				set.ivs = {hp:31, atk:31, def:31, spa:31, spd:31, spe:31};
+				set.ivs = {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31};
 			} else {
-				for (let iv in {hp:31, atk:31, def:31, spa:31, spd:31, spe:31}) {
+				for (let iv in {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31}) {
 					set.ivs[iv] = iv in set.ivs ? set.ivs[iv] : 31;
 				}
 			}
 			// Assuming the hardcoded set evs are all legal.
-			if (!set.evs) set.evs = {hp:84, atk:84, def:84, spa:84, spd:84, spe:84};
+			if (!set.evs) set.evs = {hp: 84, atk: 84, def: 84, spa: 84, spd: 84, spe: 84};
 			if (Array.isArray(set.ability)) set.ability = this.sampleNoReplace(set.ability);
 			set.moves = [this.sampleNoReplace(set.moves), this.sampleNoReplace(set.moves), this.sampleNoReplace(set.moves)].concat(set.signatureMove);
 			if (name === 'Ascriptmaster') {
