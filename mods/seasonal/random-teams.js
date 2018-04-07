@@ -26,10 +26,16 @@ class RandomStaffBrosTeams extends RandomTeams {
 				evs: {hp: 252, atk: 252, spe: 4}, nature: 'Adamant',
 			},
 			'antemortem': {
-				species: 'Clefable', ability: ['Multiscale', 'Sheer Force'], item: 'Leftovers', gender: 'M', //ask gender
+				species: 'Clefable', ability: ['Magic Bounce', 'Sheer Force'], item: 'Leftovers', gender: 'M',
 				moves: ['Earth Power', 'Cosmic Power', 'Recover', 'Giga Drain'],
 				signatureMove: 'Postmortem',
 				evs: {hp: 252, def: 4, spa: 252}, nature: 'Modest',
+			},
+			'Articblast': {
+				species: 'Garbodor', ability: 'Speed Boost', item: 'Choice Band', gender: 'N',
+				moves: ['Acid Spray', 'Knock Off', 'Earthquake'],
+				signatureMove: 'Trashalance',
+				evs: {atk: 252, spd: 4, spe: 252}, nature: 'Adamant',
 			},
 			'Ascriptmaster': {
 				species: 'Rotom', ability: 'Appliance Change', item: '', gender: 'M', // ask gender
@@ -44,7 +50,7 @@ class RandomStaffBrosTeams extends RandomTeams {
 				evs: {hp: 4, spa: 252, spe: 252}, nature: 'Modest',
 			},
 			'atomicllamas': {
-				species: 'Jynx', Ability: 'Snow Warning', item: 'Focus Sash', gender: 'N', // ask gender
+				species: 'Jynx', ability: 'Snow Warning', item: 'Focus Sash', gender: 'N', // ask gender
 				moves: ['Lovely Kiss', 'Blizzard', 'Aura Sphere'],
 				signatureMove: 'Bitchy Comment',
 				evs: {spa: 252, spd: 4, spe: 252}, ivs: {atk: 0}, nature: 'Timid',
@@ -73,6 +79,12 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Added Preservatives',
 				evs: {hp: 252, def: 252, spd: 4}, nature: 'Bold',
 			},
+			'Ciran': {
+				species: 'Rapidash', ability: 'Defiant', item: 'Life Orb', gender: 'N', shiny: true,
+				moves: ['V-Create', 'Knock Off', 'Punishment'],
+				signatureMove: 'bUrn-Turn',
+				evs: {atk: 252, def: 4, spe: 252}, ivs: {spa: 0}, nature: 'Adamant',
+			},
 			'Duck': {
 				species: 'Farfetch\'d', ability: 'Sniper', item: 'Stick', gender: 'M',
 				moves: ['Shift Gear', 'Superpower', 'Dragon Ascent'],
@@ -83,19 +95,31 @@ class RandomStaffBrosTeams extends RandomTeams {
 				species: 'Muk-Alola', ability: 'Unaware', item: 'Black Sludge', gender: 'M', // ask gender
 				moves: [['Gunk Shot', 'Poison Jab'][this.random(2)], 'Recover', 'Coil'],
 				signatureMove: 'Dark Aggro',
-				evs: {hp: 252, spa: 252, spd: 4}, nature: 'Adamant',
+				evs: {hp: 252, atk: 252, spd: 4}, nature: 'Adamant',
 			},
 			'Feliburn': {
-				species: 'Kommo-o', Ability: 'Turboblaze', item: 'Dragonium Z', gender: 'N', // ask gender
+				species: 'Kommo-o', ability: 'Turboblaze', item: 'Dragonium Z', gender: 'N', // ask gender
 				moves: ['Close Combat', 'Dragon Hammer', ['Sunsteel Strike', 'Earthquake'][this.random(2)]],
 				signatureMove: 'Clangorous Soulblaze',
-				evs: {spa: 252, spd: 4, spe: 252}, ivs: {atk: 0}, nature: 'Jolly',
+				evs: {atk: 252, spd: 4, spe: 252}, nature: 'Jolly',
 			},
 			'grimAuxiliatrix': {
 				species: 'Aggron', ability: 'Chrome Finish', item: 'Aggronite', gender: 'M', // ask gender
 				moves: ['Thunder Wave', 'Heavy Slam', ['Stealth Rock', 'Dragon Tail', 'Stone Edge'][this.random(3)]],
 				signatureMove: 'Cha Cha Slide',
 				evs: {hp: 252, def: 16, spd: 240}, nature: 'Impish',
+			},
+			'HeaLnDeaL': {
+				species: 'Lycanroc-Midday', ability: 'Fur Coat', item: 'Rockium Z', gender: 'N',
+				moves: ['Diamond Storm', 'Precipice Blades', 'Meteor Mash'],
+				signatureMove: 'Petrify Chomp',
+				evs: {spa: 252, spd: 4, spe: 252}, nature: 'Jolly',
+			},
+			'hippopotas': {
+				species: 'Hippopotas', ability: 'Sturdy', item: 'Figy Berry', gender: 'N',
+				moves: ['Protect', 'Destiny Bond', ['Stealth Rock', 'Spikes', 'Toxic Spikes', 'Sticky Web'][this.random(4)]],
+				signatureMove: 'Be Annoying',
+				evs: {hp: 252, def: 252, spd: 4}, ivs: {atk: 0, spa: 0}, nature: 'Bold',
 			},
 			'HoeenHero': {
 				species: 'Ludicolo', ability: 'Swift Swim', item: 'Damp Rock', gender: 'M',
@@ -116,8 +140,8 @@ class RandomStaffBrosTeams extends RandomTeams {
 				evs: {hp: 4, atk: 252, spe: 252}, nature: 'Jolly',
 			},
 			'Iyarito': {
-				species: 'Gengar', ability: 'Fur Coat', item: 'Psychium Z', gender: 'M', // Ask gender
-				moves: ['Hypnosis', 'Dream Eater', 'Secret Sword'],
+				species: 'Gengar', ability: 'Fur Coat', item: 'Grassium Z', gender: 'M', // Ask gender
+				moves: ['Sleep Powder', 'Dream Eater', 'Secret Sword'],
 				signatureMove: 'Iya\'s Rage',
 				evs: {hp: 184, spa: 252, spe: 60}, nature: 'Timid',
 			},
@@ -146,13 +170,19 @@ class RandomStaffBrosTeams extends RandomTeams {
 				evs: {hp: 252, atk: 148, spe: 108}, nature: 'Adamant',
 			},
 			'Level 51': {
-				species: 'Porygon2', ability: 'Trace', item: 'Eviolite',
+				species: 'Porygon2', ability: 'Unaware', item: 'Eviolite',
 				moves: ['Recover', ['Night Shade', 'Seismic Toss'][this.random(2)], ['Nature\'s Madness', 'Cosmic Power', 'Cotton Guard'][this.random(3)]],
 				signatureMove: 'Next Level Strats',
 				evs: {hp: 236, def: 220, spd: 48, spe: 4}, nature: 'Calm',
 			},
+			'LifeisDANK': {
+				species: 'Delibird', ability: 'Birb', item: 'Life Orb', gender: 'N',
+				moves: ['Extreme Speed', 'Return', 'Beak Blast'],
+				signatureMove: 'Peent Peent',
+				evs: {hp: 4, atk: 252, spe: 252}, nature: 'Adamant',
+			},
 			'Megazard': {
-				species: 'Drampa', ability: 'Insensible', item: 'Leftovers', gender: 'M',
+				species: 'Drampa', ability: 'Unaware', item: 'Leftovers', gender: 'M',
 				moves: ['Roost', 'Calm Mind', 'Lava Plume'],
 				signatureMove: 'Dragon\'s Wrath',
 				evs: {hp: 248, def: 8, spd: 252}, nature: 'Calm',
@@ -169,11 +199,23 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'For the Kids',
 				evs: {hp: 252, atk: 252, spe: 4}, nature: 'Adamant',
 			},
+			'nv': {
+				species: 'Larvitar', ability: 'Arid Plateau', item: 'Eviolite', gender: 'N',
+				moves: ['Diamond Storm', ['Precipice Blades', 'Earthquake'][this.random(2)], ['Bolt Strike', 'Sacred Fire', 'Shore Up'][this.random(3)]],
+				signatureMove: 'An Apple A Day',
+				evs: {hp: 252, atk: 252, spe: 4}, nature: 'Adamant',
+			},
 			'panpawn': {
-				species: 'Cyndaquil', ability: 'Flash Fire', item: 'Leftovers', gender: 'M',
-				moves: ['Eruption', 'Extrasensory', 'Facade'],
+				species: 'Cyndaquil', ability: 'Chlorophyll', item: 'Focus Sash', gender: 'M',
+				moves: ['Eruption', 'Psycho Boost', 'Solar Beam'],
 				signatureMove: 'LaFireBlaze420',
 				nature: 'Adamant',
+			},
+			'Paradise': {
+				species: 'Type: Null', ability: 'Toxic User', item: 'Eviolite', gender: 'N',
+				moves: ['haze', 'Toxic', 'Recover'],
+				signatureMove: 'Dizzy Rock',
+				evs: {hp: 248, def: 8, spd: 252}, ivs: {atk: 0}, nature: 'Calm',
 			},
 			'Scotteh': {
 				species: 'Suicune', ability: 'Fur Coat', item: 'Leftovers', gender: 'N',
@@ -212,15 +254,21 @@ class RandomStaffBrosTeams extends RandomTeams {
 				signatureMove: 'Baton Thief',
 				evs: {hp: 252, def: 4, spe: 252}, nature: 'Timid',
 			},
+			'Team Pokepals': {
+				species: 'Lucario', ability: 'Aura Sense', item: 'Salac Berry', gender: 'N',
+				moves: ['Aura Sphere', 'Flash Cannon', 'Nasty Plot'],
+				signatureMove: 'FINAL KAMEHAMEHA',
+				evs: {spa: 252, spd: 4, spe: 252}, nature: 'Timid',
+			},
 			'The Immortal': {
-				species: 'Blastoise', Ability: 'Magic Bounce', item: 'Blastoisinite', gender: 'N', // ask gender
+				species: 'Blastoise', ability: 'Magic Bounce', item: 'Blastoisinite', gender: 'N', // ask gender
 				moves: ['Shell Smash', 'Dragon Tail', 'Steam Eruption'],
 				signatureMove: 'Sleep Walk',
 				evs: {hp: 252, def: 4, spd: 252}, nature: 'Sassy',
 			},
 			'Tiksi': {
 				species: 'Cradily', ability: 'Sand Stream', item: 'Leftovers', gender: 'M',
-				moves: ['Shore Up', 'Rock Slide', ['Swords Dance', 'Curse'][this.random(2)]],
+				moves: ['Shore Up', 'Rock Slide', 'Curse'],
 				signatureMove: 'Devolution Wave',
 				evs: {hp: 248, atk: 252, spd: 8}, nature: 'Adamant',
 			},
@@ -236,6 +284,16 @@ class RandomStaffBrosTeams extends RandomTeams {
 				moves: ['Substitute', ['Roost', 'Strength Sap'][this.random(2)], 'Thunder Wave'],
 				signatureMove: 'glitzer popping',
 				evs: {hp: 4, def: 252, spd: 252}, nature: 'Calm',
+			},
+			/**
+			* Side note: would it be able to make the infatuation and trapping persist through the switch? As xfix mentioned it is better for flavour reasons.
+			* Cutie Escape isn't adding the volatiles, needs to be fixed.
+			*/
+			'Yuki': {
+				species: 'Ninetales-Alola', ability: 'Snow Warning', item: 'Fairium Z', gender: 'N',
+				moves: ['Blizzard', 'Moonblast', 'Aurora Veil'],
+				signatureMove: 'Cutie Escape',
+				evs: {hp: 4, spa: 252, spe: 252}, nature: 'Timid',
 			},
 			'Zod': {
 				species: 'Oricorio-Pom-Pom', ability: 'Drizzle', item: 'Leftovers', gender: 'M', //needs confirmation

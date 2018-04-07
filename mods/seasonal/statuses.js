@@ -19,7 +19,6 @@ exports.BattleStatuses = {
 		noCopy: true,
 		onStart: function (target, source) {
 			this.add('c|%Aelita|Transfer, Aelita. Scanner, Aelita. Virtualization!');
-			this.boost({spe: 1}, source);
 		},
 		onFaint: function () {
 			this.add('c|%Aelita|CODE: LYOKO. Tower deactivated...');
@@ -32,8 +31,8 @@ exports.BattleStatuses = {
 			let name = toId(pokemon.name);
 			if (pokemon.template.isMega) {
 				if (name === 'andy' && pokemon.getAbility().id === 'magicbounce') {
-					pokemon.setAbility('Huge Power'); //change to adaptability if to strong
-					this.add('-ability', pokemon, 'Huge Power'); //change to adaptability if to strong
+					pokemon.setAbility('Adaptability'); //change to adaptability if to strong
+					this.add('-ability', pokemon, 'Adaptability'); //change to adaptability if to strong
 				}
 			}
 		},
@@ -137,12 +136,13 @@ exports.BattleStatuses = {
 		onFaint: function () {
 			this.add('c|&cant say|bg haxor :(');
 		},
-		onAfterMove: function (pokemon) {
+		// incase i'm wrong in removing this just comment it out for now
+		/*onAfterMove: function (pokemon) {
 			if (pokemon.template.forme !== 'Blade') return;
 			if (pokemon.formeChange('Aegislash')) {
 				this.add('-formechange', pokemon, 'Aegislash', '[from] ability: Stance Change');
 			}
-		},
+		},*/
 	},
 	chloe: {
 		exists: true,
@@ -193,6 +193,33 @@ exports.BattleStatuses = {
 		},
 		onFaint: function () {
 			this.add('c|@grimAuxiliatrix|∠( ᐛ 」∠)＿');
+		},
+	},
+	healndeal: {
+		exists: true,
+		noCopy: true,
+		onModifyMove: function (move) {
+			if (move.secondaries) {
+				this.debug('double secondary chance');
+				for (let i = 0; i < move.secondaries.length; i++) {
+					move.secondaries[i].chance *= 2;
+				}
+			}
+		},
+	},
+	hippopotas: {
+		exists: true,
+		noCopy: true,
+		onModifyDefPriority: 6,
+		onModifyDef: function (def) {
+			return this.chainModify(1.5);
+		},
+		onModifySpDPriority: 6,
+		onModifySpD: function (spd) {
+			return this.chainModify(1.5);
+		},
+		onEatItem: function (item, pokemon) {
+			this.useMove('recycle', pokemon);
 		},
 	},
 	hoeenhero: {
@@ -302,6 +329,37 @@ exports.BattleStatuses = {
 			this.add('c|%NOVED|follow me on twitter too @novedpoke');
 		},
 	},
+	// nv
+	duststorm: {
+		effectType: 'Weather',
+		duration: 0,
+		onEffectiveness: function (typeMod, target, type, move) {
+			if (move && move.effectType === 'Move' && type === 'Rock' && typeMod > 0) {
+				this.add('-activate', target, 'aridplateau');
+				return 0;
+			}
+		},
+		onModifySpDPriority: 10,
+		onModifySpD: function (spd, pokemon) {
+			if (pokemon.hasType('Rock') && this.isWeather('duststorm')) {
+				return this.modify(spd, 1.5);
+			}
+		},
+		onStart: function (battle, source, effect) {
+			this.add('-weather', 'AridPlateau', '[from] ability: ' + effect, '[of] ' + source);
+		},
+		onResidualOrder: 1,
+		onResidual: function () {
+			this.add('-weather', 'AridPlateau', '[upkeep]');
+			this.eachEvent('Weather');
+		},
+		onWeather: function (target) {
+			if (target.hasType('Rock') || target.hasType('Ground') || target.hasType('teel')) this.damage(target.maxhp / 16);
+		},
+		onEnd: function () {
+			this.add('-weather', 'none');
+		},
+	},
 	panpawn: {
 		exists: true,
 		noCopy: true,
@@ -403,13 +461,13 @@ exports.BattleStatuses = {
 			}
 		},
 		/*onStart: function () {
-			
+
 		},
 		onSwitchOut: function () {
-			
+
 		},
 		onFaint: function () {
-			
+
 		},*/
 	},
 	tiksi: {
