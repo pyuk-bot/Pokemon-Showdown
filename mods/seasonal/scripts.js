@@ -1,7 +1,6 @@
 'use strict';
 
 exports.BattleScripts = {
-<<<<<<< HEAD
 	// Modded to allow each Pokemon on a team to use a Z move once per battle
 	runMove: function (move, pokemon, targetLoc, sourceEffect, zMove, externalMove) {
 		let target = this.getTarget(pokemon, zMove || move, targetLoc);
@@ -105,8 +104,6 @@ exports.BattleScripts = {
 		if (noLock && pokemon.volatiles.lockedmove) delete pokemon.volatiles.lockedmove;
 	},
 	// Modded to allow for DragonWhale's custom move's custom Z effect
-=======
->>>>>>> Add a fuck ton of mons and fix a fuck ton more
 	useMoveInner: function (move, pokemon, target, sourceEffect, zMove) {
 		if (!sourceEffect && this.effect.id) sourceEffect = this.effect;
 		move = this.getMoveCopy(move);
@@ -292,22 +289,16 @@ exports.BattleScripts = {
 		}
 		return true;
 	},
-<<<<<<< HEAD
 
 	// Modified to treat Legendary Frost as Hail and Arid Plateau as Sandstorm to avoid modding literally everything that checks for Hail and/or Sandstorm specifically
 	effectiveWeather: function () {
 		if (this.suppressingWeather()) return '';
-=======
-	effectiveWeather: function () {
-		if (this.suppressingWeather()) return '';
 		let weather = this.weather;
->>>>>>> Add a fuck ton of mons and fix a fuck ton more
 		let weatherClones = {
 			desolateland: 'sunnyday',
 			primordialsea: 'raindance',
 			legendaryfrost: 'hail',
 			aridplateau: 'sandstorm',
-<<<<<<< HEAD
 		};
 		return weatherClones[this.weather] || this.weather;
 	},
@@ -368,9 +359,6 @@ exports.BattleScripts = {
 			if (zMoveName) atLeastOne = true;
 		}
 		if (atLeastOne) return zMoves;
-=======
-		}
 		return weatherClones[this.weather] || this.weather;
->>>>>>> Add a fuck ton of mons and fix a fuck ton more
 	},
 };

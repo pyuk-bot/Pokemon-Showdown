@@ -9,7 +9,6 @@ class RandomStaffBrosTestTeams extends RandomTeams {
 		let sets = {
 			'Winry': {
 				species: 'Buizel', ability: 'Water Veil', item: 'Life Orb', gender: 'F', shiny: true,
-<<<<<<< HEAD
 				moves: ['aquajet', ['jumpkick', 'iciclecrash'][this.random(2)], 'waterfall'],
 				signatureMove: 'Fight to the Death',
 				evs: {atk: 252, def: 4, spe: 252}, nature: 'Jolly',
@@ -43,17 +42,6 @@ class RandomStaffBrosTestTeams extends RandomTeams {
 				moves: ['Light Screen', 'Heal Bell', 'Toxic'],
 				signatureMove: '/me swirls you',
 				evs: {hp: 252, def: 252, spd: 4}, nature: 'Bold',
-=======
-				moves: ['watershuriken', ['jumpkick', 'iciclecrash'][this.random(2)], 'waterfall'],
-				signatureMove: 'Fight to the Death',
-				evs: {atk:252, def:4, spe:252}, nature: 'Jolly',
-			},
-			'Yuki': {
-				species: 'Ninetales-Alola', ability: 'Snow Warning', item: 'Fairium Z', gender: 'N',
-				moves: ['Blizzard', 'Moonblast', 'Aurora Veil'],
-				signatureMove: 'Cutie Escape',
-				evs: {hp: 4, spa: 252, spe: 252}, nature: 'Timid',
->>>>>>> Add a fuck ton of mons and fix a fuck ton more
 			},
 			/*
 			'template': {
