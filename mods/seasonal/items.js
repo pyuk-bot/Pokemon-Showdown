@@ -21,16 +21,6 @@ exports.BattleItems = {
 		gen: 7,
 		desc: "If held by Tiksi with Rock Slide, it can use Devolution Wave.",
 	},
-	"tiksiumz": {
-		id: "tiksiumz",
-		name: "Tiksium Z",
-		onTakeItem: false,
-		zMove: "Devolution Wave",
-		zMoveFrom: "Rock Slide",
-		zMoveUser: ["Cradily"],
-		gen: 7,
-		desc: "If held by Tiksi with Rock Slide, it can use Devolution Wave.",
-	},
 	"roseradiumz": {
 		id: "roseradiumz",
 		name: "Roseradium Z",

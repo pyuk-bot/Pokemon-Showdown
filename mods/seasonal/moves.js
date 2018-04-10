@@ -1963,11 +1963,7 @@ exports.BattleMovedex = {
 		},
 		onHit: function (target) {
 			let moves = [];
-<<<<<<< HEAD
 			for (let i = 0; i < target.moveSlots.length; i++) {
-=======
-			for (let i = 0; i < target.moveSlots.length;) {
->>>>>>> Fix build
 				let dexMoves = [];
 				for (let j in exports.BattleMovedex) {
 					let dexMove = exports.BattleMovedex[j];
