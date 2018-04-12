@@ -1904,14 +1904,11 @@ exports.BattleMovedex = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, heal: 1},
-<<<<<<< HEAD
 		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Sacred Fire", target);
 			this.add('-anim', source, "Gravity", target);
 		},
-=======
->>>>>>> Add Soccer, update antemortem and Sigilyph
 		onEffectiveness: 0,
 		drain: [1, 2],
 		ignoreImmunity: {'Dragon': true},
