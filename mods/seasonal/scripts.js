@@ -359,6 +359,5 @@ exports.BattleScripts = {
 			if (zMoveName) atLeastOne = true;
 		}
 		if (atLeastOne) return zMoves;
-		return weatherClones[this.weather] || this.weather;
 	},
 };
