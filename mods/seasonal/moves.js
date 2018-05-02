@@ -1907,7 +1907,7 @@ exports.BattleMovedex = {
 			this.add('-anim', source, "Sacred Fire", target);
 			this.add('-anim', source, "Gravity", target);
 		},
-		onEffectiveness: 0,
+		onEffectiveness: 1,
 		drain: [1, 2],
 		ignoreImmunity: {'Dragon': true},
 		secondary: false,
