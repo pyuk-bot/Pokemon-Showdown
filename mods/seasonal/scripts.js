@@ -293,7 +293,6 @@ exports.BattleScripts = {
 	// Modified to treat Legendary Frost as Hail and Arid Plateau as Sandstorm to avoid modding literally everything that checks for Hail and/or Sandstorm specifically
 	effectiveWeather: function () {
 		if (this.suppressingWeather()) return '';
-		let weather = this.weather;
 		let weatherClones = {
 			desolateland: 'sunnyday',
 			primordialsea: 'raindance',
