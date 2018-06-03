@@ -465,7 +465,9 @@ class User {
 		this.locked = false;
 		/** @type {?false | string} */
 		this.semilocked = false;
+		/** @type {?false | string} */
 		this.namelocked = false;
+		/** @type {?false | string} */
 		this.permalocked = false;
 		this.prevNames = Object.create(null);
 		this.inRooms = new Set();
@@ -940,7 +942,7 @@ class User {
 		this.name = name;
 
 		let joining = !this.named;
-		this.named = !userid.startsWith('guest') || this.namelocked;
+		this.named = !userid.startsWith('guest') || !!this.namelocked;
 
 		for (const connection of this.connections) {
 			//console.log('' + name + ' renaming: socket ' + i + ' of ' + this.connections.length);
@@ -1695,5 +1697,5 @@ let Users = Object.assign(getUser, {
 	}, 1000 * 60 * 30),
 	socketConnect: socketConnect,
 });
-
+//@ts-ignore Typescript bug
 module.exports = Users;

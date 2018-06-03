@@ -17,6 +17,7 @@ const REPORT_USER_STATS_INTERVAL = 10 * 60 * 1000;
 
 const CRASH_REPORT_THROTTLE = 60 * 60 * 1000;
 
+/** @type {null} */
 const RETRY_AFTER_LOGIN = null;
 
 const FS = require('./lib/fs');
@@ -392,6 +393,7 @@ class GlobalRoom extends BasicRoom {
 		/** @type {false} */
 		this.active = false;
 		/** @type {null} */
+		// @ts-ignore Typescript bug?
 		this.chatRoomData = null;
 		/**@type {boolean | 'pre' | 'ddos'} */
 		this.lockdown = false;
@@ -1029,6 +1031,7 @@ class BasicChatRoom extends BasicRoom {
 		if (Config.logchat) {
 			this.roomlog('NEW CHATROOM: ' + this.id);
 			if (Config.loguserstats) {
+				/** @type {NodeJS.Timer?} */
 				this.logUserStatsInterval = setInterval(() => this.logUserStats(), Config.loguserstats);
 			}
 		}
@@ -1266,13 +1269,6 @@ class BasicChatRoom extends BasicRoom {
 	destroy() {
 		// deallocate ourself
 
-		if (this.battle && this.tour) {
-			// resolve state of the tournament;
-			// @ts-ignore
-			if (!this.battle.ended) this.tour.onBattleWin(this, '');
-			this.tour = null;
-		}
-
 		// remove references to ourself
 		for (let i in this.users) {
 			// @ts-ignore
@@ -1331,6 +1327,7 @@ class ChatRoom extends BasicChatRoom {
 	// TypeScript happy
 	constructor() {
 		super('');
+		// @ts-ignore Ignorance is bliss
 		this.battle = null;
 		this.active = false;
 		/** @type {'chat'} */
@@ -1457,6 +1454,15 @@ class GameRoom extends BasicChatRoom {
 	onConnect(user, connection) {
 		this.sendUser(connection, '|init|battle\n|title|' + this.title + '\n' + this.getLogForUser(user));
 		if (this.game && this.game.onConnect) this.game.onConnect(user, connection);
+	}
+
+	destroy() {
+		if (this.battle && this.tour) {
+			// resolve state of the tournament;
+			if (!this.battle.ended) this.tour.onBattleWin(this, '');
+			this.tour = null;
+		}
+		super.destroy();
 	}
 }
 
@@ -1598,8 +1604,9 @@ let Rooms = Object.assign(getRoom, {
 // initialize
 
 Monitor.notice("NEW GLOBAL: global");
+//@ts-ignore Typescript bug
 Rooms.global = new GlobalRoom('global');
-
+//@ts-ignore
 Rooms.rooms.set('global', Rooms.global);
-
+//@ts-ignore
 module.exports = Rooms;

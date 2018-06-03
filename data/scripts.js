@@ -132,6 +132,7 @@ let BattleScripts = {
 	 */
 	useMove: function (move, pokemon, target, sourceEffect, zMove) {
 		pokemon.moveThisTurnResult = undefined;
+		/** @type {boolean | null | undefined} */
 		let oldMoveResult = pokemon.moveThisTurnResult;
 		let moveResult = this.useMoveInner(move, pokemon, target, sourceEffect, zMove);
 		if (oldMoveResult === pokemon.moveThisTurnResult) pokemon.moveThisTurnResult = moveResult;
@@ -294,9 +295,11 @@ let BattleScripts = {
 			if (move.spreadHit) this.attrLastMove('[spread] ' + hitTargets.join(','));
 		} else {
 			target = targets[0];
+			// @ts-ignore Typescript bug: It still thinks target could be false even though the function would have returned by now if it was
 			let lacksTarget = target.fainted;
 			if (!lacksTarget) {
 				if (move.target === 'adjacentFoe' || move.target === 'adjacentAlly' || move.target === 'normal' || move.target === 'randomNormal') {
+					// @ts-ignore
 					lacksTarget = !this.isAdjacent(target, pokemon);
 				}
 			}
@@ -306,6 +309,7 @@ let BattleScripts = {
 				if (move.target === 'normal') pokemon.isStaleCon = 0;
 				return false;
 			}
+			// @ts-ignore
 			damage = this.tryMoveHit(target, pokemon, move);
 			if (damage || damage === 0 || damage === undefined) moveResult = true;
 		}
@@ -316,6 +320,7 @@ let BattleScripts = {
 		}
 
 		if (!moveResult) {
+			// @ts-ignore
 			this.singleEvent('MoveFail', move, null, target, pokemon, move);
 			return false;
 		}

@@ -104,6 +104,7 @@ Chat.multiLinePattern = new PatternTester();
 
 Chat.baseCommands = undefined;
 Chat.commands = undefined;
+// @ts-ignore
 Chat.pages = undefined;
 
 /*********************************************************
@@ -751,6 +752,7 @@ class CommandContext {
 			this.sendReply('|c|' + this.user.getIdentity(this.room.id) + '|' + (suppressMessage || this.message));
 		}
 		if (!ignoreCooldown && !this.pmTarget) {
+			// @ts-ignore
 			this.room.lastBroadcast = this.broadcastMessage;
 			this.room.lastBroadcastTime = Date.now();
 		}

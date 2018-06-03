@@ -64,6 +64,7 @@ class Pokemon {
 		// @ts-ignore - null used for this.formeChange(this.baseTemplate)
 		this.baseStats = null;
 
+		/**@type {boolean | 'hidden'} */
 		this.trapped = false;
 		this.maybeTrapped = false;
 		this.maybeDisabled = false;
@@ -223,7 +224,9 @@ class Pokemon {
 			}
 		}
 
+		/** @type {string | null | undefined} */
 		this.canMegaEvo = this.battle.canMegaEvo(this);
+		/** @type {string | null} */
 		this.canUltraBurst = this.battle.canUltraBurst(this);
 
 		if (!this.set.evs) {
@@ -459,6 +462,7 @@ class Pokemon {
 	/**
 	 * @param {Move} move
 	 * @param {Pokemon} target
+	 * @return {Pokemon[]}
 	 */
 	getMoveTargets(move, target) {
 		let targets = [];
@@ -1420,6 +1424,7 @@ class Pokemon {
 	 * @param {Pokemon?} source
 	 * @param {Effect?} sourceEffect
 	 * @param {string | Effect?} linkedStatus
+	 * @return {boolean}
 	 */
 	addVolatile(status, source = null, sourceEffect = null, linkedStatus = null) {
 		let result;
