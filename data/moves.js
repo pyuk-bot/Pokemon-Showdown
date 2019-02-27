@@ -1679,7 +1679,9 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return false;
+				if (!move.spreadHit) this.attrLastMove('[miss]');
+				this.add('-miss', source, target);
+				return null;
 			},
 			onSourceBasePower(basePower, target, source, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
@@ -3429,7 +3431,9 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return false;
+				if (!move.spreadHit) this.attrLastMove('[miss]');
+				this.add('-miss', source, target);
+				return null;
 			},
 			onSourceModifyDamage(damage, source, target, move) {
 				if (move.id === 'earthquake' || move.id === 'magnitude') {
@@ -3593,7 +3597,9 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return false;
+				if (!move.spreadHit) this.attrLastMove('[miss]');
+				this.add('-miss', source, target);
+				return null;
 			},
 			onSourceModifyDamage(damage, source, target, move) {
 				if (move.id === 'surf' || move.id === 'whirlpool') {
@@ -5689,7 +5695,9 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return false;
+				if (!move.spreadHit) this.attrLastMove('[miss]');
+				this.add('-miss', source, target);
+				return null;
 			},
 			onSourceModifyDamage(damage, source, target, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
@@ -11839,7 +11847,9 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return false;
+				if (!move.spreadHit) this.attrLastMove('[miss]');
+				this.add('-miss', source, target);
+				return null;
 			},
 		},
 		secondary: null,
@@ -14612,7 +14622,9 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return false;
+				if (!move.spreadHit) this.attrLastMove('[miss]');
+				this.add('-miss', source, target);
+				return null;
 			},
 		},
 		secondary: null,
@@ -15223,7 +15235,9 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return false;
+				if (!move.spreadHit) this.attrLastMove('[miss]');
+				this.add('-miss', source, target);
+				return null;
 			},
 			onAnyBasePower(basePower, target, source, move) {
 				if (target !== this.effectData.target && target !== this.effectData.source) {
