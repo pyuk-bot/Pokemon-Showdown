@@ -678,6 +678,7 @@ interface FormatsData extends EventMethods {
 	noChangeForme?: boolean
 	onBasePowerPriority?: number
 	onModifyMovePriority?: number
+	onModifyTemplatePriority?: number
 	onSwitchInPriority?: number
 	rated?: boolean
 	requirePentagon?: boolean
