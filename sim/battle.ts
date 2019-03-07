@@ -193,6 +193,12 @@ export class Battle extends Dex.ModdedDex {
 				this.setPlayer(side, options[side]!);
 			}
 		}
+		if (options.p3) {
+			this.setPlayer('p3', options.p3);
+		}
+		if (options.p4) {
+			this.setPlayer('p4', options.p4);
+		}
 	}
 
 	get p1() {
