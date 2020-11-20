@@ -192,11 +192,16 @@ export class HelpTicket extends Rooms.RoomGame {
 		}
 	}
 
-	forfeit(user: User) {
-		if (!(user.id in this.playerTable)) return;
-		this.removePlayer(user);
+	forfeit(user: User | string) {
+		const userid = toID(user);
+		if (typeof user === 'string') {
+			user = Users.get(user)!;
+			if (!user) return;
+		}
+		if (!(userid in this.playerTable)) return;
+		this.removePlayer(userid);
 		if (!this.ticket.open) return;
-		this.room.modlog({action: 'TICKETABANDON', isGlobal: false, loggedBy: user.id});
+		this.room.modlog({action: 'TICKETABANDON', isGlobal: false, loggedBy: userid});
 		this.addText(`${user.name} is no longer interested in this ticket.`, user);
 		if (this.playerCount - 1 > 0) return; // There are still users in the ticket room, dont close the ticket
 		this.close(!!(this.firstClaimTime), user);

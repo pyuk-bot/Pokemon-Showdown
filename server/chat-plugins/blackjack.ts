@@ -155,10 +155,12 @@ export class Blackjack extends Rooms.RoomGame {
 		if (this.spectators[user.id]) delete this.spectators[user.id]; // prevent player from spectating
 		return true;
 	}
-	leaveGame(user: User) {
-		if (this.state === 'started') return this.errorMessage(user, `You cannot leave this game; it has already started.`);
-		if (!this.playerTable[user.id]) return this.errorMessage(user, "You are not in this game to leave.");
-		this.removePlayer(user);
+	leaveGame(user: User | string) {
+		if (typeof user !== 'string') {
+			if (this.state === 'started') return this.errorMessage(user, `You cannot leave this game; it has already started.`);
+			if (!this.playerTable[user.id]) return this.errorMessage(user, "You are not in this game to leave.");
+		}
+		this.removePlayer(toID(user));
 		this.sendInvite();
 	}
 	spectate(user: User) {

@@ -648,14 +648,14 @@ export class Trivia extends Rooms.RoomGame {
 			this.kickedUsers.add(id);
 		}
 
-		super.removePlayer(user);
+		super.removePlayer(user.id);
 	}
 
 	leave(user: User) {
 		if (!this.playerTable[user.id]) {
 			throw new Chat.ErrorMessage(this.room.tr`You are not a player in the current game.`);
 		}
-		super.removePlayer(user);
+		super.removePlayer(user.id);
 	}
 
 	/**
@@ -1387,11 +1387,12 @@ export class Mastermind extends Rooms.RoomGame {
 		this.destroy();
 	}
 
-	leave(user: User) {
-		if (!this.playerTable[user.id]) {
+	leaveGame(user: User | string) {
+		user = toID(user);
+		if (!this.playerTable[user]) {
 			throw new Chat.ErrorMessage(this.room.tr`You are not a player in the current game.`);
 		}
-		this.leaderboard.delete(user.id);
+		this.leaderboard.delete(user as ID);
 		super.removePlayer(user);
 	}
 }
@@ -2410,7 +2411,7 @@ const mastermindCommands: ChatCommands = {
 
 
 	leave(target, room, user) {
-		getMastermindGame(room).leave(user);
+		getMastermindGame(room).leaveGame(user);
 		this.sendReply(this.tr("You have left the current game of Mastermind."));
 	},
 	leavehelp: [`/mastermind leave - Makes the player leave the game.`],

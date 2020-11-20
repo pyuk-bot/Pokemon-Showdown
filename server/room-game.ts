@@ -176,14 +176,9 @@ export class RoomGame {
 		return new RoomGamePlayer(user, this, num);
 	}
 
-	removePlayer(player: RoomGamePlayer | User) {
-		if (player instanceof Users.User) {
-			// API changed
-			// TODO: deprecate
-			player = this.playerTable[player.id];
-			if (!player) throw new Error("Player not found");
-		}
+	removePlayer(player: RoomGamePlayer | string) {
 		if (!this.allowRenames) return false;
+		if (typeof player === 'string') player = this.playerTable[player];
 		const playerIndex = this.players.indexOf(player);
 		if (playerIndex < 0) return false;
 		if (player.id) delete this.playerTable[player.id];
@@ -196,6 +191,9 @@ export class RoomGame {
 	renamePlayer(user: User, oldUserid: ID) {
 		if (user.id === oldUserid) {
 			this.playerTable[user.id].name = user.name;
+		} else if (user.id in this.playerTable) {
+			// User renamed themself to another name already in the game
+			(this.forfeit || this.leaveGame || this.removePlayer)(this.playerTable[oldUserid].id);
 		} else {
 			this.playerTable[user.id] = this.playerTable[oldUserid];
 			this.playerTable[user.id].id = user.id;
@@ -225,7 +223,7 @@ export class RoomGame {
 	 * extremely unlikely to keep playing after this function is
 	 * called.
 	 */
-	forfeit?(user: User): void;
+	forfeit?(user: User | string): void;
 
 	/**
 	 * Called when a user uses /choose [text]
@@ -247,7 +245,7 @@ export class RoomGame {
 	/**
 	 * Called when a user uses /leavegame [text]
 	 */
-	leaveGame?(user: User, text?: string): void;
+	leaveGame?(user: User | string, text?: string): void;
 
 	// Events:
 
@@ -279,7 +277,9 @@ export class RoomGame {
 	 * if the user was previously a guest, but now has a username.
 	 * Check `!user.named` for the case where a user previously had a
 	 * username but is now a guest. By default, updates a player's
-	 * name as long as allowRenames is set to true.
+	 * name as long as allowRenames is set to true. If a player updates
+	 * their name to one that is already in the game, their old name is
+	 * removed.
 	 */
 	onRename(user: User, oldUserid: ID, isJoining: boolean, isForceRenamed: boolean) {
 		if (!this.allowRenames || (!user.named && !isForceRenamed)) {
@@ -290,6 +290,10 @@ export class RoomGame {
 			return;
 		}
 		if (!(oldUserid in this.playerTable)) return;
+		if (user.id in this.playerTable) {
+			// User renamed themself to another name already in the game
+			(this.forfeit || this.leaveGame || this.removePlayer)(this.playerTable[oldUserid].id);
+		}
 		if (!user.named) {
 			return this.onLeave(user, oldUserid);
 		}

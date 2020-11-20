@@ -189,10 +189,11 @@ export class UNO extends Rooms.RoomGame {
 		return false;
 	}
 
-	leaveGame(user: User) {
-		if (!(user.id in this.playerTable)) return false;
-		if (this.state === 'signups' && this.removePlayer(user)) {
-			this.sendToRoom(`${user.name} has left the game of UNO.`);
+	leaveGame(user: User | string) {
+		const userid = toID(user);
+		if (userid in this.playerTable) return false;
+		if (this.state === 'signups' && this.removePlayer(userid)) {
+			this.sendToRoom(`${typeof user !== 'string' ? user.name : user} has left the game of UNO.`);
 			return true;
 		}
 		return false;
@@ -212,9 +213,12 @@ export class UNO extends Rooms.RoomGame {
 			user.updateSearch();
 			return; // dont set users to their guest accounts.
 		}
+		if (this.playerTable[user.id]) {
+			// player renamed to another name already used by another player in this game
+			this.eliminate(oldUserid);
+		}
 		this.playerTable[user.id] = this.playerTable[oldUserid];
-		// only run if it's a rename that involves a change of userid
-		if (user.id !== oldUserid) delete this.playerTable[oldUserid];
+		delete this.playerTable[oldUserid];
 
 		// update the user's name information
 		this.playerTable[user.id].name = user.name;

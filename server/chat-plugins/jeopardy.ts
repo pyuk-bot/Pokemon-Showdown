@@ -798,7 +798,7 @@ export const commands: ChatCommands = {
 			if (user.id !== game.host.id) return this.errorReply("This command can only be used by the host.");
 			const targetUser = Users.get(target);
 			if (!targetUser) return this.errorReply(`User '${target}' not found.`);
-			if (game.removePlayer(targetUser)) {
+			if (game.removePlayer(targetUser.id)) {
 				game.update();
 			} else {
 				return this.errorReply(`Unable to remove '${targetUser.name}' from the game.`);

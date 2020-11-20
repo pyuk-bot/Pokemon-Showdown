@@ -495,15 +495,24 @@ export class ScavengerHunt extends Rooms.RoomGame {
 		}
 	}
 
-	leaveGame(user: User) {
-		const player = this.playerTable[user.id];
+	leaveGame(user: User | string) {
+		const userid = toID(user);
+		const player = this.playerTable[userid];
 
+		if (typeof user === 'string') {
+			if (!player || player.completed) return;
+			this.runEvent('Leave', player);
+			this.joinedIps = this.joinedIps.filter(ip => !player.joinIps.includes(ip));
+			this.removePlayer(user);
+			this.leftHunt[userid] = 1;
+			return;
+		}
 		if (!player) return user.sendTo(this.room, "You have not joined the scavenger hunt.");
 		if (player.completed) return user.sendTo(this.room, "You have already completed this scavenger hunt.");
 		this.runEvent('Leave', player);
 		this.joinedIps = this.joinedIps.filter(ip => !player.joinIps.includes(ip));
-		this.removePlayer(user);
-		this.leftHunt[user.id] = 1;
+		this.removePlayer(userid);
+		this.leftHunt[userid] = 1;
 		user.sendTo(this.room, "You have left the scavenger hunt.");
 	}
 

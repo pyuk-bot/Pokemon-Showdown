@@ -241,10 +241,12 @@ export class RPSGame extends Rooms.RoomGame {
 		}
 		return true;
 	}
-	leaveGame(user: User) {
-		const player = this.getPlayer(user);
-		player.sendRoom(`You left the game.`);
-		delete this.playerTable[user.id];
+	leaveGame(user: User | string) {
+		if (typeof user !== 'string') {
+			const player = this.getPlayer(user);
+			player.sendRoom(`You left the game.`);
+		}
+		delete this.playerTable[toID(user)];
 		this.end();
 	}
 	addPlayer(user: User) {

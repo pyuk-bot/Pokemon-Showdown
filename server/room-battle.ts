@@ -928,7 +928,9 @@ export class RoomBattle extends RoomGames.RoomGame {
 			}
 			return;
 		}
-		if (!this.allowRenames) {
+		// even if renames are allowed, a player already in a battle can't
+		// rename themself to the same name as another player in the same battle
+		if (!this.allowRenames || user.id in this.playerTable) {
 			const player = this.playerTable[oldUserid];
 			if (player) {
 				const message = isForceRenamed ? " lost by having an inappropriate name." : " forfeited by changing their name.";
@@ -988,8 +990,7 @@ export class RoomBattle extends RoomGames.RoomGame {
 		void this.stream.write(`>tiebreak`);
 	}
 	forfeit(user: User | string, message = '') {
-		if (typeof user !== 'string') user = user.id;
-		else user = toID(user);
+		user = toID(user);
 
 		if (!(user in this.playerTable)) return false;
 		return this.forfeitPlayer(this.playerTable[user], message);

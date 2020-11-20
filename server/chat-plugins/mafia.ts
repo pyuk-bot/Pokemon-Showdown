@@ -1658,10 +1658,11 @@ class MafiaTracker extends Rooms.RoomGame {
 		this.nextSub();
 	}
 
-	forfeit(user: User) {
+	forfeit(user: User | string) {
+		user = toID(user);
 		// Add the player to the sub list.
-		if (!(user.id in this.playerTable)) return;
-		this.requestedSub.push(user.id);
+		if (!(user in this.playerTable)) return;
+		this.requestedSub.push(user as ID);
 		this.nextSub();
 	}
 
