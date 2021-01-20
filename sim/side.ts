@@ -296,7 +296,7 @@ export class Side {
 	) {
 		if (!source && this.battle.event && this.battle.event.target) source = this.battle.event.target;
 		if (source === 'debug') source = this.active[0];
-		if (target instanceof Pokemon) target = target.position;
+		if (target instanceof Pokemon) target = target.activePosition;
 		if (!source) throw new Error(`setting sidecond without a source`);
 
 		status = this.battle.dex.getEffect(status);

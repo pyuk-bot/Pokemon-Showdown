@@ -16,7 +16,7 @@ describe('Assurance', function () {
 			[{species: 'Regieleki', ability: 'transistor', moves: ['wildcharge']}],
 		]);
 		battle.makeChoices();
-		const regi = battle.p2.active[0];
+		const regi = battle.p2.getActive()[0];
 		const recoilRange = [113, 133].map(d => Math.floor(d / 4));
 		const assuRange = [214, 253];
 		assert.bounded(regi.hp, [regi.maxhp - recoilRange[1] - assuRange[1], regi.maxhp - recoilRange[0] - assuRange[0]]);
@@ -31,7 +31,7 @@ describe('Assurance', function () {
 			{species: 'pawniard', moves: ['assurance']},
 		]]);
 		battle.makeChoices('auto', 'move psychic 1, move assurance 1');
-		const landorus = battle.p1.active[1];
+		const landorus = battle.p1.getActive()[1];
 		const damage = landorus.maxhp - landorus.hp;
 		assert.bounded(damage, [63, 75]); // 60 BP; if it was 120 BP, it would be 124-147 damage
 	});

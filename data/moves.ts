@@ -3427,7 +3427,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isFutureMove: true,
 		onTry(source, target) {
 			if (!target.side.addSlotCondition(target, 'futuremove')) return false;
-			Object.assign(target.side.slotConditions[target.position]['futuremove'], {
+			Object.assign(target.side.slotConditions[target.activePosition]['futuremove'], {
 				move: 'doomdesire',
 				source: source,
 				moveData: {
@@ -5866,7 +5866,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isFutureMove: true,
 		onTry(source, target) {
 			if (!target.side.addSlotCondition(target, 'futuremove')) return false;
-			Object.assign(target.side.slotConditions[target.position]['futuremove'], {
+			Object.assign(target.side.slotConditions[target.activePosition]['futuremove'], {
 				duration: 3,
 				move: 'futuresight',
 				source: source,

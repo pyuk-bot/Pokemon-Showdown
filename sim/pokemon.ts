@@ -636,9 +636,9 @@ export class Pokemon {
 	}
 
 	randomFoe(): Pokemon | null {
-		const foes = this.foes();
+		const foes = this.side.getFoeActive();
 		if (!foes.length) return null;
-		return this.battle.sample(this.foes());
+		return this.battle.sample(foes);
 	}
 
 	getUndynamaxedHP(amount?: number) {
