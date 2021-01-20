@@ -636,7 +636,7 @@ export class Pokemon {
 	}
 
 	randomFoe(): Pokemon | null {
-		const foes = this.side.getFoeActive();
+		const foes = this.foes();
 		if (!foes.length) return null;
 		return this.battle.sample(foes);
 	}

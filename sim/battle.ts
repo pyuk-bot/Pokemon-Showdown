@@ -2454,7 +2454,7 @@ export class Battle {
 				return foeActives[frontPosition];
 			}
 		}
-		return pokemon.randomFoe();
+		return pokemon.randomFoe() || this.sample(pokemon.side.getFoeActive());
 	}
 
 	checkFainted() {
