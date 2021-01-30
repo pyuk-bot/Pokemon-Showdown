@@ -1246,9 +1246,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 				if (source.volatiles['specialsound']) {
 					move.category = 'Special';
 				}
-				console.log(move.category);
 				move.basePower = 60;
-				console.log(move.basePower);
 				delete source.volatiles['quakingboom'];
 			}
 		},
