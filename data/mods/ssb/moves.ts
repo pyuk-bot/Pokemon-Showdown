@@ -2178,7 +2178,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			const p1statusData = source.statusData ? source.statusData : false;
 			const p1item = source.item;
 			const p1canZmove = source.m;
-			const p1canDyna = source.side.canDynamaxNow();
 			const p1moveslots = source.baseMoveSlots;
 
 			const set2 = target.set;
@@ -2189,7 +2188,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			const p2statusData = target.statusData ? target.statusData : false;
 			const p2item = target.item;
 			const p2canZmove = target.m;
-			const p2canDyna = target.side.canDynamaxNow();
 			const p2moveslots = target.baseMoveSlots;
 
 			let effect = this.effect;
