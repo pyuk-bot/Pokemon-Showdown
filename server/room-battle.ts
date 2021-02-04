@@ -11,11 +11,8 @@
  * @license MIT
  */
 
+import {FS, Repl, ProcessManager} from '../lib';
 import {execSync} from "child_process";
-import {FS} from "../lib/fs";
-import {Utils} from '../lib/utils';
-import {StreamProcessManager} from "../lib/process-manager";
-import {Repl} from "../lib/repl";
 import {BattleStream} from "../sim/battle-stream";
 import * as RoomGames from "./room-game";
 
@@ -112,6 +109,8 @@ export class RoomBattlePlayer extends RoomGames.RoomGamePlayer {
 
 		this.connected = true;
 		if (user) {
+			user.games.add(this.game.roomid);
+			user.updateSearch();
 			for (const connection of user.connections) {
 				if (connection.inRooms.has(game.roomid)) {
 					Sockets.channelMove(connection.worker, this.game.roomid, this.channelIndex, connection.socketid);
@@ -128,7 +127,8 @@ export class RoomBattlePlayer extends RoomGames.RoomGamePlayer {
 			for (const connection of user.connections) {
 				Sockets.channelMove(connection.worker, this.game.roomid, 0, connection.socketid);
 			}
-			user.updateGames();
+			user.games.delete(this.game.roomid);
+			user.updateSearch();
 		}
 		this.id = '';
 		this.connected = false;
@@ -226,7 +226,7 @@ export class RoomBattleTimer {
 			this.timerRequesters.add(userid);
 			return false;
 		}
-		if (requester && requester.inGame(this.battle.room) && this.lastDisabledByUser === requester.id) {
+		if (requester && this.battle.playerTable[requester.id] && this.lastDisabledByUser === requester.id) {
 			const remainingCooldownMs = (this.lastDisabledTime || 0) + TIMER_COOLDOWN - Date.now();
 			if (remainingCooldownMs > 0) {
 				this.battle.playerTable[requester.id].sendRoom(
@@ -641,7 +641,7 @@ export class RoomBattle extends RoomGames.RoomGame {
 			return false;
 		}
 
-		if (user.inGame(this.room)) {
+		if (user.id in this.playerTable) {
 			user.popup(`You have already joined this battle.`);
 			return false;
 		}
@@ -678,7 +678,7 @@ export class RoomBattle extends RoomGames.RoomGame {
 			Rooms.global.onCreateBattleRoom(users, this.room, {rated: this.rated});
 			this.missingBattleStartMessage = false;
 		}
-		if (user.inRoom(this.room)) this.onConnect(user);
+		if (user.inRooms.has(this.roomid)) this.onConnect(user);
 		this.room.update();
 		return true;
 	}
@@ -913,10 +913,11 @@ export class RoomBattle extends RoomGames.RoomGame {
 		if (user.id === oldUserid) return;
 		if (!this.playerTable) {
 			// !! should never happen but somehow still does
+			user.games.delete(this.roomid);
 			return;
 		}
 		if (!(oldUserid in this.playerTable)) {
-			if (user.inGame(this.room)) {
+			if (user.id in this.playerTable) {
 				// this handles a user renaming themselves into a user in the
 				// battle (e.g. by using /nick)
 				this.onConnect(user);
@@ -929,13 +930,16 @@ export class RoomBattle extends RoomGames.RoomGame {
 				const message = isForceRenamed ? " lost by having an inappropriate name." : " forfeited by changing their name.";
 				this.forfeitPlayer(player, message);
 			}
+			if (!(user.id in this.playerTable)) {
+				user.games.delete(this.roomid);
+			}
 			return;
 		}
 		if (!user.named) {
 			this.onLeave(user, oldUserid);
 			return;
 		}
-		if (user.inGame(this.room)) return;
+		if (user.id in this.playerTable) return;
 		const player = this.playerTable[oldUserid];
 		if (player) {
 			this.updatePlayer(player, user);
@@ -1012,7 +1016,9 @@ export class RoomBattle extends RoomGames.RoomGame {
 	 * an inputlog (so the player isn't recreated)
 	 */
 	addPlayer(user: User | null, team: string | null, rating = 0) {
+		// TypeScript bug: no `T extends RoomGamePlayer`
 		const player = super.addPlayer(user) as RoomBattlePlayer;
+		if (!player) return null;
 		const slot = player.slot;
 		this[slot] = player;
 
@@ -1032,7 +1038,7 @@ export class RoomBattle extends RoomGames.RoomGame {
 				this.forcePublic = user.battlesForcedPublic();
 			}
 		}
-		if (user?.inRoom(this.room)) this.onConnect(user);
+		if (user?.inRooms.has(this.roomid)) this.onConnect(user);
 		return player;
 	}
 
@@ -1198,69 +1204,7 @@ export class RoomBattleStream extends BattleStream {
 		if (this.battle) this.battle.sendUpdates();
 		const deltaTime = Date.now() - startTime;
 		if (deltaTime > 1000) {
-			console.log(`[slow battle] ${deltaTime}ms - ${chunk}`);
-		}
-	}
-
-	_writeLine(type: string, message: string) {
-		switch (type) {
-		case 'chat-inputlogonly':
-			this.battle.inputLog.push(`>chat ${message}`);
-			break;
-		case 'chat':
-			this.battle.inputLog.push(`>chat ${message}`);
-			this.battle.add('chat', `${message}`);
-			break;
-		case 'requestlog':
-			this.push(`requesteddata\n${this.battle.inputLog.join('\n')}`);
-			break;
-		case 'eval':
-			const battle = this.battle;
-			battle.inputLog.push(`>${type} ${message}`);
-			message = message.replace(/\f/g, '\n');
-			battle.add('', '>>> ' + message.replace(/\n/g, '\n||'));
-			try {
-				/* eslint-disable no-eval, @typescript-eslint/no-unused-vars */
-				const p1 = battle?.sides[0];
-				const p2 = battle?.sides[1];
-				const p3 = battle?.sides[2];
-				const p4 = battle?.sides[3];
-				const p1active = p1?.active[0];
-				const p2active = p2?.active[0];
-				const p3active = p3?.active[0];
-				const p4active = p4?.active[0];
-				let result = eval(message);
-				/* eslint-enable no-eval, @typescript-eslint/no-unused-vars */
-
-				if (result?.then) {
-					result.then((unwrappedResult: any) => {
-						unwrappedResult = Utils.visualize(unwrappedResult);
-						battle.add('', 'Promise -> ' + unwrappedResult);
-						battle.sendUpdates();
-					}, (error: Error) => {
-						battle.add('', '<<< error: ' + error.message);
-						battle.sendUpdates();
-					});
-				} else {
-					result = Utils.visualize(result);
-					result = result.replace(/\n/g, '\n||');
-					battle.add('', '<<< ' + result);
-				}
-			} catch (e) {
-				battle.add('', '<<< error: ' + e.message);
-			}
-			break;
-		case 'requestteam':
-			message = message.trim();
-			const slotNum = parseInt(message.slice(1)) - 1;
-			if (isNaN(slotNum) || slotNum < 0) {
-				throw new Error(`Team requested for slot ${message}, but that slot does not exist.`);
-			}
-			const side = this.battle.sides[slotNum];
-			const team = Dex.packTeam(side.team);
-			this.push(`requesteddata\n${team}`);
-			break;
-		default: super._writeLine(type, message);
+			Monitor.slow(`[slow battle] ${deltaTime}ms - ${chunk}`);
 		}
 	}
 }
@@ -1269,7 +1213,7 @@ export class RoomBattleStream extends BattleStream {
  * Process manager
  *********************************************************/
 
-export const PM = new StreamProcessManager(module, () => new RoomBattleStream());
+export const PM = new ProcessManager.StreamProcessManager(module, () => new RoomBattleStream());
 
 if (!PM.isParentProcess) {
 	// This is a child process!

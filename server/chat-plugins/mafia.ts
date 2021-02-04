@@ -1,4 +1,4 @@
-import {Utils} from '../../lib/utils';
+import {Utils, FS} from '../../lib';
 
 interface MafiaData {
 	// keys for all of these are IDs
@@ -88,8 +88,6 @@ interface MafiaIDEAPlayerData {
 	originalChoices: string[];
 	picks: {[choice: string]: string | null};
 }
-
-import {FS} from '../../lib/fs';
 
 const DATA_FILE = 'config/chat-plugins/mafia-data.json';
 const LOGS_FILE = 'config/chat-plugins/mafia-logs.json';
@@ -338,7 +336,7 @@ class Mafia extends Rooms.RoomGame {
 		if (this.phase !== 'signups') return user.sendTo(this.room, `|error|The game of ${this.title} has already started.`);
 		this.canJoin(user, true);
 		if (this.playerCount >= this.playerCap) return user.sendTo(this.room, `|error|The game of ${this.title} is full.`);
-		this.addPlayer(user);
+		if (!this.addPlayer(user)) return user.sendTo(this.room, `|error|You have already joined the game of ${this.title}.`);
 		if (this.subs.includes(user.id)) this.subs.splice(this.subs.indexOf(user.id), 1);
 		this.playerTable[user.id].updateHtmlRoom();
 		this.sendRoom(`${this.playerTable[user.id].name} has joined the game.`);
