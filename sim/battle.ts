@@ -1553,9 +1553,9 @@ export class Battle {
 			for (const side of this.sides) {
 				if (side.canDynamaxNow()) {
 					if (this.turn === 1) {
-						this.addSplit(side.id, ['canDynamax', side.id]);
+						this.addSplit(side.id, ['-candynamax', side.id]);
 					} else {
-						this.add('canDynamax', side.id);
+						this.add('-candynamax', side.id);
 					}
 				}
 			}
