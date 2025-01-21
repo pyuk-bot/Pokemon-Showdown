@@ -399,6 +399,7 @@ export class Battle {
 	 * 2. Priority, high to low (default 0)
 	 * 3. Speed, high to low (default 0)
 	 * 4. SubOrder, low to high (default 0)
+	 * 5. EffectOrder, low to high (default 0)
 	 *
 	 * Doesn't reference `this` so doesn't need to be bound.
 	 */
