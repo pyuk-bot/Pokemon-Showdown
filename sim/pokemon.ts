@@ -34,6 +34,7 @@ export interface EffectState {
 	id: string;
 	effectOrder: number;
 	duration?: number;
+	started?: boolean;
 	[k: string]: any;
 }
 

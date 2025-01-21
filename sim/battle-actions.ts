@@ -183,6 +183,8 @@ export class BattleActions {
 			if (!poke.hp) continue;
 			poke.isStarted = true;
 			poke.draggedIn = null;
+			poke.abilityState.started = true;
+			poke.itemState.started = true;
 		}
 		return true;
 	}
