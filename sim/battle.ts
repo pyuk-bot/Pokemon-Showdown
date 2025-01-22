@@ -918,6 +918,7 @@ export class Battle {
 			// https://www.smogon.com/forums/threads/sword-shield-battle-mechanics-research.3655528/page-59#post-8685465
 			const effectTypeOrder: {[k in EffectType]?: number} = {
 				// Z-Move: 1,
+				Move: 2,
 				Condition: 2,
 				// Slot Condition: 3,
 				// Side Condition: 4,
@@ -946,7 +947,7 @@ export class Battle {
 					handler.subOrder = 5;
 				}
 			} else if (handler.effect.effectType === 'Ability') {
-				if (handler.effect.name === 'Poison Touch') {
+				if (callbackName === 'onSourceDamagingHit') {
 					handler.subOrder = 6;
 				} else if (handler.effect.name === 'Stall') {
 					handler.subOrder = 9;
